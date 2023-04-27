@@ -1,0 +1,5 @@
+rootProject.name = 'fxfluent'
+include 'fluentcore'
+include 'fluentdemo'
+include 'fluentcorej9'
+
