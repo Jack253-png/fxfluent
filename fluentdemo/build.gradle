@@ -1,17 +1,50 @@
 plugins {
     id 'java'
+    id 'maven-publish'
+    id 'application'
+    id 'org.openjfx.javafxplugin' version '0.0.10'
+    id 'org.beryx.jlink' version '2.24.1'
 }
 
 group 'com.mcreater'
 version '1.0-SNAPSHOT'
 
+application {
+    mainClass = 'com.mcreater.fluentdemo.Main'
+}
+
 repositories {
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    maven { url 'https://mvnrepository.com/artifact/' }
+    maven { url 'https://jitpack.io/' }
     mavenCentral()
 }
 
+javafx {
+    if (getJavaVersion() > 10) {
+        version = '19.0.2.1'
+        modules = ['javafx.controls', 'javafx.fxml', 'javafx.media']
+    }
+}
+
+static int getJavaVersion() {
+    int version = 0
+    String[] ful = System.getProperty("java.runtime.version").split("\\.");
+    if (Integer.parseInt(ful[0]) == 1) {
+        version = Integer.parseInt(ful[1]);
+    } else {
+        version = Integer.parseInt(ful[0]);
+    }
+    return version
+}
+
 dependencies {
+    implementation project(path: ':fluentcore')
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    if (getJavaVersion() > 10) {
+        implementation project(path: ":fluentcorej9")
+    }
 }
 
 test {

@@ -23,11 +23,6 @@ tasks.withType(Javadoc) {
     options.encoding = "utf-8"
 }
 
-application {
-    mainModule = 'com.mcreater.amcl'
-    mainClass = 'com.mcreater.amcl.JavaFXApplication'
-}
-
 javafx {
     if (getJavaVersion() > 10) {
         version = '19.0.2.1'
