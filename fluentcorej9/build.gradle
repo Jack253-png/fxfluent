@@ -9,6 +9,9 @@ plugins {
 group 'com.mcreater'
 version '1.0-SNAPSHOT'
 
+sourceCompatibility = "1.9"
+targetCompatibility = "1.9"
+
 repositories {
     maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
     maven { url 'https://mvnrepository.com/artifact/' }
