@@ -7,7 +7,7 @@ plugins {
 }
 
 group 'com.mcreater'
-version '1.0-SNAPSHOT'
+version '0.1'
 
 sourceCompatibility = "1.9"
 targetCompatibility = "1.9"
@@ -18,10 +18,13 @@ application {
 }
 
 repositories {
-    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    mavenCentral()
+    maven { url = "https://maven.aliyun.com/repository/public" }
+    maven { url = "https://maven.aliyun.com/repository/jcenter" }
+    maven { url = "https://maven.aliyun.com/repository/google" }
+    maven { url = "https://maven.aliyun.com/repository/central" }
     maven { url 'https://mvnrepository.com/artifact/' }
     maven { url 'https://jitpack.io/' }
-    mavenCentral()
 }
 
 javafx {
@@ -44,6 +47,7 @@ static int getJavaVersion() {
 
 dependencies {
     implementation project(path: ':fluentcore')
+    implementation "io.github.palexdev:materialfx:11.16.1"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     if (getJavaVersion() > 10) {
@@ -53,4 +57,46 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+application {
+    mainClassName = "com.mcreater.fluentdemo.Main"
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+javadoc {
+    options {
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        title "Javadoc root"
+    }
+}
+
+publishing {
+    publications {
+        fluentdemo(MavenPublication) {
+            groupId group
+            artifactId name
+            version version
+
+            artifact sourcesJar
+            artifact jar
+//            artifact javadocJar
+        }
+    }
+
+    repositories {
+        maven { url uri(new File(rootProject.projectDir.getAbsolutePath(), "maven").getAbsolutePath()) }
+    }
 }

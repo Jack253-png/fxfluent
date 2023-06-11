@@ -2,6 +2,8 @@ package com.mcreater.fluentdemo;
 
 import com.sun.javafx.tk.TKStage;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.Window;
@@ -12,7 +14,7 @@ import java.lang.reflect.Method;
 public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Test");
-        primaryStage.initStyle(StageStyle.TRANSPARENT);
+        primaryStage.initStyle(StageStyle.DECORATED);
         primaryStage.show();
 
         Module module = Stage.class.getModule();
@@ -33,6 +35,9 @@ public class MainApp extends Application {
         getNativeHandle.setAccessible(true);
         long handle = (long) getNativeHandle.invoke(platformWindowInstance);
         System.out.println(handle);
+
+        Scene scene = new Scene(new Pane());
+        primaryStage.setScene(scene);
     }
 
     public static void launch(String... args) {
