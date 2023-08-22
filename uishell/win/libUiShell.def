@@ -1,0 +1,4 @@
+; D:\mingw64\bin\dlltool --base-file C:\Users\ADMINI~1\AppData\Local\Temp\cca06740.base --output-exp UiShell.exp --dllname UiShell.dll --output-def libUiShell.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup --def C:\Users\ADMINI~1\AppData\Local\Temp\cca06740.def --output-lib libUiShell.a
+EXPORTS
+	HelloWorld @ 1
+	GetCompositionColor @ 2
