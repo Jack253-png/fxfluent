@@ -17,6 +17,8 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation rootProject.files("libs/jfxrt.jar")
+    implementation "net.java.dev.jna:jna:5.7.0"
+    implementation "net.java.dev.jna:jna-platform:5.7.0"
 }
 
 test {

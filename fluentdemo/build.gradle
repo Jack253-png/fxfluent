@@ -14,7 +14,7 @@ targetCompatibility = "1.9"
 
 application {
     mainClass = 'com.mcreater.fluentdemo.Main'
-    applicationDefaultJvmArgs = [ "--add-opens", "java.base/java.lang=ALL-UNNAMED"]
+    applicationDefaultJvmArgs = ["--add-opens", "java.base/java.lang=ALL-UNNAMED"]
 }
 
 repositories {
@@ -53,6 +53,8 @@ dependencies {
     if (getJavaVersion() > 10) {
         implementation project(path: ":fluentcorej9")
     }
+    implementation "net.java.dev.jna:jna:5.7.0"
+    implementation "net.java.dev.jna:jna-platform:5.7.0"
 }
 
 test {

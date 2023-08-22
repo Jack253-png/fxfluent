@@ -1,3 +1,5 @@
+import java.nio.file.Files
+
 plugins {
     id 'java'
     id 'maven-publish'
@@ -12,8 +14,6 @@ version '1.0-SNAPSHOT'
 ext {
     junitVersion = '5.8.2'
 }
-
-
 
 sourceCompatibility = "8"
 targetCompatibility = "8"
@@ -44,13 +44,21 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
+tasks.register('nativeCopy_win32_x86_64') {
+    it.doFirst {
+        java.nio.file.Path targetDll = project.file("fluentcore/src/main/resources/win32-x86-64/UiShell.dll").toPath()
+        Files.delete(targetDll)
+        Files.copy(project.file("uishell/win/UiShell.dll").toPath(), targetDll)
+    }
+}
+
 static int getJavaVersion() {
     int version = 0
-    String[] ful = System.getProperty("java.runtime.version").split("\\.");
+    String[] ful = System.getProperty("java.runtime.version").split("\\.")
     if (Integer.parseInt(ful[0]) == 1) {
-        version = Integer.parseInt(ful[1]);
+        version = Integer.parseInt(ful[1])
     } else {
-        version = Integer.parseInt(ful[0]);
+        version = Integer.parseInt(ful[0])
     }
     return version
 }
