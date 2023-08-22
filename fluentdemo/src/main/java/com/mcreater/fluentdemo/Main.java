@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
         Win32UiShellLib.INSTANCE.HelloWorld();
+        System.out.println(Win32UiShellLib.INSTANCE.GetThemeIsDark());
         System.out.println(UiShellWrapper.GetSystemCompositionColor());
         MainApp.launch(args);
     }

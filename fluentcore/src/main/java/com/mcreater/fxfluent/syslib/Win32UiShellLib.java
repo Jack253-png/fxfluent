@@ -8,4 +8,5 @@ public interface Win32UiShellLib extends Library {
     Win32UiShellLib INSTANCE = Native.load("UiShell", Win32UiShellLib.class);
     void HelloWorld();
     WinDef.DWORD GetCompositionColor();
+    WinDef.BOOL GetThemeIsDark();
 }

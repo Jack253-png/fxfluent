@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
 DLLIMPORT void HelloWorld () {
     MessageBox (0, "Hello World from DLL!\n", "Hi", MB_ICONINFORMATION);
@@ -17,6 +18,19 @@ DLLIMPORT DWORD GetCompositionColor() {
   HRESULT hr = DwmGetColorizationColor(&color, &opaque);
   if (SUCCEEDED(hr)) return color;
   else return 13924352;
+}
+
+DLLIMPORT BOOL GetThemeIsDark() {
+    HKEY hk;
+    LONG lReturn = RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", 0, KEY_READ, &hk);
+    if (ERROR_SUCCESS == lReturn) {
+        DWORD dwValue;
+        DWORD dwSize = sizeof(dwValue);
+        lReturn = RegQueryValueEx(hk, "AppsUseLightTheme", NULL, NULL, (LPBYTE)&dwValue, &dwSize);
+        RegCloseKey(hk);
+        if (ERROR_SUCCESS == lReturn) return dwValue == 0;
+    }
+    return TRUE;
 }
 
 
