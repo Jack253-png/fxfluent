@@ -3,8 +3,8 @@ package com.mcreater.fluentdemo;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 public class UIGalleryPane extends GridPane {
 
@@ -21,5 +21,7 @@ public class UIGalleryPane extends GridPane {
         defaultButton.setDefaultButton(true);
         buttons.getChildren().add(defaultButton);
         add(buttons, 0, 0);
+
+        setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 }

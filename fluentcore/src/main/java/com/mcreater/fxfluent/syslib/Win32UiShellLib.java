@@ -6,7 +6,10 @@ import com.sun.jna.platform.win32.WinDef;
 
 public interface Win32UiShellLib extends Library {
     Win32UiShellLib INSTANCE = Native.load("UiShell", Win32UiShellLib.class);
-    void HelloWorld();
+    void NativeWarningReflect();
     WinDef.DWORD GetCompositionColor();
     WinDef.BOOL GetThemeIsDark();
+    WinDef.BOOL GetTransparencyEnabled();
+    WinDef.BOOL ApplyBlur(WinDef.HWND hwnd, WinDef.DWORD blurType);
+    WinDef.BOOL IsWindows11();
 }

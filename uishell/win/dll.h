@@ -8,9 +8,12 @@
 #endif /* Not BUILDING_DLL */
 #include <windows.h>
 
-DLLIMPORT void HelloWorld(void);
+DLLIMPORT void NativeWarningReflect(void);
 DLLIMPORT DWORD GetCompositionColor(void);
 DLLIMPORT BOOL GetThemeIsDark(void);
 DLLIMPORT BOOL GetTransparencyEnabled(void);
+DLLIMPORT BOOL ApplyBlur(HWND, DWORD);
+DLLIMPORT BOOL SetWindowRadius(HWND, DWORD);
+DLLIMPORT BOOL IsWindows11(void);
 
 #endif /* _DLL_H_ */

@@ -49,10 +49,10 @@ if (checkPlatform(System.WINDOWS, Arch.X86_64)) {
         checkPlatform(System.WINDOWS, Arch.X86_64)
         java.nio.file.Path targetDll = project.file("fluentcore/src/main/resources/win32-x86-64/UiShell.dll").toPath()
         it.doFirst {
-            Files.delete(targetDll)
+            if (Files.exists(targetDll)) Files.delete(targetDll)
         }
         it.doLast {
-            Files.copy(project.file("uishell/win/UiShell.dll").toPath(), targetDll)
+            if (Files.exists(project.file("uishell/win/UiShell.dll").toPath())) Files.copy(project.file("uishell/win/UiShell.dll").toPath(), targetDll)
         }
     }
 
