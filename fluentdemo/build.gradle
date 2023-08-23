@@ -47,7 +47,7 @@ static int getJavaVersion() {
 
 dependencies {
     implementation project(path: ':fluentcore')
-    implementation "io.github.palexdev:materialfx:11.16.1"
+    implementation "io.github.palexdev:materialfx:11.13.5"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     if (getJavaVersion() > 10) {

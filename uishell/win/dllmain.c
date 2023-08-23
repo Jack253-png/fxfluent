@@ -33,6 +33,19 @@ DLLIMPORT BOOL GetThemeIsDark() {
     return TRUE;
 }
 
+DLLIMPORT BOOL GetTransparencyEnabled() {
+    HKEY hk;
+    LONG lReturn = RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", 0, KEY_READ, &hk);
+    if (ERROR_SUCCESS == lReturn) {
+        DWORD dwValue;
+        DWORD dwSize = sizeof(dwValue);
+        lReturn = RegQueryValueEx(hk, "EnableTransparency", NULL, NULL, (LPBYTE)&dwValue, &dwSize);
+        RegCloseKey(hk);
+        if (ERROR_SUCCESS == lReturn) return dwValue == 1;
+    }
+    return TRUE;
+}
+
 
 BOOL APIENTRY DllMain (HINSTANCE hInst     /* Library instance handle. */ ,
                        DWORD reason        /* Reason this function is being called. */ ,

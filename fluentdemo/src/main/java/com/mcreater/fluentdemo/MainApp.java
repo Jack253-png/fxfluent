@@ -2,6 +2,7 @@ package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.util.NativeUtil;
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -9,6 +10,8 @@ public class MainApp extends Application {
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Test");
         primaryStage.initStyle(StageStyle.DECORATED);
+
+        primaryStage.setScene(new Scene(new UIGalleryPane(), 300, 275));
         primaryStage.show();
 
         System.out.println(NativeUtil.getWindowHandle(primaryStage));

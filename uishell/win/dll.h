@@ -11,5 +11,6 @@
 DLLIMPORT void HelloWorld(void);
 DLLIMPORT DWORD GetCompositionColor(void);
 DLLIMPORT BOOL GetThemeIsDark(void);
+DLLIMPORT BOOL GetTransparencyEnabled(void);
 
 #endif /* _DLL_H_ */

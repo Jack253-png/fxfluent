@@ -44,17 +44,183 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
 }
 
-tasks.register('nativeCopy_win32_x86_64') {
-    it.doFirst {
+if (checkPlatform(System.WINDOWS, Arch.X86_64)) {
+    tasks.register('nativeCopy_win32_x86_64') {
+        checkPlatform(System.WINDOWS, Arch.X86_64)
         java.nio.file.Path targetDll = project.file("fluentcore/src/main/resources/win32-x86-64/UiShell.dll").toPath()
-        Files.delete(targetDll)
-        Files.copy(project.file("uishell/win/UiShell.dll").toPath(), targetDll)
+        it.doFirst {
+            Files.delete(targetDll)
+        }
+        it.doLast {
+            Files.copy(project.file("uishell/win/UiShell.dll").toPath(), targetDll)
+        }
+    }
+
+    tasks.register('nativeBuild_win32_x86_64') {
+        it.doFirst {
+            project.exec {
+                workingDir project.file("uishell/win")
+                def myCommond = [
+                        "cmd", "/c", "build.bat"
+                ]
+                commandLine myCommond
+            }
+        }
+        it.finalizedBy(tasks.nativeCopy_win32_x86_64)
+    }
+}
+
+allprojects {
+    if (project.name == "fluentcore") {
+        tasks.configureEach {
+            if (it.getName() == "compileJava") {
+                if (checkPlatform(System.WINDOWS, Arch.X86_64)) it.dependsOn(rootProject.tasks.nativeBuild_win32_x86_64)
+            }
+        }
+    }
+}
+
+static boolean checkPlatform(System system, Arch arch) {
+    return getSystem() == system && getArch() == arch
+}
+
+enum System {
+    WINDOWS, MACOS, LINUX
+}
+
+enum Arch {
+    X86,
+    X86_64,
+    IA32,
+    IA64,
+    SPARC,
+    SPARCV9,
+    ARM32,
+    ARM64,
+    MIPS,
+    MIPS64,
+    MIPSEL,
+    MIPS64EL,
+    PPC,
+    PPC64,
+    PPCLE,
+    PPC64LE,
+    S390,
+    S390X,
+    RISCV32,
+    RISCV64,
+    LOONGARCH32,
+    LOONGARCH64_OW,
+    LOONGARCH64,
+    UNKNOWN
+}
+
+static System getSystem() {
+    if (java.lang.System.getProperty("os.name").toLowerCase().contains("windows")) return System.WINDOWS;
+    if (java.lang.System.getProperty("os.name").toLowerCase().contains("mac") || java.lang.System.getProperty("os.name").toLowerCase().contains("osx")) return System.MACOS
+    if (java.lang.System.getProperty("os.name").toLowerCase().contains("linux")) return System.LINUX
+    return System.WINDOWS
+}
+
+static Arch getArch() {
+    String value = java.lang.System.getProperty("os.arch")
+    switch (value) {
+        case "x8664":
+        case "x86-64":
+        case "x86_64":
+        case "amd64":
+        case "ia32e":
+        case "em64t":
+        case "x64":
+            return Arch.X86_64;
+        case "x8632":
+        case "x86-32":
+        case "x86_32":
+        case "x86":
+        case "i86pc":
+        case "i386":
+        case "i486":
+        case "i586":
+        case "i686":
+        case "ia32":
+        case "x32":
+            return Arch.X86;
+        case "arm64":
+        case "aarch64":
+            return Arch.ARM64;
+        case "arm":
+        case "arm32":
+            return Arch.ARM32;
+        case "mips64":
+            return Arch.MIPS64;
+        case "mips64el":
+            return Arch.MIPS64EL;
+        case "mips":
+        case "mips32":
+            return Arch.MIPS;
+        case "mipsel":
+        case "mips32el":
+            return Arch.MIPSEL;
+        case "riscv":
+        case "risc-v":
+        case "riscv64":
+            return Arch.RISCV64;
+        case "ia64":
+        case "ia64w":
+        case "itanium64":
+            return Arch.IA64;
+        case "ia64n":
+            return Arch.IA32;
+        case "sparcv9":
+        case "sparc64":
+            return Arch.SPARCV9;
+        case "sparc":
+        case "sparc32":
+            return Arch.SPARC;
+        case "ppc64":
+        case "powerpc64":
+            return "little".equals(java.lang.System.getProperty("sun.cpu.endian")) ? Arch.PPC64LE : Arch.PPC64;
+        case "ppc64le":
+        case "powerpc64le":
+            return Arch.PPC64LE;
+        case "ppc":
+        case "ppc32":
+        case "powerpc":
+        case "powerpc32":
+            return Arch.PPC;
+        case "ppcle":
+        case "ppc32le":
+        case "powerpcle":
+        case "powerpc32le":
+            return Arch.PPCLE;
+        case "s390":
+            return Arch.S390;
+        case "s390x":
+            return Arch.S390X;
+        case "loongarch32":
+            return Arch.LOONGARCH32;
+        case "loongarch64": {
+            String v = java.lang.System.getProperty("os.version")
+            int first = Integer.parseInt(v.split("\\.")[0])
+            int second = Integer.parseInt(v.split("\\.")[1])
+            if (first < 5 || (first == 5 && second <= 19))
+                return Arch.LOONGARCH64_OW;
+            return Arch.LOONGARCH64;
+        }
+        default:
+            if (value.startsWith("armv7")) {
+                return Arch.ARM32;
+            }
+            if (value.startsWith("armv8") || value.startsWith("armv9")) {
+                return Arch.ARM64;
+            }
+            return Arch.UNKNOWN;
     }
 }
 
 static int getJavaVersion() {
     int version = 0
-    String[] ful = System.getProperty("java.runtime.version").split("\\.")
+    String[] ful = java.lang.System.getProperty("java.runtime.version").split("\\.")
     if (Integer.parseInt(ful[0]) == 1) {
         version = Integer.parseInt(ful[1])
     } else {
