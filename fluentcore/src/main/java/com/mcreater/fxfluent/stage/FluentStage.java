@@ -10,11 +10,14 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.awt.*;
+
 public class FluentStage extends Stage {
     private UiShellWrapper.BackdropType backdropType;
     private Node content;
     private VBox sceneContent;
     private boolean lastApply = false;
+    private boolean isDarkMode = UiShellWrapper.GetSystemIsDark();
     public FluentStage() {
         this(StageStyle.DECORATED);
     }
@@ -63,26 +66,58 @@ public class FluentStage extends Stage {
     private Node buildTitleBar() {
         HBox box = new HBox();
         box.setPrefHeight(50);
+        box.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0.004), CornerRadii.EMPTY, Insets.EMPTY)));
+        WindowMovement.getInstance().windowMove(box, this);
         return box;
     }
 
     private Scene buildScene() {
+        int i = isDarkMode ? 32 : 243;
         this.sceneContent = new VBox();
         this.sceneContent.getChildren().clear();
         this.sceneContent.getChildren().addAll(buildTitleBar(), this.content);
         this.sceneContent.setBackground(new Background(
                 new BackgroundFill(
                         UiShellWrapper.needBackground(backdropType) ?
-                                Color.rgb(243, 243, 243, lastApply ? .65 : 0) :
+                                Color.rgb(i, i, i, lastApply ? .65 : 0) :
                                 Color.TRANSPARENT,
                         CornerRadii.EMPTY,
                         Insets.EMPTY
                 )
         ));
-
-//      this.sceneContent.setBackground(new Background(new BackgroundFill(Color.rgb(32, 32, 32, 0.8), CornerRadii.EMPTY, Insets.EMPTY)));
         Scene scene = new Scene(this.sceneContent);
         scene.setFill(Color.TRANSPARENT);
         return scene;
+    }
+
+   private static class WindowMovement {
+        double x1;
+        double y1;
+        double x_stage;
+        double y_stage;
+
+        public static WindowMovement getInstance() {
+            return new WindowMovement();
+        }
+
+        private WindowMovement() {
+        }
+
+        public <V extends Region, K extends Stage> void windowMove(V listenedObject, K stage) {
+            Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
+            listenedObject.setOnMouseDragged(event -> {
+                double x = this.x_stage + event.getScreenX() - this.x1;
+                double y = this.y_stage + event.getScreenY() - this.y1;
+                if (x >= 0 && x <= scrSize.getWidth() - stage.getWidth()) stage.setX(x);
+                if (y >= 0 && y <= scrSize.getHeight() - stage.getHeight()) stage.setY(y);
+            });
+            listenedObject.setOnDragEntered(null);
+            listenedObject.setOnMousePressed(event -> {
+                this.x1 = event.getScreenX();
+                this.y1 = event.getScreenY();
+                this.x_stage = stage.getX();
+                this.y_stage = stage.getY();
+            });
+        }
     }
 }
