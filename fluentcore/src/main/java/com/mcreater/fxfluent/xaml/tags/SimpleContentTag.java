@@ -5,7 +5,7 @@ import org.dom4j.Element;
 
 public abstract class SimpleContentTag<T> implements AbstractContentTag<T> {
     protected Element element;
-    protected ResourceDict dict;
+    public ResourceDict dict;
     public SimpleContentTag<T> writeElement(Element element) {
         this.element = element;
         return this;

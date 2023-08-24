@@ -14,7 +14,10 @@ public class SolidColorBrushContentTag extends SimpleContentTag<Supplier<Color>>
         if (content == null) return null;
 
         Matcher matcher = RESOURCE_REF_PATTERN.matcher(content);
-        if (matcher.find()) return dict.foundTag(matcher.group("refkey"), Color.class)::toObject;
+        if (matcher.find()) {
+            ColorContentTag cntag = dict.foundTag(matcher.group("refkey"), ColorContentTag.class);
+            return cntag != null ? cntag::toObject : () -> null;
+        }
         else return () -> Color.valueOf(content);
     }
 }

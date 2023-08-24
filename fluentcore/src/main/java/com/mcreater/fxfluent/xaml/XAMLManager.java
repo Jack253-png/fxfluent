@@ -18,6 +18,7 @@ import java.util.Vector;
 public class XAMLManager {
     private static final List<InputStream> files = new Vector<>();
     public static final Map<String, ResourceDict> registeredContents = new HashMap<>();
+    public static final ResourceDict globalRegisteredContents = ResourceDict.createEmpty("{Global}");
     public static void addFile(File file) throws IOException {
         files.add(Files.newInputStream(file.toPath()));
     }
@@ -27,7 +28,9 @@ public class XAMLManager {
     }
 
     public static void parse() {
+        registeredContents.values().forEach(ResourceDict::clear);
         registeredContents.clear();
+        globalRegisteredContents.clear();
         files.forEach(file -> {
             try {
                 parse(new SAXReader().read(file));
@@ -43,7 +46,7 @@ public class XAMLManager {
             root.elements("ResourceDictionary.ThemeDictionaries").forEach(e -> {
                 e.elements("ResourceDictionary").forEach(en -> {
                     String id = en.attributeValue("Key");
-                    if (!registeredContents.containsKey(id)) registeredContents.put(id, ResourceDict.createEmpty());
+                    if (!registeredContents.containsKey(id)) registeredContents.put(id, ResourceDict.createEmpty(id));
 
                     en.elements().forEach(element -> {
                         AbstractContentTag<?> contentTag = AbstractContentTag.create(registeredContents.get(id), element);
@@ -51,7 +54,8 @@ public class XAMLManager {
                     });
                 });
             });
-        }
 
+            root.elements("String").forEach(element -> globalRegisteredContents.add(AbstractContentTag.create(globalRegisteredContents, element)));
+        }
     }
 }

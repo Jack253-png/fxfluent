@@ -6,16 +6,20 @@ import com.mcreater.fxfluent.xaml.tags.StaticResourceRedirectContentTag;
 import java.util.Vector;
 
 public class ResourceDict extends Vector<AbstractContentTag<?>> {
-    public static ResourceDict createEmpty() {
-        return new ResourceDict();
+    public final String name;
+    private ResourceDict(String name) {
+        this.name = name;
+    }
+    public static ResourceDict createEmpty(String name) {
+        return new ResourceDict(name);
     }
 
-    public <T> AbstractContentTag<T> foundTag(String key, Class<T> clazz) {
+    public <T extends AbstractContentTag<?>> T foundTag(String key, Class<T> clazz) {
         for (AbstractContentTag<?> abstractContentTag : this) {
             if (abstractContentTag.getKey().equals(key)) {
                 return abstractContentTag instanceof StaticResourceRedirectContentTag ?
                         foundTag(((StaticResourceRedirectContentTag) abstractContentTag).toObject(), clazz) :  // Redirect tags
-                        (AbstractContentTag<T>) abstractContentTag;
+                        (T) abstractContentTag;
             }
         }
         return null;
