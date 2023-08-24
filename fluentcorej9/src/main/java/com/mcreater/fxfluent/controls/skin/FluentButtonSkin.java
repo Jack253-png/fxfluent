@@ -13,6 +13,8 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
+import java.util.stream.Stream;
+
 import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
 
 public class FluentButtonSkin extends ButtonSkin {
@@ -22,10 +24,13 @@ public class FluentButtonSkin extends ButtonSkin {
     public FluentButtonSkin(FluentButton control) {
         super(control);
         button = control;
-        control.hoverProperty().addListener(this::updateState);
-        control.pressedProperty().addListener(this::updateState);
-        control.focusedProperty().addListener(this::updateState);
-        control.disabledProperty().addListener(this::updateState);
+        Stream.of(
+                control.hoverProperty(),
+                control.pressedProperty(),
+                control.focusedProperty(),
+                control.disabledProperty()
+        ).forEach(a -> a.addListener(this::updateState));
+
 
         state.addListener((observable, oldValue, newValue) -> this.updateBackground());
         backgroundColor.property.addListener((observable, oldValue, newValue) -> new SolidColorBrush(newValue).accept(this.button, new CornerRadii(10)));
@@ -54,9 +59,6 @@ public class FluentButtonSkin extends ButtonSkin {
                 key = "ButtonBackgroundDisabled";
                 break;
         }
-        System.out.println(button);
-        System.out.println(key);
-        System.out.println(XAMLManager.getCurrentDict().foundSolidColorBrush(key).getColor());
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(key).getColor());
     }
 }
