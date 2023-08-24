@@ -17,8 +17,8 @@ import java.util.Vector;
 
 public class XAMLManager {
     private static final List<InputStream> files = new Vector<>();
-    public static final Map<String, ResourceDict> registeredContents = new HashMap<>();
-    public static final ResourceDict globalRegisteredContents = ResourceDict.createEmpty("{Global}");
+    private static final Map<String, ResourceDict> registeredContents = new HashMap<>();
+    private static final ResourceDict globalRegisteredContents = ResourceDict.createEmpty("{Global}");
     public static void addFile(File file) throws IOException {
         files.add(Files.newInputStream(file.toPath()));
     }
@@ -43,19 +43,40 @@ public class XAMLManager {
     private static void parse(Document document) {
         Element root = document.getRootElement();
         if (root.getName().equals("ResourceDictionary")) {
-            root.elements("ResourceDictionary.ThemeDictionaries").forEach(e -> {
-                e.elements("ResourceDictionary").forEach(en -> {
+            List<Element> e = root.elements("ResourceDictionary.ThemeDictionaries");
+            if (e.size() > 0) {
+                e.get(0).elements("ResourceDictionary").forEach(en -> {
                     String id = en.attributeValue("Key");
-                    if (!registeredContents.containsKey(id)) registeredContents.put(id, ResourceDict.createEmpty(id));
 
-                    en.elements().forEach(element -> {
-                        AbstractContentTag<?> contentTag = AbstractContentTag.create(registeredContents.get(id), element);
-                        if (contentTag != null) registeredContents.get(id).add(contentTag);
+                    if (!registeredContents.containsKey(id)) registeredContents.put(id, ResourceDict.createEmpty(id));
+                });
+
+                registeredContents.keySet().forEach(keyi -> {
+                    e.get(0).elements("ResourceDictionary").forEach(en -> {
+                        String id = en.attributeValue("Key");
+                        if (id.equals(keyi)) {
+                            ResourceDict dict = registeredContents.get(id);
+                            en.elements().forEach(element -> {
+                                AbstractContentTag<?> contentTag = AbstractContentTag.create(dict, element);
+                                if (contentTag != null) dict.add(contentTag);
+                            });
+                        }
                     });
                 });
-            });
-
-            root.elements("String").forEach(element -> globalRegisteredContents.add(AbstractContentTag.create(globalRegisteredContents, element)));
+            }
+            root.elements().stream().filter(a -> a.getName().equals("String")).forEach(element -> globalRegisteredContents.add(AbstractContentTag.create(globalRegisteredContents, element)));
         }
+    }
+
+    public static ResourceDict getCurrentDict() {
+        return registeredContents.getOrDefault("Light", ResourceDict.createEmpty("Light"));
+    }
+
+    public static ResourceDict getGlobal() {
+        return globalRegisteredContents;
+    }
+
+    public static Map<String, ResourceDict> getAll() {
+        return registeredContents;
     }
 }

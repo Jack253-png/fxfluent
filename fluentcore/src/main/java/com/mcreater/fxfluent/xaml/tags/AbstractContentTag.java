@@ -25,6 +25,7 @@ public interface AbstractContentTag<T> {
             register("Color", a -> new ColorContentTag().writeElement(a).setResourceDict(dict));
             register("SolidColorBrush", a -> new SolidColorBrushContentTag().writeElement(a).setResourceDict(dict));
             register("StaticResource", a -> new StaticResourceRedirectContentTag().writeElement(a).setResourceDict(dict));
+            register("String", a -> new StringContentTag().writeElement(a).setResourceDict(dict));
         }
 
         return Optional.ofNullable(converters.get(element.getName()))

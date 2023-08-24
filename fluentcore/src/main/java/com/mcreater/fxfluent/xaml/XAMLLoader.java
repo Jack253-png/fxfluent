@@ -15,12 +15,17 @@ public class XAMLLoader {
         // XAMLManager.addFileFromClasspath("xaml/Common_themeresources_any.xaml");
 
         XAMLManager.parse();
-        XAMLManager.registeredContents.forEach((key, con) -> {
+        XAMLManager.getAll().forEach((key, con) -> {
             System.out.printf("%s: \n\n", key);
             con.forEach(a -> {
                 System.out.println(a.getKey());
                 System.out.printf("Type %s (name %s): %s\n", a.getClass().getSimpleName(), a.getKey(), a.toObject());
             });
+        });
+        System.out.print("{Global}: \n\n");
+        XAMLManager.getGlobal().forEach(a -> {
+            System.out.println(a.getKey());
+            System.out.printf("Type %s (name %s): %s\n", a.getClass().getSimpleName(), a.getKey(), a.toObject());
         });
     }
 }

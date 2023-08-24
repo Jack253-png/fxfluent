@@ -1,10 +1,10 @@
 package com.mcreater.fxfluent.controls.skin;
 
+import com.mcreater.fxfluent.controls.FluentButton;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
-import javafx.scene.control.Button;
 
 public class FluentButtonSkin extends ButtonSkin {
-    public FluentButtonSkin(Button button) {
+    public FluentButtonSkin(FluentButton button) {
         super(button);
     }
 }
