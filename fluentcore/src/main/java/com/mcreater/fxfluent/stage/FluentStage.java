@@ -1,7 +1,9 @@
 package com.mcreater.fxfluent.stage;
 
+import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import com.mcreater.fxfluent.util.NativeUtil;
+import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -9,6 +11,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import javafx.util.Duration;
 
 import java.awt.*;
 
@@ -18,6 +21,7 @@ public class FluentStage extends Stage {
     private VBox sceneContent;
     private boolean lastApply = false;
     private boolean isDarkMode = UiShellWrapper.GetSystemIsDark();
+    private final AnimatedValue<Color> windowColor = new AnimatedValue<>(Color.rgb(243, 243, 243), Duration.millis(150));
     public FluentStage() {
         this(StageStyle.DECORATED);
     }
@@ -29,6 +33,7 @@ public class FluentStage extends Stage {
         this.backdropType = UiShellWrapper.BackdropType.MICA;
         this.content = new Pane();
         this.sceneContent = new VBox();
+        SystemThemeLoop.addListener(a -> this.applyBackdropType());
     }
 
     /**
@@ -44,7 +49,8 @@ public class FluentStage extends Stage {
      */
     public void applyBackdropType() {
         try {
-            lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType);
+            isDarkMode = UiShellWrapper.GetSystemIsDark();
+            lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
             this.setScene(buildScene());
         }
         catch (Exception e) {
@@ -73,6 +79,16 @@ public class FluentStage extends Stage {
 
     private Scene buildScene() {
         int i = isDarkMode ? 32 : 243;
+        windowColor.updateValue(Color.rgb(i, i, i, lastApply ? .65 : 0));
+        windowColor.property.addListener((observableValue, color, t1) -> FluentStage.this.sceneContent.setBackground(new Background(
+                new BackgroundFill(
+                        UiShellWrapper.needBackground(backdropType) ?
+                                t1 :
+                                Color.TRANSPARENT,
+                        CornerRadii.EMPTY,
+                        Insets.EMPTY
+                )
+        )));
         this.sceneContent = new VBox();
         this.sceneContent.getChildren().clear();
         this.sceneContent.getChildren().addAll(buildTitleBar(), this.content);

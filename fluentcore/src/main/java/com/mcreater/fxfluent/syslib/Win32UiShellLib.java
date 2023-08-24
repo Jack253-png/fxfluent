@@ -10,6 +10,6 @@ public interface Win32UiShellLib extends Library {
     WinDef.DWORD GetCompositionColor();
     WinDef.BOOL GetThemeIsDark();
     WinDef.BOOL GetTransparencyEnabled();
-    WinDef.BOOL ApplyBlur(WinDef.HWND hwnd, WinDef.DWORD blurType);
+    WinDef.BOOL ApplyBlur(WinDef.HWND hwnd, WinDef.DWORD blurType, WinDef.BOOL isDark);
     WinDef.BOOL IsWindows11();
 }

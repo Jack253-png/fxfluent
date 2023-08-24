@@ -40,12 +40,13 @@ public class UiShellWrapper {
         }
         return false;
     }
-    public static boolean ApplyBlur(long windowHandle, BackdropType type) {
+    public static boolean ApplyBlur(long windowHandle, BackdropType type, boolean isDark) {
         if (GetSystemTransparencyEnabled()) {
             if (SystemUtil.isWindows()) {
                 return Win32UiShellLib.INSTANCE.ApplyBlur(
                         new WinDef.HWND(Pointer.createConstant(windowHandle)),
-                        new WinDef.DWORD(type.id)
+                        new WinDef.DWORD(type.id),
+                        new WinDef.BOOL(isDark)
                 ).booleanValue();
             }
         }

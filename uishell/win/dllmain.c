@@ -46,7 +46,7 @@ DLLIMPORT BOOL GetTransparencyEnabled() {
     return TRUE;
 }
 
-DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType) {
+DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType, BOOL isDark) {
   OSVERSIONINFOEX osver;
   osver.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
   if (!GetVersionEx((LPOSVERSIONINFOA)&osver)) {
@@ -61,7 +61,7 @@ DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType) {
     // Win 11
     if (build >= 22621) {
       WindowBackdropFast(hwnd, blurType == 1 ? 2 : (blurType == 0 ? 3 : blurType));
-	  WindowImmersiveDarkModeFast(hwnd, GetThemeIsDark());
+	  WindowImmersiveDarkModeFast(hwnd, isDark);
 	  WindowMicaFast(hwnd, TRUE);
 	  WindowBlurBehindFast(hwnd, TRUE);
 	  WindowExtendFrameIntoClientAreaFast(hwnd);
@@ -70,7 +70,7 @@ DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType) {
       DWORD dwBlurType = blurType <= 2 ? blurType : 2;
       WindowBlurBehindFast(hwnd, TRUE);
 	    WindowExtendFrameIntoClientAreaFast(hwnd);
-      if (GetThemeIsDark()) {
+      if (isDark) {
         WindowImmersiveDarkModeFast(hwnd, TRUE);
 	      WindowBlurFast(hwnd, dwBlurType, 0x00535353);
       }

@@ -1,9 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
 import com.mcreater.fxfluent.controls.skin.FluentButtonSkin;
-import javafx.animation.Timeline;
-import javafx.beans.property.ObjectProperty;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -12,8 +9,6 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class FluentButton extends Button {
-    private Timeline backgroundColor;
-    private final ObjectProperty<Color> backgroundColorProperty = new SimpleObjectProperty<>();
     public FluentButton() {
         this.init();
     }

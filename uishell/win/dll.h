@@ -12,7 +12,7 @@ DLLIMPORT void NativeWarningReflect(void);
 DLLIMPORT DWORD GetCompositionColor(void);
 DLLIMPORT BOOL GetThemeIsDark(void);
 DLLIMPORT BOOL GetTransparencyEnabled(void);
-DLLIMPORT BOOL ApplyBlur(HWND, DWORD);
+DLLIMPORT BOOL ApplyBlur(HWND, DWORD, BOOL);
 DLLIMPORT BOOL SetWindowRadius(HWND, DWORD);
 DLLIMPORT BOOL IsWindows11(void);
 

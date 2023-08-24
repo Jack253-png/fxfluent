@@ -1,5 +1,7 @@
 package com.mcreater.fxfluent.xaml;
 
+import com.mcreater.fxfluent.xaml.style.AppColorTheme;
+import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.mcreater.fxfluent.xaml.tags.AbstractContentTag;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -69,7 +71,8 @@ public class XAMLManager {
     }
 
     public static ResourceDict getCurrentDict() {
-        return registeredContents.getOrDefault("Light", ResourceDict.createEmpty("Light"));
+        String key = SystemThemeLoop.getTheme() == AppColorTheme.LIGHT ? "Light" : "Default";
+        return registeredContents.getOrDefault(key, ResourceDict.createEmpty(key + " (Empty fallback)"));
     }
 
     public static ResourceDict getGlobal() {

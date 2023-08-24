@@ -4,6 +4,6 @@ public enum StateType {
     NONE,
     HOVER,
     FOCUS,
-    PRESSED,
-    DISABLED
+    PRESS,
+    DISABLE
 }
