@@ -1,12 +1,11 @@
 package com.mcreater.fxfluent.xaml;
 
-import java.io.File;
 import java.io.IOException;
 
 public class XAMLLoader {
     public static void testLoad() throws IOException {
-        File file = new File("D:\\mods\\xaml-ui\\microsoft-ui-xaml-main\\dev\\CommonStyles\\Common_themeresources_any.xaml");
-        XAMLManager.addFile(file);
+        XAMLManager.addFileFromClasspath("xaml/Common_themeresources_any.xaml");
+        XAMLManager.addFileFromClasspath("xaml/Button_themeresources.xaml");
         XAMLManager.parse();
         XAMLManager.registeredContents.forEach((key, con) -> {
             System.out.printf("%s: \n\n", key);
