@@ -21,6 +21,8 @@ public class UIGalleryPane extends GridPane {
         buttons.getChildren().add(defaultButton);
         add(buttons, 0, 0);
 
+        buttons.setSpacing(10);
+
         setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 }

@@ -6,10 +6,15 @@ import org.dom4j.Element;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.Function;
+import java.util.function.BiFunction;
 
 public interface AbstractContentTag<T> {
-    Map<String, Function<Element, AbstractContentTag<?>>> converters = new HashMap<>();
+    Map<String, BiFunction<ResourceDict, Element, AbstractContentTag<?>>> converters = new HashMap<String, BiFunction<ResourceDict, Element, AbstractContentTag<?>>>() {{
+        put("Color", (dict, a) -> new ColorContentTag().writeElement(a).setResourceDict(dict));
+        put("SolidColorBrush", (dict, a) -> new SolidColorBrushContentTag().writeElement(a).setResourceDict(dict));
+        put("StaticResource", (dict, a) -> new StaticResourceRedirectContentTag().writeElement(a).setResourceDict(dict));
+        put("String", (dict, a) -> new StringContentTag().writeElement(a).setResourceDict(dict));
+    }};
     AbstractContentTag<T> writeElement(Element element);
     AbstractContentTag<T> setResourceDict(ResourceDict dict);
     Element getElement();
@@ -17,19 +22,12 @@ public interface AbstractContentTag<T> {
         return getElement().attributeValue("Key");
     }
     T toObject();
-    static void register(String key, Function<Element, AbstractContentTag<?>> function) {
+    static void register(String key, BiFunction<ResourceDict, Element, AbstractContentTag<?>> function) {
         converters.put(key, function);
     }
     static AbstractContentTag<?> create(ResourceDict dict, Element element) {
-        if (converters.isEmpty()) {
-            register("Color", a -> new ColorContentTag().writeElement(a).setResourceDict(dict));
-            register("SolidColorBrush", a -> new SolidColorBrushContentTag().writeElement(a).setResourceDict(dict));
-            register("StaticResource", a -> new StaticResourceRedirectContentTag().writeElement(a).setResourceDict(dict));
-            register("String", a -> new StringContentTag().writeElement(a).setResourceDict(dict));
-        }
-
         return Optional.ofNullable(converters.get(element.getName()))
-                .map(function -> function.apply(element))
+                .map(function -> function.apply(dict, element))
                 .orElse(null);
     }
 }

@@ -4,4 +4,5 @@
 .fluent-button:focused {
     -fx-background-color: transparent transparent transparent transparent;
     -fx-stroke: transparent;
+    -fx-text-fill: transparent;
 }

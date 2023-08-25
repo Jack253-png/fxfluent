@@ -16,6 +16,11 @@ public class AnimatedValue<T> {
         this.duration = duration;
     }
 
+    public void setValue(T value) {
+        if (timeline != null) timeline.stop();
+        property.set(value);
+    }
+
     public void updateValue(T value) {
         if (timeline != null) timeline.stop();
         timeline = new Timeline(

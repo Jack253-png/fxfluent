@@ -12,10 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Vector;
+import java.util.*;
 
 public class XAMLManager {
     private static final List<InputStream> files = new Vector<>();
@@ -45,29 +42,16 @@ public class XAMLManager {
     private static void parse(Document document) {
         Element root = document.getRootElement();
         if (root.getName().equals("ResourceDictionary")) {
-            List<Element> e = root.elements("ResourceDictionary.ThemeDictionaries");
-            if (e.size() > 0) {
-                e.get(0).elements("ResourceDictionary").forEach(en -> {
-                    String id = en.attributeValue("Key");
+            root.elements("ResourceDictionary.ThemeDictionaries")
+                    .forEach(themedict -> themedict.elements("ResourceDictionary").forEach(dicts -> dicts.elements().forEach(subEle -> operateDict(dicts.attributeValue("Key"), subEle))));
 
-                    if (!registeredContents.containsKey(id)) registeredContents.put(id, ResourceDict.createEmpty(id));
-                });
-
-                registeredContents.keySet().forEach(keyi -> {
-                    e.get(0).elements("ResourceDictionary").forEach(en -> {
-                        String id = en.attributeValue("Key");
-                        if (id.equals(keyi)) {
-                            ResourceDict dict = registeredContents.get(id);
-                            en.elements().forEach(element -> {
-                                AbstractContentTag<?> contentTag = AbstractContentTag.create(dict, element);
-                                if (contentTag != null) dict.add(contentTag);
-                            });
-                        }
-                    });
-                });
-            }
             root.elements().stream().filter(a -> a.getName().equals("String")).forEach(element -> globalRegisteredContents.add(AbstractContentTag.create(globalRegisteredContents, element)));
         }
+    }
+
+    private static void operateDict(String dict, Element subEle) {
+        if (!registeredContents.containsKey(dict)) registeredContents.put(dict, ResourceDict.createEmpty(dict));
+        Optional.ofNullable(AbstractContentTag.create(registeredContents.get(dict), subEle)).ifPresent(a -> registeredContents.get(dict).add(a));
     }
 
     public static ResourceDict getCurrentDict() {

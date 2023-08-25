@@ -1,7 +1,11 @@
 package com.mcreater.fxfluent.xaml;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.List;
@@ -12,20 +16,17 @@ public class XAMLLoader {
         Map map = new Gson().fromJson(new InputStreamReader(XAMLLoader.class.getClassLoader().getResourceAsStream("xaml/indexes/resources.json")), Map.class);
         ((List<String>) map.get("paths")).forEach(XAMLManager::addFileFromClasspath);
 
-        // XAMLManager.addFileFromClasspath("xaml/Common_themeresources_any.xaml");
+//        XAMLManager.addFileFromClasspath("xaml/Common_themeresources_any.xaml");
 
         XAMLManager.parse();
+
+        JsonObject object = new JsonObject();
         XAMLManager.getAll().forEach((key, con) -> {
-            System.out.printf("%s: \n\n", key);
-            con.forEach(a -> {
-                System.out.println(a.getKey());
-                System.out.printf("Type %s (name %s): %s\n", a.getClass().getSimpleName(), a.getKey(), a.toObject());
-            });
+            JsonObject objs = new JsonObject();
+            con.forEach(abstractContentTag -> objs.add(abstractContentTag.getKey(), new JsonPrimitive(abstractContentTag.toObject().toString())));
+            object.add(key, objs);
         });
-        System.out.print("{Global}: \n\n");
-        XAMLManager.getGlobal().forEach(a -> {
-            System.out.println(a.getKey());
-            System.out.printf("Type %s (name %s): %s\n", a.getClass().getSimpleName(), a.getKey(), a.toObject());
-        });
+
+        new GsonBuilder().setPrettyPrinting().create().toJson(object, new FileWriter("test.json"));
     }
 }

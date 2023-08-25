@@ -122,10 +122,8 @@ public class FluentStage extends Stage {
         public <V extends Region, K extends Stage> void windowMove(V listenedObject, K stage) {
             Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
             listenedObject.setOnMouseDragged(event -> {
-                double x = this.x_stage + event.getScreenX() - this.x1;
-                double y = this.y_stage + event.getScreenY() - this.y1;
-                if (x >= 0 && x <= scrSize.getWidth() - stage.getWidth()) stage.setX(x);
-                if (y >= 0 && y <= scrSize.getHeight() - stage.getHeight()) stage.setY(y);
+                stage.setX(this.x_stage + event.getScreenX() - this.x1);
+                stage.setY(this.y_stage + event.getScreenY() - this.y1);
             });
             listenedObject.setOnDragEntered(null);
             listenedObject.setOnMousePressed(event -> {
