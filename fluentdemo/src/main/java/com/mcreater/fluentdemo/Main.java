@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws NoSuchFieldException, IllegalAccessException, IOException {
         SystemThemeLoop.load();
         XAMLLoader.testLoad();
-        DefaultFontPatcher.patch(new Font(24));
+        DefaultFontPatcher.patch(new Font(18));
         MainApp.launch(args);
     }
 }
