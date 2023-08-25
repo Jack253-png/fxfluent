@@ -1,0 +1,18 @@
+.fluent-window-button,
+.fluent-window-button:focused {
+    -fx-background-color: transparent transparent transparent transparent;
+    -fx-stroke: transparent;
+    -fx-text-fill: transparent;
+}
+
+.fluent-window-button:hover {
+    -fx-background-color: #20202013 #20202013 #20202013 #20202013;
+    -fx-stroke: transparent;
+    -fx-text-fill: transparent;
+}
+
+.fluent-window-button:pressed {
+    -fx-background-color: #20202008 #20202008 #20202008 #20202008;
+    -fx-stroke: transparent;
+    -fx-text-fill: transparent;
+}

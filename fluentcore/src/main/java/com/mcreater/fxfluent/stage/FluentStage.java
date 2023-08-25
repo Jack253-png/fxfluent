@@ -1,10 +1,13 @@
 package com.mcreater.fxfluent.stage;
 
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
+import com.mcreater.fxfluent.stage.controls.FluentCloseButton;
+import com.mcreater.fxfluent.stage.controls.FluentWindowButton;
 import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import com.mcreater.fxfluent.util.NativeUtil;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
@@ -70,10 +73,26 @@ public class FluentStage extends Stage {
     }
 
     private Node buildTitleBar() {
-        HBox box = new HBox();
+        AnchorPane box = new AnchorPane();
         box.setPrefHeight(50);
         box.setBackground(new Background(new BackgroundFill(new Color(0, 0, 0, 0.004), CornerRadii.EMPTY, Insets.EMPTY)));
         WindowMovement.getInstance().windowMove(box, this);
+        FluentCloseButton closeButton = new FluentCloseButton();
+        closeButton.setOnAction(actionEvent -> FluentStage.this.close());
+        closeButton.setAlignment(Pos.CENTER);
+        AnchorPane.setRightAnchor(closeButton, 0D);
+
+        FluentWindowButton maximizeButton = new FluentWindowButton();
+        maximizeButton.setOnAction(actionEvent -> FluentStage.this.setMaximized(!FluentStage.this.isMaximized()));
+        maximizeButton.setAlignment(Pos.CENTER);
+        AnchorPane.setRightAnchor(maximizeButton, closeButton.getPrefWidth());
+
+        FluentWindowButton minimizeButton = new FluentWindowButton();
+        minimizeButton.setOnAction(actionEvent -> FluentStage.this.setIconified(true));
+        minimizeButton.setAlignment(Pos.CENTER);
+        AnchorPane.setRightAnchor(minimizeButton, maximizeButton.getPrefWidth() + closeButton.getPrefWidth());
+
+        box.getChildren().addAll(closeButton, maximizeButton, minimizeButton);
         return box;
     }
 
