@@ -15,5 +15,6 @@ DLLIMPORT BOOL GetTransparencyEnabled(void);
 DLLIMPORT BOOL ApplyBlur(HWND, DWORD, BOOL);
 DLLIMPORT BOOL SetWindowRadius(HWND, DWORD);
 DLLIMPORT BOOL IsWindows11(void);
+DLLIMPORT void SetWindowIsDark(HWND, BOOL);
 
 #endif /* _DLL_H_ */

@@ -1,6 +1,7 @@
 package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.stage.FluentStage;
+import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -10,7 +11,10 @@ public class MainApp extends Application {
         FluentStage stage = new FluentStage(StageStyle.TRANSPARENT);
         stage.setTitle("Test");
         stage.setContent(new UIGalleryPane());
+        stage.setWidth(800);
+        stage.setHeight(600);
         stage.show();
+        stage.setBackdropType(UiShellWrapper.BackdropType.ACRYLIC);
         stage.applyBackdropType();
     }
 

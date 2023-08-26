@@ -55,6 +55,8 @@ public class FluentStage extends Stage {
             isDarkMode = UiShellWrapper.GetSystemIsDark();
             lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
             this.setScene(buildScene());
+            setIconified(true);
+            setIconified(false);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -98,10 +100,10 @@ public class FluentStage extends Stage {
 
     private Scene buildScene() {
         int i = isDarkMode ? 32 : 243;
-        windowColor.updateValue(Color.rgb(i, i, i, lastApply ? .65 : 0));
+        windowColor.updateValue(Color.rgb(i, i, i, lastApply ? .65 : 1));
         windowColor.property.addListener((observableValue, color, t1) -> FluentStage.this.sceneContent.setBackground(new Background(
                 new BackgroundFill(
-                        UiShellWrapper.needBackground(backdropType) ?
+                        (UiShellWrapper.needBackground(backdropType) && lastApply) ?
                                 t1 :
                                 Color.TRANSPARENT,
                         CornerRadii.EMPTY,
@@ -114,12 +116,13 @@ public class FluentStage extends Stage {
         this.sceneContent.setBackground(new Background(
                 new BackgroundFill(
                         UiShellWrapper.needBackground(backdropType) ?
-                                Color.rgb(i, i, i, lastApply ? .65 : 0) :
+                                Color.rgb(i, i, i, lastApply ? .65 : 1) :
                                 Color.TRANSPARENT,
                         CornerRadii.EMPTY,
                         Insets.EMPTY
                 )
         ));
+
         Scene scene = new Scene(this.sceneContent);
         scene.setFill(Color.TRANSPARENT);
         return scene;

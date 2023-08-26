@@ -60,6 +60,7 @@ DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType, BOOL isDark) {
   else {
     // Win 11
     if (build >= 22621) {
+      WindowBackdropFast(hwnd, 0);
       WindowBackdropFast(hwnd, blurType == 1 ? 2 : (blurType == 0 ? 3 : blurType));
 	  WindowImmersiveDarkModeFast(hwnd, isDark);
 	  WindowMicaFast(hwnd, TRUE);
@@ -69,14 +70,14 @@ DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType, BOOL isDark) {
     else {
       DWORD dwBlurType = blurType <= 2 ? blurType : 2;
       WindowBlurBehindFast(hwnd, TRUE);
-	    WindowExtendFrameIntoClientAreaFast(hwnd);
+	  WindowExtendFrameIntoClientAreaFast(hwnd);
       if (isDark) {
         WindowImmersiveDarkModeFast(hwnd, TRUE);
-	      WindowBlurFast(hwnd, dwBlurType, 0x00535353);
+	    WindowBlurFast(hwnd, dwBlurType, 0x00535353);
       }
       else {
         WindowImmersiveDarkModeFast(hwnd, FALSE);
-	      WindowBlurFast(hwnd, dwBlurType, 0x00d3d3d3);
+	    WindowBlurFast(hwnd, dwBlurType, 0x00d3d3d3);
       }
     }
   }
@@ -98,6 +99,10 @@ DLLIMPORT BOOL IsWindows11() {
     }
     DWORD build = osver.dwBuildNumber;
     return build >= 22621;
+}
+
+DLLIMPORT void SetWindowIsDark(HWND hwnd, BOOL isDark) {
+    WindowImmersiveDarkModeFast(hwnd, isDark);
 }
 
 // 0 : Disable

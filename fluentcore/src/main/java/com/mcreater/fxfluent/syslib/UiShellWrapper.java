@@ -64,4 +64,13 @@ public class UiShellWrapper {
         }
         return true;
     }
+
+    public static void SetWindowIsDark(long windowHandle, boolean isDark) {
+        if (SystemUtil.isWindows()) {
+            Win32UiShellLib.INSTANCE.SetWindowIsDark(
+                    new WinDef.HWND(Pointer.createConstant(windowHandle)),
+                    new WinDef.BOOL(isDark)
+            );
+        }
+    }
 }
