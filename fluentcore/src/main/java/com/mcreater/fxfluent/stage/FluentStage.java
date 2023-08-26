@@ -16,8 +16,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
-import java.awt.*;
-
 public class FluentStage extends Stage {
     private UiShellWrapper.BackdropType backdropType;
     private Node content;
@@ -54,7 +52,7 @@ public class FluentStage extends Stage {
         try {
             isDarkMode = UiShellWrapper.GetSystemIsDark();
             lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
-            this.setScene(buildScene());
+            this.updateScene();
             setIconified(true);
             setIconified(false);
         }
@@ -71,7 +69,7 @@ public class FluentStage extends Stage {
      */
     public void setContent(Node content) {
         this.content = content;
-        this.setScene(buildScene());
+        this.updateScene();
     }
 
     private Node buildTitleBar() {
@@ -98,7 +96,7 @@ public class FluentStage extends Stage {
         return box;
     }
 
-    private Scene buildScene() {
+    private void updateScene() {
         int i = isDarkMode ? 32 : 243;
         windowColor.updateValue(Color.rgb(i, i, i, lastApply ? .65 : 1));
         windowColor.property.addListener((observableValue, color, t1) -> FluentStage.this.sceneContent.setBackground(new Background(
@@ -125,7 +123,7 @@ public class FluentStage extends Stage {
 
         Scene scene = new Scene(this.sceneContent);
         scene.setFill(Color.TRANSPARENT);
-        return scene;
+        this.setScene(scene);
     }
 
    private static class WindowMovement {
@@ -142,7 +140,6 @@ public class FluentStage extends Stage {
         }
 
         public <V extends Region, K extends Stage> void windowMove(V listenedObject, K stage) {
-            Dimension scrSize = Toolkit.getDefaultToolkit().getScreenSize();
             listenedObject.setOnMouseDragged(event -> {
                 stage.setX(this.x_stage + event.getScreenX() - this.x1);
                 stage.setY(this.y_stage + event.getScreenY() - this.y1);
