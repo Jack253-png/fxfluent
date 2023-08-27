@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 
 public class SystemThemeLoop {
     private static AppColorTheme theme = UiShellWrapper.GetSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
+    private static boolean transparencyEnabled = false;
     private static List<Consumer<AppColorTheme>> listeners = new Vector<>();
     public static AppColorTheme getTheme() {
         return theme;
@@ -24,6 +25,12 @@ public class SystemThemeLoop {
                     AppColorTheme theme1 = UiShellWrapper.GetSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
                     if (theme1 != theme) {
                         theme = theme1;
+                        listeners.forEach(a -> Platform.runLater(() -> a.accept(theme)));
+                    }
+
+                    boolean tra = UiShellWrapper.GetSystemTransparencyEnabled();
+                    if (tra != transparencyEnabled) {
+                        transparencyEnabled = tra;
                         listeners.forEach(a -> Platform.runLater(() -> a.accept(theme)));
                     }
 

@@ -16,7 +16,7 @@ public class UIGalleryPane extends GridPane {
         FluentButton disabledButton = new FluentButton("禁用的按钮");
         disabledButton.setDisable(true);
         buttons.getChildren().add(disabledButton);
-        FluentButton defaultButton = new FluentButton("焦点样式的按钮");
+        FluentButton defaultButton = new FluentButton("系统主题色按钮");
         defaultButton.setDefaultButton(true);
         buttons.getChildren().add(defaultButton);
         add(buttons, 0, 0);

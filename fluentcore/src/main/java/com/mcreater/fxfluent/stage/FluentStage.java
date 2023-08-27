@@ -22,6 +22,7 @@ public class FluentStage extends Stage {
     private VBox sceneContent;
     private boolean lastApply = false;
     private boolean isDarkMode = UiShellWrapper.GetSystemIsDark();
+    private boolean isFirstInit = true;
     private final AnimatedValue<Color> windowColor = new AnimatedValue<>(Color.rgb(243, 243, 243), Duration.millis(150));
     public FluentStage() {
         this(StageStyle.DECORATED);
@@ -53,8 +54,11 @@ public class FluentStage extends Stage {
             isDarkMode = UiShellWrapper.GetSystemIsDark();
             lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
             this.updateScene();
-            setIconified(true);
-            setIconified(false);
+            if (!isFirstInit) {
+                setIconified(true);
+                setIconified(false);
+            }
+            else isFirstInit = false;
         }
         catch (Exception e) {
             e.printStackTrace();

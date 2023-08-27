@@ -3,16 +3,22 @@
     -fx-background-color: transparent transparent transparent transparent;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
 }
 
 .fluent-window-button:hover {
     -fx-background-color: #20202013 #20202013 #20202013 #20202013;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
 }
 
 .fluent-window-button:pressed {
     -fx-background-color: #20202008 #20202008 #20202008 #20202008;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
 }
