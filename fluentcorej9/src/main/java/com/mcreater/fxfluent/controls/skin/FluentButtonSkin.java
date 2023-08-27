@@ -31,6 +31,13 @@ public class FluentButtonSkin extends ButtonSkin {
         put(StateType.PRESS, "ButtonBackgroundPressed");
         put(StateType.DISABLE, "ButtonBackgroundDisabled");
     }};
+    private static final Map<StateType, String> BG_ACCENT_KEY_MAP = new HashMap<>() {{
+        put(StateType.NONE, "AccentButtonBackground");
+        put(StateType.FOCUS, "AccentButtonBackground");
+        put(StateType.HOVER, "AccentButtonBackgroundPointerOver");
+        put(StateType.PRESS, "AccentButtonBackgroundPressed");
+        put(StateType.DISABLE, "AccentButtonBackgroundDisabled");
+    }};
     private static final Map<StateType, String> FG_KEY_MAP = new HashMap<>() {{
         put(StateType.NONE, "ButtonForeground");
         put(StateType.FOCUS, "ButtonForeground");
@@ -38,12 +45,26 @@ public class FluentButtonSkin extends ButtonSkin {
         put(StateType.PRESS, "ButtonForegroundPressed");
         put(StateType.DISABLE, "ButtonForegroundDisabled");
     }};
+    private static final Map<StateType, String> FG_ACCENT_KEY_MAP = new HashMap<>() {{
+        put(StateType.NONE, "AccentButtonForeground");
+        put(StateType.FOCUS, "AccentButtonForeground");
+        put(StateType.HOVER, "AccentButtonForegroundPointerOver");
+        put(StateType.PRESS, "AccentButtonForegroundPressed");
+        put(StateType.DISABLE, "AccentButtonForegroundDisabled");
+    }};
     private static final Map<StateType, String> BRD_BOTTOM_KEY_MAP = new HashMap<>() {{
         put(StateType.NONE, "ControlStrokeColorSecondaryBrush");
         put(StateType.FOCUS, "ControlStrokeColorSecondaryBrush");
         put(StateType.HOVER, "ControlStrokeColorSecondaryBrush");
         put(StateType.PRESS, "ControlStrokeColorDefaultBrush");
         put(StateType.DISABLE, "ControlStrokeColorDefaultBrush");
+    }};
+    private static final Map<StateType, String> BRD_BOTTOM_ACCENT_KEY_MAP = new HashMap<>() {{
+        put(StateType.NONE, "ControlStrokeColorOnAccentSecondary");
+        put(StateType.FOCUS, "ControlStrokeColorOnAccentSecondary");
+        put(StateType.HOVER, "ControlStrokeColorOnAccentSecondary");
+        put(StateType.PRESS, "AccentButtonBorderBrushPressed");
+        put(StateType.DISABLE, "AccentButtonBorderBrushDisabled");
     }};
     private final FluentButton button;
     private final ObjectProperty<StateType> state = new SimpleObjectProperty<>(null);
@@ -65,6 +86,8 @@ public class FluentButtonSkin extends ButtonSkin {
         ).forEach(a -> a.addListener(this::updateState));
 
         SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
+        button.defaultButtonProperty().addListener((NewValueListener<Boolean>) t1 -> FluentButtonSkin.this.updateComponents(state.get()));
+
         CornerRadii cornerRadii = new CornerRadii(4);
 
         state.addListener((NewValueListener<StateType>) FluentButtonSkin.this::updateComponents);
@@ -111,11 +134,14 @@ public class FluentButtonSkin extends ButtonSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(BG_KEY_MAP.get(type)).getColor());
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(FG_KEY_MAP.get(type)).getColor());
+        backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
+                (button.isDefaultButton() ? BG_ACCENT_KEY_MAP : BG_KEY_MAP).get(type)).getColor()
+        );
+        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.isDefaultButton() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP).get(type)).getColor());
+        Map<StateType, String> lft = button.isDefaultButton() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
         Stream.of(
             upBorderColor, leftBorderColor, rightBorderColor
-            ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(BRD_BOTTOM_KEY_MAP.get(StateType.PRESS)).getColor()));
-        downBorderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(BRD_BOTTOM_KEY_MAP.get(type)).getColor());
+            ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(StateType.PRESS)).getColor()));
+        downBorderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(type)).getColor());
     }
 }

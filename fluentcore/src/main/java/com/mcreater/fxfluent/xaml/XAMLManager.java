@@ -1,8 +1,11 @@
 package com.mcreater.fxfluent.xaml;
 
+import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.mcreater.fxfluent.xaml.tags.AbstractContentTag;
+import com.mcreater.fxfluent.xaml.tags.DynamicColorContentTag;
+import javafx.scene.paint.Color;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -13,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.*;
+
+import static com.mcreater.fxfluent.util.NumberUtil.lim;
 
 public class XAMLManager {
     private static final List<InputStream> files = new Vector<>();
@@ -30,6 +35,8 @@ public class XAMLManager {
         registeredContents.values().forEach(ResourceDict::clear);
         registeredContents.clear();
         globalRegisteredContents.clear();
+        registerAccent();
+
         files.forEach(file -> {
             try {
                 parse(new SAXReader().read(file));
@@ -37,6 +44,27 @@ public class XAMLManager {
                 e.printStackTrace();
             }
         });
+    }
+    private static void registerAccent() {
+        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColor", UiShellWrapper::GetSystemCompositionColor));
+        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorDark1", () -> {
+            Color color = UiShellWrapper.GetSystemCompositionColor();
+            return Color.hsb(
+                    lim(color.getHue()/203*205, 0, 360),
+                    lim(color.getSaturation()/29*22+(20/100D), 0, 1),
+                    lim(color.getBrightness()/26*28-(14/100D), 0, 1),
+                    1
+            );
+        }));
+        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorLight2", () -> {
+            Color color = UiShellWrapper.GetSystemCompositionColor();
+            return Color.hsb(
+                    lim(color.getHue()/284*280+5, 0, 360), //9
+                    lim(color.getSaturation()-(30/100D), 0, 1),
+                    lim(color.getBrightness()/3+(73/100D), 0, 1), //46
+                    1
+            );
+        }));
     }
 
     private static void parse(Document document) {

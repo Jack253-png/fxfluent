@@ -37,9 +37,6 @@ public class ColorUtil {
         box.getChildren().add(new Rectangle(120, 120, newclr));
         box.getChildren().add(new Rectangle(120, 120, newclr2));
 
-        printhsb("original", color);
-        printhsb("dark calc", newclr2);
-
         return box;
     }
     public static void printhsb(String clr, Color newclr2) {

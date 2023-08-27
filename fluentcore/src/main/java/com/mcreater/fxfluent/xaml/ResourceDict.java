@@ -2,6 +2,7 @@ package com.mcreater.fxfluent.xaml;
 
 import com.mcreater.fxfluent.brush.SolidColorBrush;
 import com.mcreater.fxfluent.xaml.tags.AbstractContentTag;
+import com.mcreater.fxfluent.xaml.tags.ColorContentTag;
 import com.mcreater.fxfluent.xaml.tags.SolidColorBrushContentTag;
 import com.mcreater.fxfluent.xaml.tags.StaticResourceRedirectContentTag;
 
@@ -24,10 +25,15 @@ public class ResourceDict extends Vector<AbstractContentTag<?>> {
                         (T) abstractContentTag;
             }
         }
-        return null;
+        return this == XAMLManager.getGlobal() ? null : XAMLManager.getGlobal().foundTag(key, clazz);
     }
 
     public SolidColorBrush foundSolidColorBrush(String key) {
-        return foundTag(key, SolidColorBrushContentTag.class).toObject();
+        try {
+            return foundTag(key, SolidColorBrushContentTag.class).toObject();
+        }
+        catch (Exception e) {
+            return new SolidColorBrush(foundTag(key, ColorContentTag.class).toObject());
+        }
     }
 }
