@@ -23,10 +23,12 @@ public class XAMLLoader {
         JsonObject object = new JsonObject();
         XAMLManager.getAll().forEach((key, con) -> {
             JsonObject objs = new JsonObject();
-            con.forEach(abstractContentTag -> objs.add(abstractContentTag.getKey(), new JsonPrimitive(abstractContentTag.toObject().toString())));
+            con.forEach(abstractContentTag -> objs.add(abstractContentTag.getKey(), new JsonPrimitive(abstractContentTag.toString())));
             object.add(key, objs);
         });
 
-        new GsonBuilder().setPrettyPrinting().create().toJson(object, new FileWriter("test.json"));
+        try (FileWriter writer = new FileWriter("test.json")) {
+            new GsonBuilder().setPrettyPrinting().create().toJson(object, writer);
+        }
     }
 }

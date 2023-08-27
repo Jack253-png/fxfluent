@@ -14,6 +14,7 @@ public interface AbstractContentTag<T> {
         put("SolidColorBrush", (dict, a) -> new SolidColorBrushContentTag().writeElement(a).setResourceDict(dict));
         put("StaticResource", (dict, a) -> new StaticResourceRedirectContentTag().writeElement(a).setResourceDict(dict));
         put("String", (dict, a) -> new StringContentTag().writeElement(a).setResourceDict(dict));
+        put("Thickness", (dict, a) -> new ThicknessContentTag().writeElement(a).setResourceDict(dict));
     }};
     AbstractContentTag<T> writeElement(Element element);
     AbstractContentTag<T> setResourceDict(ResourceDict dict);

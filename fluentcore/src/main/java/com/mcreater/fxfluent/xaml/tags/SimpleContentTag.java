@@ -19,4 +19,8 @@ public abstract class SimpleContentTag<T> implements AbstractContentTag<T> {
     public Element getElement() {
         return element;
     }
+
+    public String toString() {
+        return toObject().toString();
+    }
 }

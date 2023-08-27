@@ -117,20 +117,12 @@ public class FluentButtonSkin extends ButtonSkin {
         );
 
         updateState(null, null, null);
-        updateComponentsImmediately(state.get());
+        updateComponents(state.get());
+        button.setPadding(new Insets(5, 11, 5, 11));
     }
 
     private void updateState(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
         state.set(genState(button.isDisabled(), button.isHover(), button.isPressed(), button.isFocused()));
-    }
-
-    private void updateComponentsImmediately(StateType type) {
-        backgroundColor.setValue(XAMLManager.getCurrentDict().foundSolidColorBrush(BG_KEY_MAP.get(type)).getColor());
-        foregroundColor.setValue(XAMLManager.getCurrentDict().foundSolidColorBrush(FG_KEY_MAP.get(type)).getColor());
-        Stream.of(
-                upBorderColor, leftBorderColor, rightBorderColor
-        ).forEach(a -> a.setValue(XAMLManager.getCurrentDict().foundSolidColorBrush(BRD_BOTTOM_KEY_MAP.get(StateType.PRESS)).getColor()));
-        downBorderColor.setValue(XAMLManager.getCurrentDict().foundSolidColorBrush(BRD_BOTTOM_KEY_MAP.get(type)).getColor());
     }
 
     private void updateComponents(StateType type) {

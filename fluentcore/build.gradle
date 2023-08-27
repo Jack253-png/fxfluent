@@ -17,6 +17,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation rootProject.files("libs/jfxrt.jar")
+    implementation rootProject.files("libs/java-objc-bridge-1.0.0.jar")
     implementation "net.java.dev.jna:jna:5.7.0"
     implementation "net.java.dev.jna:jna-platform:5.7.0"
     implementation "org.dom4j:dom4j:2.0.1"

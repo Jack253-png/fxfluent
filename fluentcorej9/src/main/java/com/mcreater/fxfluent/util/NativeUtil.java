@@ -26,6 +26,7 @@ public class NativeUtil {
         com.sun.glass.ui.Window platformWindowInstance = (com.sun.glass.ui.Window) platformWindow.get(internalStage);
         Method getNativeHandle = com.sun.glass.ui.Window.class.getDeclaredMethod("getNativeHandle");
         getNativeHandle.setAccessible(true);
+
         return (long) getNativeHandle.invoke(platformWindowInstance);
     }
 }

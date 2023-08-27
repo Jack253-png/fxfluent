@@ -1,7 +1,6 @@
 package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.controls.FluentButton;
-import com.mcreater.fxfluent.util.ColorUtil;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
@@ -17,16 +16,10 @@ public class UIGalleryPane extends GridPane {
         FluentButton disabledButton = new FluentButton("禁用的按钮");
         disabledButton.setDisable(true);
         buttons.getChildren().add(disabledButton);
-        FluentButton defaultButton = new FluentButton("默认样式的按钮");
+        FluentButton defaultButton = new FluentButton("焦点样式的按钮");
         defaultButton.setDefaultButton(true);
         buttons.getChildren().add(defaultButton);
         add(buttons, 0, 0);
-
-        buttons.setSpacing(10);
-        add(ColorUtil.testColorTranslate(Color.rgb(37, 130, 146)), 1, 0);
-        add(ColorUtil.testColorTranslate(Color.rgb(0, 120, 212)), 2, 0);
-        add(ColorUtil.testColorTranslate(Color.rgb(226, 36, 26)), 3, 0);
-        add(ColorUtil.testColorTranslate(Color.rgb(169, 77, 193)), 4, 0);
 
         setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
     }

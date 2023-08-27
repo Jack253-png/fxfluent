@@ -44,6 +44,7 @@ dependencies {
     implementation "net.java.dev.jna:jna:5.7.0"
     implementation "net.java.dev.jna:jna-platform:5.7.0"
     implementation "org.dom4j:dom4j:2.0.1"
+    implementation rootProject.files("libs/java-objc-bridge-1.0.0.jar")
 }
 
 test {
