@@ -1,8 +1,10 @@
 .fluent-button,
 .fluent-button:hover,
 .fluent-button:pressed,
-.fluent-button:focused {
+.fluent-button:focused,
+.fluent-button:disabled {
     -fx-background-color: transparent transparent transparent transparent;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;
+    -fx-opacity: 1.0;
 }

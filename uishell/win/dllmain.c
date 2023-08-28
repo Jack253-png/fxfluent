@@ -87,7 +87,10 @@ DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType, BOOL isDark) {
 DLLIMPORT BOOL SetWindowRadius(HWND hwnd, DWORD radius) {
 	RECT m_rc;
 	GetWindowRect(hwnd, &m_rc);
-    HRGN m_rgn = CreateRoundRectRgn(m_rc.left, m_rc.top, m_rc.right, m_rc.bottom, radius, radius);
+    /*HRGN m_rgn = CreateRoundRectRgn(m_rc.left, m_rc.top, m_rc.right, m_rc.bottom, radius, radius);
+    SetWindowRgn(hwnd, m_rgn, TRUE);*/
+
+    HRGN m_rgn = CreateRoundRectRgn(0, 0, m_rc.right - m_rc.left, m_rc.bottom - m_rc.top, radius, radius);
     SetWindowRgn(hwnd, m_rgn, TRUE);
 }
 

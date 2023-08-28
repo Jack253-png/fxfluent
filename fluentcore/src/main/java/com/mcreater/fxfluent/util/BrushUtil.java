@@ -1,6 +1,5 @@
 package com.mcreater.fxfluent.util;
 
-import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.geometry.Insets;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.*;
@@ -29,7 +28,7 @@ public class BrushUtil {
         };
     }
 
-    public static BiConsumer<Region, Color> borderFill(BorderOrientation orientation, CornerRadii cornerRadii, int borderWidths, Insets insets) {
+    public static BiConsumer<Region, Color> borderFill(BorderOrientation orientation, CornerRadii cornerRadii, double borderWidths, Insets insets) {
         return (region, color) -> {
             if (region.getBorder() == null || region.getBorder().getStrokes().size() == 0) {
                 region.setBorder(new Border(new BorderStroke(
@@ -58,7 +57,7 @@ public class BrushUtil {
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,
                         cornerRadii,
-                        new BorderWidths(borderWidths / (SystemThemeLoop.isDark() ? 2D : 1D)),
+                        new BorderWidths(borderWidths),
                         insets
                 )));
                 region.setBorder(new Border(strokes, new Vector<>()));

@@ -4,12 +4,14 @@ import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.stage.controls.FluentTitleBar;
 import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import com.mcreater.fxfluent.util.NativeUtil;
+import com.mcreater.fxfluent.util.listeners.NewValueListener;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -21,6 +23,17 @@ public class FluentStage extends Stage {
     private boolean lastApply = false;
     private boolean isDarkMode = UiShellWrapper.GetSystemIsDark();
     private boolean isFirstInit = true;
+    private boolean disableBackdrop = false;
+    private boolean disableBackground = false;
+
+    public void setDisableBackdrop(boolean disableBackdrop) {
+        this.disableBackdrop = disableBackdrop;
+    }
+
+    public void setDisableBackground(boolean disableBackground) {
+        this.disableBackground = disableBackground;
+    }
+
     private final AnimatedValue<Color> windowColor = new AnimatedValue<>(Color.rgb(243, 243, 243), Duration.millis(150));
     public FluentStage() {
         this(StageStyle.DECORATED);
@@ -50,7 +63,9 @@ public class FluentStage extends Stage {
     public void applyBackdropType() {
         try {
             isDarkMode = UiShellWrapper.GetSystemIsDark();
-            lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
+            if (!disableBackdrop) {
+                lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
+            }
             this.updateScene();
             if (!isFirstInit) {
                 setIconified(true);
@@ -78,14 +93,24 @@ public class FluentStage extends Stage {
         return new FluentTitleBar(this);
     }
 
+    private Color getWindowBackground() {
+        if (!disableBackground) {
+            int i = isDarkMode ? 32 : 243;
+            if (getStyle() != StageStyle.TRANSPARENT) {
+                return Color.rgb(i, i, i, 1);
+            } else {
+                return Color.rgb(i, i, i, (lastApply) ? (UiShellWrapper.needBackground(backdropType) ? .65 : 0) : 1);
+            }
+        }
+        else return Color.TRANSPARENT;
+    }
+
     private void updateScene() {
         int i = isDarkMode ? 32 : 243;
-        windowColor.updateValue(Color.rgb(i, i, i, lastApply ? .65 : 1));
+        windowColor.updateValue(getWindowBackground());
         windowColor.property.addListener((observableValue, color, t1) -> FluentStage.this.sceneContent.setBackground(new Background(
                 new BackgroundFill(
-                        (UiShellWrapper.needBackground(backdropType) && lastApply) ?
-                                t1 :
-                                Color.TRANSPARENT,
+                        getWindowBackground(),
                         CornerRadii.EMPTY,
                         Insets.EMPTY
                 )
@@ -95,13 +120,22 @@ public class FluentStage extends Stage {
         this.sceneContent.getChildren().addAll(buildTitleBar(), this.content);
         this.sceneContent.setBackground(new Background(
                 new BackgroundFill(
-                        UiShellWrapper.needBackground(backdropType) ?
-                                Color.rgb(i, i, i, lastApply ? .65 : 1) :
-                                Color.TRANSPARENT,
+                        getWindowBackground(),
                         CornerRadii.EMPTY,
                         Insets.EMPTY
                 )
         ));
+
+        Rectangle rectangle = new Rectangle();
+        rectangle.widthProperty().bind(this.widthProperty());
+        rectangle.heightProperty().bind(this.heightProperty());
+        rectangle.setArcWidth(15);
+        rectangle.setArcHeight(15);
+        maximizedProperty().addListener((NewValueListener<Boolean>) t1 -> {
+            rectangle.setArcWidth(t1 ? 0 : 15);
+            rectangle.setArcHeight(t1 ? 0 : 15);
+        });
+        this.sceneContent.setClip(rectangle);
 
         Scene scene = new Scene(this.sceneContent);
         scene.setFill(Color.TRANSPARENT);

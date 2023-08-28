@@ -1,20 +1,21 @@
 package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.stage.FluentStage;
-import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import javafx.application.Application;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class MainApp extends Application {
     public void start(Stage primaryStage) {
         FluentStage stage = new FluentStage(StageStyle.TRANSPARENT);
-        stage.setTitle("Test");
-        stage.setContent(new UIGalleryPane());
+        stage.setTitle("FxFluent 控件库展示");
+        stage.setContent(new UIGalleryPane(stage));
+        stage.getIcons().add(new Image(MainApp.class.getClassLoader().getResourceAsStream("icons/TitlebarLogo.png")));
+        stage.setDisableBackdrop(true);
         stage.setWidth(800);
         stage.setHeight(600);
         stage.show();
-        stage.setBackdropType(UiShellWrapper.BackdropType.ACRYLIC);
         stage.applyBackdropType();
     }
 

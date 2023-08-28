@@ -69,7 +69,7 @@ public class FluentButtonSkin extends ButtonSkin {
     private final FluentButton button;
     private final ObjectProperty<StateType> state = new SimpleObjectProperty<>(null);
     private final AnimatedValue<Color> backgroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
-    private final AnimatedValue<Color> foregroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
+    private final AnimatedValue<Color> foregroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(42));
 
     private final AnimatedValue<Color> upBorderColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
     private final AnimatedValue<Color> downBorderColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));

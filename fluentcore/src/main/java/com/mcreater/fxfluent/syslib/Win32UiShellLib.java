@@ -13,4 +13,5 @@ public interface Win32UiShellLib extends Library {
     WinDef.BOOL ApplyBlur(WinDef.HWND hwnd, WinDef.DWORD blurType, WinDef.BOOL isDark);
     WinDef.BOOL IsWindows11();
     void SetWindowIsDark(WinDef.HWND hwnd, WinDef.BOOL isDark);
+    WinDef.BOOL SetWindowRadius(WinDef.HWND hwnd, WinDef.DWORD radius);
 }

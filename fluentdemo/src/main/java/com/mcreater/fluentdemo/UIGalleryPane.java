@@ -1,13 +1,14 @@
 package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.controls.FluentButton;
+import com.mcreater.fxfluent.stage.FluentStage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class UIGalleryPane extends GridPane {
-    public UIGalleryPane() {
+    public UIGalleryPane(FluentStage stage) {
         setPadding(new Insets(10));
 
         VBox buttons = new VBox();
@@ -18,7 +19,9 @@ public class UIGalleryPane extends GridPane {
         buttons.getChildren().add(disabledButton);
         FluentButton defaultButton = new FluentButton("系统主题色按钮");
         defaultButton.setDefaultButton(true);
+
         buttons.getChildren().add(defaultButton);
+        buttons.setSpacing(15);
         add(buttons, 0, 0);
 
         setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
