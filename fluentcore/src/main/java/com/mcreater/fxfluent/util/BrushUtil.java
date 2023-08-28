@@ -1,6 +1,6 @@
 package com.mcreater.fxfluent.util;
 
-import com.mcreater.fxfluent.syslib.UiShellWrapper;
+import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.geometry.Insets;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.*;
@@ -58,7 +58,7 @@ public class BrushUtil {
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,
                         cornerRadii,
-                        new BorderWidths(borderWidths / (UiShellWrapper.GetSystemIsDark() ? 2D : 1D)),
+                        new BorderWidths(borderWidths / (SystemThemeLoop.isDark() ? 2D : 1D)),
                         insets
                 )));
                 region.setBorder(new Border(strokes, new Vector<>()));

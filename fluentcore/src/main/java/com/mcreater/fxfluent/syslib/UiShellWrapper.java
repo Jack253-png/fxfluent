@@ -19,6 +19,12 @@ public class UiShellWrapper {
         BackdropType(int id) {
             this.id = id;
         }
+        public static BackdropType getDefault() {
+            if (SystemUtil.isWindows()) {
+                return Win32UiShellLib.INSTANCE.IsWindows11().booleanValue() ? MICA : ACRYLIC;
+            }
+            else return BLUR;
+        }
     }
     public static Color SYS_DEFAULT_COMPOSITION_COLOR = Color.rgb(0, 120, 212);
     public static Color GetSystemCompositionColor() {
@@ -33,6 +39,9 @@ public class UiShellWrapper {
             return Win32UiShellLib.INSTANCE.GetThemeIsDark().booleanValue();
         }
         return false;
+    }
+    public static boolean SystemThemeSupport() {
+        return SystemUtil.isWindows();
     }
     public static boolean GetSystemTransparencyEnabled() {
         if (SystemUtil.isWindows()) {

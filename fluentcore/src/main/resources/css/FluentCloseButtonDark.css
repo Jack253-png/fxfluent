@@ -1,5 +1,6 @@
 .fluent-close-button,
-.fluent-close-button:focused {
+.fluent-close-button:focused,
+.fluent-close-button:disabled, {
     -fx-background-color: transparent transparent transparent transparent;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;
@@ -8,7 +9,7 @@
 }
 
 .fluent-close-button:hover {
-    -fx-background-color: #c42b1c #c42b1c #c42b1c #c42b1c;
+    -fx-background-color: #c22b1c #c22b1c #c22b1c #c22b1c;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;
     -fx-background-radius: 0;
@@ -16,7 +17,7 @@
 }
 
 .fluent-close-button:pressed {
-    -fx-background-color: #c42b1c #c42b1c #c42b1c #c42b1c;
+    -fx-background-color: #b2271d #b2271d #b2271d #b2271d;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;
     -fx-background-radius: 0;

@@ -1,5 +1,6 @@
 .fluent-window-button,
-.fluent-window-button:focused {
+.fluent-window-button:focused,
+.fluent-window-button:disabled {
     -fx-background-color: transparent transparent transparent transparent;
     -fx-stroke: transparent;
     -fx-text-fill: transparent;

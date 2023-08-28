@@ -9,10 +9,19 @@ import java.util.function.Consumer;
 
 public class SystemThemeLoop {
     private static AppColorTheme theme = UiShellWrapper.GetSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
+    private static AppColorTheme predictedTheme = AppColorTheme.SYSTEM;
+
+    public static void setPredictedTheme(AppColorTheme predictedTheme) {
+        SystemThemeLoop.predictedTheme = predictedTheme;
+    }
+
     private static boolean transparencyEnabled = false;
     private static List<Consumer<AppColorTheme>> listeners = new Vector<>();
     public static AppColorTheme getTheme() {
         return theme;
+    }
+    public static boolean isDark() {
+        return theme == AppColorTheme.DARK;
     }
     public static void addListener(Consumer<AppColorTheme> consumer) {
         listeners.add(consumer);
@@ -23,8 +32,14 @@ public class SystemThemeLoop {
             public void run() {
                 while (true) {
                     AppColorTheme theme1 = UiShellWrapper.GetSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
-                    if (theme1 != theme) {
-                        theme = theme1;
+                    if (predictedTheme == AppColorTheme.SYSTEM) {
+                        if (theme1 != theme) {
+                            theme = theme1;
+                            listeners.forEach(a -> Platform.runLater(() -> a.accept(theme)));
+                        }
+                    }
+                    else if (predictedTheme != theme) {
+                        theme = predictedTheme;
                         listeners.forEach(a -> Platform.runLater(() -> a.accept(theme)));
                     }
 
