@@ -1,11 +1,11 @@
 package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.controls.FluentButton;
+import com.mcreater.fxfluent.controls.FluentToggleButton;
 import com.mcreater.fxfluent.stage.FluentStage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
@@ -26,7 +26,7 @@ public class UIGalleryPane extends GridPane {
         buttons.setSpacing(15);
         add(buttons, 0, 0);
         ScrollBar bar = new ScrollBar();
-        ToggleButton button = new ToggleButton("Test");
+        FluentToggleButton button = new FluentToggleButton("Test");
         add(bar, 0, 1);
         add(button, 0, 2);
 

@@ -1,0 +1,13 @@
+.fluent-toggle-button,
+.fluent-toggle-button:hover,
+.fluent-toggle-button:pressed,
+.fluent-toggle-button:focused,
+.fluent-toggle-button:disabled,
+.fluent-toggle-button:armed,
+.fluent-toggle-button:selected,
+.fluent-toggle-button:selected:focused {
+    -fx-background-color: transparent transparent transparent transparent;
+    -fx-stroke: transparent;
+    -fx-text-fill: transparent;
+    -fx-opacity: 1.0;
+}
