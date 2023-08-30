@@ -19,7 +19,7 @@ import javafx.util.Duration;
 public class FluentStage extends Stage {
     private UiShellWrapper.BackdropType backdropType;
     private Node content;
-    private VBox sceneContent;
+    private Pane sceneContent;
     private boolean lastApply = false;
     private boolean isDarkMode = UiShellWrapper.GetSystemIsDark();
     private boolean isFirstInit = true;
@@ -89,7 +89,7 @@ public class FluentStage extends Stage {
         this.updateScene();
     }
 
-    private Node buildTitleBar() {
+    private FluentTitleBar buildTitleBar() {
         return new FluentTitleBar(this);
     }
 
@@ -115,9 +115,14 @@ public class FluentStage extends Stage {
                         Insets.EMPTY
                 )
         )));
-        this.sceneContent = new VBox();
+        FluentTitleBar titleBar = buildTitleBar();
+
+        Region placeHolder = new Region();
+        placeHolder.setPrefHeight(50 + 10);
+
+        this.sceneContent = new Pane();
         this.sceneContent.getChildren().clear();
-        this.sceneContent.getChildren().addAll(buildTitleBar(), this.content);
+        this.sceneContent.getChildren().addAll(new VBox(placeHolder, this.content), titleBar);
         this.sceneContent.setBackground(new Background(
                 new BackgroundFill(
                         getWindowBackground(),
@@ -136,6 +141,10 @@ public class FluentStage extends Stage {
             rectangle.setArcHeight(t1 ? 0 : 15);
         });
         this.sceneContent.setClip(rectangle);
+        titleBar.prefWidthProperty().bind(this.widthProperty());
+
+        this.sceneContent.prefWidthProperty().bind(this.widthProperty());
+        this.sceneContent.prefHeightProperty().bind(this.heightProperty());
 
         Scene scene = new Scene(this.sceneContent);
         scene.setFill(Color.TRANSPARENT);
