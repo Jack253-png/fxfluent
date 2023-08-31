@@ -16,8 +16,29 @@ DLLIMPORT DWORD GetCompositionColor() {
   BOOL opaque = FALSE;
   
   HRESULT hr = DwmGetColorizationColor(&color, &opaque);
-  if (SUCCEEDED(hr)) return color;
-  else return 13924352;
+  if (hr == S_OK) return color;
+  else {
+    HKEY hk;
+    LONG lReturn = RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\DWM", 0, KEY_READ, &hk);
+    if (ERROR_SUCCESS == lReturn) {
+      DWORD dwValue;
+      DWORD dwSize = sizeof(dwValue);
+      lReturn = RegQueryValueEx(hk, "AccentColor", NULL, NULL, (LPBYTE)&dwValue, &dwSize);
+      RegCloseKey(hk);
+      if (ERROR_SUCCESS == lReturn) {
+        DWORD b = (dwValue >> 16) & 0xFF;
+        DWORD g = (dwValue >> 8) & 0xFF;
+        DWORD r = (dwValue >> 0) & 0xFF;
+        DWORD a = 255;
+
+        return ((a & 0xFF) << 24) |
+               ((r & 0xFF) << 16) |
+               ((g & 0xFF) << 8)  |
+               ((b & 0xFF) << 0);
+      }
+    }
+    return 0xFF0078D4;
+  }
 }
 
 DLLIMPORT BOOL GetThemeIsDark() {

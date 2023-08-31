@@ -1,5 +1,6 @@
 package com.mcreater.fluentdemo;
 
+import com.mcreater.fxfluent.brush.AcrylicInAppFillColorBrush;
 import com.mcreater.fxfluent.controls.FluentButton;
 import com.mcreater.fxfluent.controls.FluentToggleButton;
 import com.mcreater.fxfluent.stage.FluentStage;
@@ -26,6 +27,7 @@ public class UIGalleryPane extends GridPane {
         buttons.setSpacing(15);
         add(buttons, 0, 0);
         ScrollBar bar = new ScrollBar();
+        new AcrylicInAppFillColorBrush().accept(bar, null);
         FluentToggleButton button = new FluentToggleButton("Test");
         add(bar, 0, 1);
         add(button, 0, 2);

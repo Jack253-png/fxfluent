@@ -23,15 +23,20 @@ public class AcrylicInAppFillColorBrush implements BiConsumer<Region, Map<String
                             if (reg.getRotate() != 0) throw new Exception("Not supported for rotation");
 
                             Bounds boundsInScene = reg.localToScene(reg.getBoundsInLocal());
-                            long st = System.currentTimeMillis();
-                            reg.setBackground(new Background(new BackgroundImage(
-                                    ImageUtil.snapshot(reg.getScene(), boundsInScene, new Color(0, 0, 0, 0.1), () -> reg.setOpacity(0), () -> reg.setOpacity(1)),
-                                    BackgroundRepeat.NO_REPEAT,
-                                    BackgroundRepeat.NO_REPEAT,
-                                    BackgroundPosition.DEFAULT,
-                                    BackgroundSize.DEFAULT
-                            )));
-                            System.out.printf("%d ms\n", System.currentTimeMillis() - st);
+                            reg.setBackground(new Background(
+                                    new BackgroundImage(
+                                            ImageUtil.snapshot(
+                                                    reg.getScene(),
+                                                    boundsInScene,
+                                                    new Color(1, 1, 1, 0.1),
+                                                    () -> reg.setOpacity(0),
+                                                    () -> reg.setOpacity(1)),
+                                            BackgroundRepeat.NO_REPEAT,
+                                            BackgroundRepeat.NO_REPEAT,
+                                            BackgroundPosition.DEFAULT,
+                                            BackgroundSize.DEFAULT
+                                    )
+                            ));
                         }
                         catch (Exception e) {
                             e.printStackTrace();

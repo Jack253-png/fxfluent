@@ -11,9 +11,14 @@ import javafx.scene.image.PixelFormat;
 import javafx.scene.image.WritableImage;
 import javafx.scene.paint.Color;
 
+import java.util.Random;
 import java.util.concurrent.atomic.AtomicReference;
 
+import static com.mcreater.fxfluent.util.NumberUtil.lim;
+
 public class ImageUtil {
+    private static final long seed = new Random().nextLong();
+    private static Random random = new Random(seed);
     public static Image snapshot(Scene scene, Bounds bounds, Color coverColor, Runnable befSnap, Runnable aftSnap) {
         if (scene == null) return new WritableImage(1, 1);
         int radius = 32;
@@ -47,16 +52,22 @@ public class ImageUtil {
         int[] opc = new int[width * height];
         new WritableImage(blurred.get().getPixelReader(), radius, radius, width, height).getPixelReader().getPixels(0, 0, width, height, PixelFormat.getIntArgbInstance(), clrs, 0, width);
 
+        random = new Random(seed);
         for (int index = 0; index < clrs.length; index++) {
             opc[index] = clrs[index] | 0xFF000000;
             int baser = (opc[index] >> 16) & 0xFF;
             int baseg = (opc[index] >> 8) & 0xFF;
             int baseb = opc[index] & 0xFF;
-            double o = 0.2;
-            int r = (int) (baser + (coverColor.getRed() - baser) * o);
-            int g = (int) (baseg + (coverColor.getGreen() - baseg) * o);
-            int b = (int) (baseb + (coverColor.getBlue() - baseb) * o);
+            double o = coverColor.getOpacity();
+            int r = (int) (baser + (coverColor.getRed()*255 - baser) * o);
+            int g = (int) (baseg + (coverColor.getGreen()*255 - baseg) * o);
+            int b = (int) (baseb + (coverColor.getBlue()*255 - baseb) * o);
             int a = 255;
+
+            r = lim(r + random.nextInt(-10, 10), 0, 255);
+            g = lim(g + random.nextInt(-10, 10), 0, 255);
+            b = lim(b + random.nextInt(-10, 10), 0, 255);
+
             opc[index] = ((a & 0xFF) << 24) |
                     ((r & 0xFF) << 16) |
                     ((g & 0xFF) << 8)  |
