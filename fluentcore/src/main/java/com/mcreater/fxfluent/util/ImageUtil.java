@@ -39,9 +39,9 @@ public class ImageUtil {
         ImageView pane = new ImageView();
         pane.setFitWidth(width);
         pane.setFitHeight(height);
+        pane.setEffect(new GaussianBlur(radius));
         while (result.get() == null) {}
         pane.setImage(result.get());
-        pane.setEffect(new GaussianBlur(radius));
 
         AtomicReference<WritableImage> blurred = new AtomicReference<>();
         Platform.runLater(() -> blurred.set(pane.snapshot(parameters, null)));
@@ -62,16 +62,15 @@ public class ImageUtil {
             int r = (int) (baser + (coverColor.getRed()*255 - baser) * o);
             int g = (int) (baseg + (coverColor.getGreen()*255 - baseg) * o);
             int b = (int) (baseb + (coverColor.getBlue()*255 - baseb) * o);
-            int a = 255;
 
-            r = lim(r + random.nextInt(-10, 10), 0, 255);
-            g = lim(g + random.nextInt(-10, 10), 0, 255);
-            b = lim(b + random.nextInt(-10, 10), 0, 255);
+            r = lim(r + random.nextInt(-5, 5), 0, 255);
+            g = lim(g + random.nextInt(-5, 5), 0, 255);
+            b = lim(b + random.nextInt(-5, 5), 0, 255);
 
-            opc[index] = ((a & 0xFF) << 24) |
-                    ((r & 0xFF) << 16) |
-                    ((g & 0xFF) << 8)  |
-                    ((b & 0xFF));
+            opc[index] = ((0xFF) << 24) |
+                         ((r & 0xFF) << 16) |
+                         ((g & 0xFF) << 8)  |
+                         ((b & 0xFF));
         }
 
         int bdX = (int) bounds.getMinX();

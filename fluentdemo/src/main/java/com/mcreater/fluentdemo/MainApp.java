@@ -12,9 +12,30 @@ public class MainApp extends Application {
         stage.setTitle("FxFluent 控件库展示");
         /*Region cov = new Region();
         Pane pane = new Pane(new UIGalleryPane(stage), cov);
-        cov.prefWidthProperty().bind(stage.widthProperty());
-        cov.prefHeightProperty().bind(stage.heightProperty());
-        new AcrylicInAppFillColorBrush().accept(cov, null);*/
+        cov.setPrefWidth(100);
+        cov.setPrefHeight(100);
+        cov.setLayoutY(125);
+        Timeline timeline = new Timeline(
+                new KeyFrame(
+                        Duration.ZERO,
+                        new KeyValue(
+                                cov.layoutXProperty(),
+                                0
+                        )
+                ),
+                new KeyFrame(
+                        Duration.millis(1500),
+                        new KeyValue(
+                                cov.layoutXProperty(),
+                                200
+                        )
+                )
+        );
+        timeline.setCycleCount(-1);
+        timeline.setAutoReverse(true);
+        timeline.playFromStart();
+        new AcrylicInAppFillColorBrush().accept(cov, null);
+        stage.setContent(pane);*/
 
         stage.setContent(new UIGalleryPane(stage));
         stage.getIcons().add(new Image(MainApp.class.getClassLoader().getResourceAsStream("icons/TitlebarLogo.png")));
