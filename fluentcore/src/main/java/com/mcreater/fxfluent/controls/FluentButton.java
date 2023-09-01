@@ -1,11 +1,21 @@
 package com.mcreater.fxfluent.controls;
 
+import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
+import com.mcreater.fxfluent.controls.abstractions.Borderable;
+import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
+import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
 import com.mcreater.fxfluent.controls.skin.FluentButtonSkin;
+import com.mcreater.fxfluent.controls.state.StateType;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Skin;
+import javafx.scene.layout.CornerRadii;
 
-public class FluentButton extends Button {
+import java.util.Map;
+
+import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.*;
+
+public class FluentButton extends Button implements CornerRadiusable, Backgroundable, Foregroundable, Borderable {
     public FluentButton() {
         this.init();
     }
@@ -28,5 +38,21 @@ public class FluentButton extends Button {
 
     protected Skin<?> createDefaultSkin() {
         return new FluentButtonSkin(this);
+    }
+
+    public CornerRadii getCornerRadii() {
+        return new CornerRadii(4);
+    }
+
+    public Map<StateType, String> getBackgroundRemap() {
+        return isDefaultButton() ? BG_ACCENT_KEY_MAP : BG_KEY_MAP;
+    }
+
+    public Map<StateType, String> getForegroundRemap() {
+        return isDefaultButton() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP;
+    }
+
+    public Map<StateType, String> getBorderRemap() {
+        return isDefaultButton() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
     }
 }

@@ -1,0 +1,16 @@
+.fluent-check-box > .box,
+.fluent-check-box:hover > .box,
+.fluent-check-box:armed > .box,
+.fluent-check-box:focused > .box {
+    -fx-background-color: transparent transparent transparent transparent;
+    -fx-padding: 2px, -2px, 2px, -2px;
+}
+
+.fluent-check-box:disabled {
+    -fx-opacity: 1.0;
+}
+
+.check-box:selected > .box > .mark,
+.check-box:indeterminate  > .box > .mark {
+    -fx-background-color: transparent transparent;
+}

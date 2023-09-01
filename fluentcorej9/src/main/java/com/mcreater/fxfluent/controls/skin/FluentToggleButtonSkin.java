@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
-import static com.mcreater.fxfluent.controls.value.ControlMaps.Buttons.*;
+import static com.mcreater.fxfluent.controls.value.ControlMaps.ToggleButton.*;
 
 public class FluentToggleButtonSkin extends ToggleButtonSkin {
     private final FluentToggleButton button;
@@ -47,7 +47,7 @@ public class FluentToggleButtonSkin extends ToggleButtonSkin {
         SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
         button.selectedProperty().addListener((NewValueListener<Boolean>) t1 -> FluentToggleButtonSkin.this.updateComponents(state.get()));
 
-        CornerRadii cornerRadii = new CornerRadii(4);
+        CornerRadii cornerRadii = control.getCornerRadii();
 
         state.addListener((NewValueListener<StateType>) FluentToggleButtonSkin.this::updateComponents);
         backgroundColor.property.addListener((NewValueListener<Color>) newValue ->

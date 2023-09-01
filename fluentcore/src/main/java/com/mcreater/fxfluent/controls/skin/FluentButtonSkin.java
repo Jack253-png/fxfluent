@@ -17,55 +17,12 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
 
 import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
 
 public class FluentButtonSkin extends ButtonSkin {
-    private static final Map<StateType, String> BG_KEY_MAP = new HashMap<StateType, String>() {{
-        put(StateType.NONE, "ButtonBackground");
-        put(StateType.FOCUS, "ButtonBackground");
-        put(StateType.HOVER, "ButtonBackgroundPointerOver");
-        put(StateType.PRESS, "ButtonBackgroundPressed");
-        put(StateType.DISABLE, "ButtonBackgroundDisabled");
-    }};
-    private static final Map<StateType, String> BG_ACCENT_KEY_MAP = new HashMap<StateType, String>() {{
-        put(StateType.NONE, "AccentButtonBackground");
-        put(StateType.FOCUS, "AccentButtonBackground");
-        put(StateType.HOVER, "AccentButtonBackgroundPointerOver");
-        put(StateType.PRESS, "AccentButtonBackgroundPressed");
-        put(StateType.DISABLE, "AccentButtonBackgroundDisabled");
-    }};
-    private static final Map<StateType, String> FG_KEY_MAP = new HashMap<StateType, String>() {{
-        put(StateType.NONE, "ButtonForeground");
-        put(StateType.FOCUS, "ButtonForeground");
-        put(StateType.HOVER, "ButtonForegroundPointerOver");
-        put(StateType.PRESS, "ButtonForegroundPressed");
-        put(StateType.DISABLE, "ButtonForegroundDisabled");
-    }};
-    private static final Map<StateType, String> FG_ACCENT_KEY_MAP = new HashMap<StateType, String>() {{
-        put(StateType.NONE, "AccentButtonForeground");
-        put(StateType.FOCUS, "AccentButtonForeground");
-        put(StateType.HOVER, "AccentButtonForegroundPointerOver");
-        put(StateType.PRESS, "AccentButtonForegroundPressed");
-        put(StateType.DISABLE, "AccentButtonForegroundDisabled");
-    }};
-    private static final Map<StateType, String> BRD_BOTTOM_KEY_MAP = new HashMap<StateType, String>() {{
-        put(StateType.NONE, "ControlStrokeColorSecondaryBrush");
-        put(StateType.FOCUS, "ControlStrokeColorSecondaryBrush");
-        put(StateType.HOVER, "ControlStrokeColorSecondaryBrush");
-        put(StateType.PRESS, "ControlStrokeColorDefaultBrush");
-        put(StateType.DISABLE, "ControlStrokeColorDefaultBrush");
-    }};
-    private static final Map<StateType, String> BRD_BOTTOM_ACCENT_KEY_MAP = new HashMap<StateType, String>() {{
-        put(StateType.NONE, "ControlStrokeColorOnAccentSecondary");
-        put(StateType.FOCUS, "ControlStrokeColorOnAccentSecondary");
-        put(StateType.HOVER, "ControlStrokeColorOnAccentSecondary");
-        put(StateType.PRESS, "AccentButtonBorderBrushPressed");
-        put(StateType.DISABLE, "AccentButtonBorderBrushDisabled");
-    }};
     private final FluentButton button;
     private final ObjectProperty<StateType> state = new SimpleObjectProperty<>(null);
     private final AnimatedValue<Color> backgroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
@@ -88,7 +45,7 @@ public class FluentButtonSkin extends ButtonSkin {
         SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
         button.defaultButtonProperty().addListener((NewValueListener<Boolean>) t1 -> FluentButtonSkin.this.updateComponents(state.get()));
 
-        CornerRadii cornerRadii = new CornerRadii(4);
+        CornerRadii cornerRadii = control.getCornerRadii();
 
         state.addListener((NewValueListener<StateType>) FluentButtonSkin.this::updateComponents);
         backgroundColor.property.addListener((NewValueListener<Color>) newValue ->
@@ -127,10 +84,10 @@ public class FluentButtonSkin extends ButtonSkin {
 
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (button.isDefaultButton() ? BG_ACCENT_KEY_MAP : BG_KEY_MAP).get(type)).getColor()
+                (button.getBackgroundRemap()).get(type)).getColor()
         );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.isDefaultButton() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP).get(type)).getColor());
-        Map<StateType, String> lft = button.isDefaultButton() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
+        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)).getColor());
+        Map<StateType, String> lft = button.getBorderRemap();
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
         ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(StateType.PRESS)).getColor()));

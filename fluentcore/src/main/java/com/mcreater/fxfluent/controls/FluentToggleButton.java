@@ -1,11 +1,13 @@
 package com.mcreater.fxfluent.controls;
 
+import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
 import com.mcreater.fxfluent.controls.skin.FluentToggleButtonSkin;
 import javafx.scene.Node;
 import javafx.scene.control.Skin;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.layout.CornerRadii;
 
-public class FluentToggleButton extends ToggleButton {
+public class FluentToggleButton extends ToggleButton implements CornerRadiusable {
     public FluentToggleButton() {
         init();
     }
@@ -27,5 +29,9 @@ public class FluentToggleButton extends ToggleButton {
 
     protected Skin<?> createDefaultSkin() {
         return new FluentToggleButtonSkin(this);
+    }
+
+    public CornerRadii getCornerRadii() {
+        return new CornerRadii(4);
     }
 }

@@ -32,10 +32,10 @@ public class BrushUtil {
         return (region, color) -> {
             if (region.getBorder() == null || region.getBorder().getStrokes().size() == 0) {
                 region.setBorder(new Border(new BorderStroke(
-                        orientation == BorderOrientation.TOP ? color : Color.TRANSPARENT,
-                        orientation == BorderOrientation.RIGHT ? color : Color.TRANSPARENT,
-                        orientation == BorderOrientation.BOTTOM ? color : Color.TRANSPARENT,
-                        orientation == BorderOrientation.LEFT ? color : Color.TRANSPARENT,
+                        orientation == null || orientation == BorderOrientation.TOP ? color : Color.TRANSPARENT,
+                        orientation == null || orientation == BorderOrientation.RIGHT ? color : Color.TRANSPARENT,
+                        orientation == null || orientation == BorderOrientation.BOTTOM ? color : Color.TRANSPARENT,
+                        orientation == null || orientation == BorderOrientation.LEFT ? color : Color.TRANSPARENT,
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,
@@ -48,10 +48,10 @@ public class BrushUtil {
             else {
                 List<BorderStroke> strokes = new Vector<>();
                 region.getBorder().getStrokes().forEach(borderStroke -> strokes.add(new BorderStroke(
-                        orientation == BorderOrientation.TOP ? color : borderStroke.getTopStroke(),
-                        orientation == BorderOrientation.RIGHT ? color : borderStroke.getRightStroke(),
-                        orientation == BorderOrientation.BOTTOM ? color : borderStroke.getBottomStroke(),
-                        orientation == BorderOrientation.LEFT ? color : borderStroke.getLeftStroke(),
+                        orientation == null || orientation == BorderOrientation.TOP ? color : borderStroke.getTopStroke(),
+                        orientation == null || orientation == BorderOrientation.RIGHT ? color : borderStroke.getRightStroke(),
+                        orientation == null || orientation == BorderOrientation.BOTTOM ? color : borderStroke.getBottomStroke(),
+                        orientation == null || orientation == BorderOrientation.LEFT ? color : borderStroke.getLeftStroke(),
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,

@@ -23,6 +23,14 @@ public class XAMLManager {
     private static final List<InputStream> files = new Vector<>();
     private static final Map<String, ResourceDict> registeredContents = new HashMap<>();
     private static final ResourceDict globalRegisteredContents = ResourceDict.createEmpty("{Global}");
+    static {
+        try {
+            XAMLLoader.loadAll();
+        }
+        catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
     public static void addFile(File file) throws IOException {
         files.add(Files.newInputStream(file.toPath()));
     }
