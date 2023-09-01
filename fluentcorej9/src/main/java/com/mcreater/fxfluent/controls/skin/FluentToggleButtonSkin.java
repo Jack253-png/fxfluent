@@ -21,7 +21,6 @@ import java.util.Map;
 import java.util.stream.Stream;
 
 import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
-import static com.mcreater.fxfluent.controls.value.ControlMaps.ToggleButton.*;
 
 public class FluentToggleButtonSkin extends ToggleButtonSkin {
     private final FluentToggleButton button;
@@ -86,10 +85,10 @@ public class FluentToggleButtonSkin extends ToggleButtonSkin {
 
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (button.isSelected() ? BG_ACCENT_KEY_MAP : BG_KEY_MAP).get(type)).getColor()
+                (button.getBackgroundRemap()).get(type)).getColor()
         );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.isSelected() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP).get(type)).getColor());
-        Map<StateType, String> lft = button.isSelected() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
+        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)).getColor());
+        Map<StateType, String> lft = button.getBorderRemap();
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
         ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(StateType.PRESS)).getColor()));

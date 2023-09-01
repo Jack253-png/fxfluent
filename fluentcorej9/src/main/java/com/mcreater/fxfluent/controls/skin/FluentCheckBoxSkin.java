@@ -21,7 +21,6 @@ import javafx.util.Duration;
 import java.util.stream.Stream;
 
 import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
-import static com.mcreater.fxfluent.controls.value.ControlMaps.CheckBox.*;
 
 public class FluentCheckBoxSkin extends CheckBoxSkin {
     private final FluentCheckBox control;
@@ -73,13 +72,13 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
 
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (this.control.isSelected() ? BG_PRESSED_KEY_MAP : BG_KEY_MAP).get(type)).getColor()
+                (this.control.getBackgroundRemap()).get(type)).getColor()
         );
         borderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (this.control.isSelected() ? BRD_PRESSED_KEY_MAP : BRD_KEY_MAP).get(type)).getColor()
+                (this.control.getBorderRemap()).get(type)).getColor()
         );
         textColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                FG_KEY_MAP.get(type)
+                this.control.getForegroundRemap().get(type)
         ).getColor());
     }
 }

@@ -16,26 +16,23 @@ public class ColorUtil {
         return color;
     }
 
-    public static VBox testColorTranslate(Color color) {
+    public static VBox testColorTranslate(Color color, Color expected) {
         VBox box = new VBox();
-        // AccentFillColorSelectedTextBackgroundBrush color
-        // SystemAccentColorLight2
+        // SystemAccentColorLight3
         Color newclr = Color.hsb(
-                lim(color.getHue()/203*205, 0, 360),
-                lim(color.getSaturation()/29*22+(20/100D), 0, 1),
-                lim(color.getBrightness()/26*28-(14/100D), 0, 1),
-                1
-        );
-        // SystemAccentColorDark1
-        Color newclr2 = Color.hsb(
-                lim(color.getHue()/284*280+5, 0, 360), //9
-                lim(color.getSaturation()-(30/100D), 0, 1),
-                lim(color.getBrightness()/3+(73/100D), 0, 1), //46
+                lim(color.getHue()*0.9699+0.05696, 0, 360),
+                lim(color.getSaturation()*0.9707-0.2644, 0, 1),
+                lim(color.getBrightness()*0.38+0.6379, 0, 1),
                 1
         );
         box.getChildren().add(new Rectangle(120, 120, color));
         box.getChildren().add(new Rectangle(120, 120, newclr));
-        box.getChildren().add(new Rectangle(120, 120, newclr2));
+        box.getChildren().add(new Rectangle(120, 120, expected));
+
+        printhsb("original", color);
+        printhsb("expected", expected);
+        printhsb("calc", newclr);
+        System.out.println();
 
         return box;
     }

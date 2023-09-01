@@ -58,18 +58,36 @@ public class XAMLManager {
         globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorDark1", () -> {
             Color color = UiShellWrapper.GetSystemCompositionColor();
             return Color.hsb(
-                    lim(color.getHue()/203*205, 0, 360),
-                    lim(color.getSaturation()/29*22+(20/100D), 0, 1),
-                    lim(color.getBrightness()/26*28-(14/100D), 0, 1),
+                    lim(color.getHue()*0.9992+0.4584, 0, 360),
+                    lim(color.getSaturation()*0.8824+0.1139, 0, 1),
+                    lim(color.getBrightness()*0.9767-0.08423, 0, 1),
+                    1
+            );
+        }));
+        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorDark2", () -> {
+            Color color = UiShellWrapper.GetSystemCompositionColor();
+            return Color.hsb(
+                    lim(color.getHue()+1.495, 0, 360),
+                    lim(color.getSaturation()*0.7728+0.2247, 0, 1),
+                    lim(color.getBrightness()*0.854-0.1437, 0, 1),
+                    1
+            );
+        }));
+        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorDark3", () -> {
+            Color color = UiShellWrapper.GetSystemCompositionColor();
+            return Color.hsb(
+                    lim(color.getHue()*1.005+0.32, 0, 360),
+                    lim(color.getSaturation()*0.4227+0.5717, 0, 1),
+                    lim(color.getBrightness()*0.7573-0.2348, 0, 1),
                     1
             );
         }));
         globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorLight2", () -> {
             Color color = UiShellWrapper.GetSystemCompositionColor();
             return Color.hsb(
-                    lim(color.getHue()/284*280+5, 0, 360), //9
-                    lim(color.getSaturation()-(30/100D), 0, 1),
-                    lim(color.getBrightness()/3+(73/100D), 0, 1), //46
+                    lim(color.getHue()*0.9699+0.05696, 0, 360),
+                    lim(color.getSaturation()*0.9707-0.2644, 0, 1),
+                    lim(color.getBrightness()*0.38+0.6379, 0, 1),
                     1
             );
         }));
