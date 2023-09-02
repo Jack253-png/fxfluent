@@ -37,7 +37,7 @@ public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgr
     }
 
     public CornerRadii getCornerRadii() {
-        return new CornerRadii(6);
+        return new CornerRadii(4);
     }
 
     public Map<StateType, String> getBackgroundRemap() {

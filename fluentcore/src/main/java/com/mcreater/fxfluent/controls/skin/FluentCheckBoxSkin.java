@@ -2,6 +2,7 @@ package com.mcreater.fxfluent.controls.skin;
 
 import com.mcreater.fxfluent.brush.SolidColorBrush;
 import com.mcreater.fxfluent.controls.FluentCheckBox;
+import com.mcreater.fxfluent.controls.internals.CheckBoxCheckMark;
 import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.util.BrushUtil;
@@ -15,6 +16,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
@@ -47,7 +49,7 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
 
         backgroundColor.property.addListener((NewValueListener<Color>) newValue ->
                 new SolidColorBrush(newValue)
-                        .accept(ControlUtil.findControlInSkin(this, "box"), BrushUtil.backgroundFill(cornerRadii))
+                        .accept(getInternalBox(), BrushUtil.backgroundFill(cornerRadii))
         );
         textColor.property.addListener((NewValueListener<Color>) newValue ->
                 new SolidColorBrush(newValue)
@@ -55,15 +57,22 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
         );
         borderColor.property.addListener((NewValueListener<Color>) newValue ->
                 new SolidColorBrush(newValue)
-                        .accept(ControlUtil.findControlInSkin(this, "box"), BrushUtil.borderFill(
+                        .accept(getInternalBox(), BrushUtil.borderFill(
                                 null,
                                 cornerRadii,
                                 1,
                                 Insets.EMPTY
                         ))
         );
+
+        getInternalBox().getChildren().add(new CheckBoxCheckMark(this));
+
         updateState(null, null, null);
         updateComponents(state.get());
+    }
+
+    public StackPane getInternalBox() {
+        return (StackPane) ControlUtil.findControlInSkin(this, "box");
     }
 
     private void updateState(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {

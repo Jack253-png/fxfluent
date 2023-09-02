@@ -3,7 +3,7 @@
 .fluent-check-box:armed > .box,
 .fluent-check-box:focused > .box {
     -fx-background-color: transparent transparent transparent transparent;
-    -fx-padding: 2px, -2px, 2px, -2px;
+    -fx-padding: 1px, 0px, 1px, 0px;
 }
 
 .fluent-check-box:disabled {
