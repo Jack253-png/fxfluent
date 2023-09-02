@@ -20,9 +20,9 @@ public class ColorUtil {
         VBox box = new VBox();
         // SystemAccentColorLight3
         Color newclr = Color.hsb(
-                lim(color.getHue()*0.9699+0.05696, 0, 360),
-                lim(color.getSaturation()*0.9707-0.2644, 0, 1),
-                lim(color.getBrightness()*0.38+0.6379, 0, 1),
+                lim(color.getHue()*0.9488+4, 0, 360), // +8.839
+                lim(color.getSaturation()*0.5576-0.09745, 0, 1),
+                lim(color.getBrightness()*0.2243+0.7938, 0, 1),
                 1
         );
         box.getChildren().add(new Rectangle(120, 120, color));

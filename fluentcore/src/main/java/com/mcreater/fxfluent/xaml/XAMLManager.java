@@ -91,6 +91,15 @@ public class XAMLManager {
                     1
             );
         }));
+        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorLight3", () -> {
+            Color color = UiShellWrapper.GetSystemCompositionColor();
+            return Color.hsb(
+                    lim(color.getHue()*0.9488+4, 0, 360), // +8.839
+                    lim(color.getSaturation()*0.5576-0.09745, 0, 1),
+                    lim(color.getBrightness()*0.2243+0.7938, 0, 1),
+                    1
+            );
+        }));
     }
 
     private static void parse(Document document) {
