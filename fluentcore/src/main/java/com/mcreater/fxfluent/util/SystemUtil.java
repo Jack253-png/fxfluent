@@ -12,4 +12,18 @@ public class SystemUtil {
     public static boolean isLinux() {
         return System.getProperty("os.name").toLowerCase().contains("linux");
     }
+    public static void startGCLoop() {
+        new Thread(() -> {
+            while (true) {
+                System.gc();
+
+                try {
+                    Thread.sleep(500);
+                }
+                catch (InterruptedException e) {
+
+                }
+            }
+        }).start();
+    }
 }

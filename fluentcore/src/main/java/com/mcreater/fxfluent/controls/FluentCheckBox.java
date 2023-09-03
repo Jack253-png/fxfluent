@@ -1,9 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
-import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
-import com.mcreater.fxfluent.controls.abstractions.Borderable;
-import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
-import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
+import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentCheckBoxSkin;
 import com.mcreater.fxfluent.controls.state.StateType;
 import javafx.scene.control.CheckBox;
@@ -14,7 +11,7 @@ import java.util.Map;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.CheckBox.*;
 
-public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgroundable, Foregroundable, Borderable {
+public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Glyphable {
     public FluentCheckBox() {
         init();
     }
@@ -37,18 +34,23 @@ public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgr
     }
 
     public CornerRadii getCornerRadii() {
-        return new CornerRadii(4);
+        return new CornerRadii(5);
     }
 
     public Map<StateType, String> getBackgroundRemap() {
-        return isSelected() ? BG_PRESSED_KEY_MAP : BG_KEY_MAP;
+
+        return isSelected() || isIndeterminate() ? BG_PRESSED_KEY_MAP : BG_KEY_MAP;
     }
 
     public Map<StateType, String> getBorderRemap() {
-        return isSelected() ? BRD_PRESSED_KEY_MAP : BRD_KEY_MAP;
+        return isSelected() || isIndeterminate() ? BRD_PRESSED_KEY_MAP : BRD_KEY_MAP;
     }
 
     public Map<StateType, String> getForegroundRemap() {
         return FG_KEY_MAP;
+    }
+
+    public Map<StateType, String> getGlyphRemap() {
+        return GLY_KEY_MAP;
     }
 }

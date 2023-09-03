@@ -30,6 +30,7 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
     private final AnimatedValue<Color> backgroundColor = new AnimatedValue<>(Color.BLACK, Duration.millis(42));
     private final AnimatedValue<Color> borderColor = new AnimatedValue<>(Color.BLACK, Duration.millis(42));
     private final AnimatedValue<Color> textColor = new AnimatedValue<>(Color.BLACK, Duration.millis(42));
+    private CheckBoxCheckMark mark;
     public FluentCheckBoxSkin(FluentCheckBox control) {
         super(control);
         this.control = control;
@@ -41,6 +42,7 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
         ).forEach(a -> a.addListener(this::updateState));
         state.addListener((NewValueListener<StateType>) FluentCheckBoxSkin.this::updateComponents);
         this.control.selectedProperty().addListener((NewValueListener<Boolean>) t1 -> FluentCheckBoxSkin.this.updateComponents(state.get()));
+        this.control.indeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> FluentCheckBoxSkin.this.updateComponents(state.get()));
 
         SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
         control.allowIndeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> FluentCheckBoxSkin.this.updateComponents(state.get()));
@@ -65,7 +67,12 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
                         ))
         );
 
-        getInternalBox().getChildren().add(new CheckBoxCheckMark(this));
+        mark = new CheckBoxCheckMark(this);
+        getInternalBox().getChildren().add(mark);
+        control.selectedProperty().addListener((NewValueListener<Boolean>) t1 -> {
+            if (t1) mark.startInAnimate();
+            else mark.startOutAnimate();
+        });
 
         updateState(null, null, null);
         updateComponents(state.get());
@@ -89,5 +96,11 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
         textColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
                 this.control.getForegroundRemap().get(type)
         ).getColor());
+    }
+
+    public Color getMarkColor() {
+        return XAMLManager.getCurrentDict().foundSolidColorBrush(
+                this.control.getGlyphRemap().get(state.get())
+        ).getColor();
     }
 }

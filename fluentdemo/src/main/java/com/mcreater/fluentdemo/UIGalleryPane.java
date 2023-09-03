@@ -29,6 +29,7 @@ public class UIGalleryPane extends GridPane {
         add(buttons, 0, 0);
         ScrollBar bar = new ScrollBar();
         FluentCheckBox box2 = new FluentCheckBox("test");
+        box2.setAllowIndeterminate(true);
         new AcrylicInAppFillColorBrush().accept(bar, null);
         FluentToggleButton button = new FluentToggleButton("Test");
         add(bar, 0, 1);

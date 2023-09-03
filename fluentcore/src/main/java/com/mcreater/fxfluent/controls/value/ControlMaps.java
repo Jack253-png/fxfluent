@@ -131,5 +131,12 @@ public class ControlMaps {
             put(StateType.PRESS, "CheckBoxForegroundUncheckedPressed");
             put(StateType.DISABLE, "CheckBoxForegroundUncheckedDisabled");
         }};
+        public static final Map<StateType, String> GLY_KEY_MAP = new HashMap<StateType, String>() {{
+            put(StateType.NONE, "CheckBoxCheckGlyphForegroundUnchecked");
+            put(StateType.FOCUS, "CheckBoxCheckGlyphForegroundUnchecked");
+            put(StateType.HOVER, "CheckBoxCheckGlyphForegroundUncheckedPointerOver");
+            put(StateType.PRESS, "CheckBoxCheckGlyphForegroundUncheckedPressed");
+            put(StateType.DISABLE, "CheckBoxCheckGlyphForegroundUncheckedDisabled");
+        }};
     }
 }
