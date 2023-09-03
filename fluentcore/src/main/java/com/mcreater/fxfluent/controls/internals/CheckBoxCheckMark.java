@@ -191,7 +191,6 @@ public class CheckBoxCheckMark extends Pane {
     }
 
     public void onUpdateComponent() {
-        System.out.printf("control sel: %s, control ind: %s\n", skin.getSkinnable().isSelected(), skin.getSkinnable().isIndeterminate());
         line1.setStroke(skin.getSkinnable().isSelected() ? getFill() : Color.TRANSPARENT);
         line2.setStroke(skin.getSkinnable().isSelected() ? getFill() : Color.TRANSPARENT);
         intermin.setStroke(skin.getSkinnable().isIndeterminate() ? getFill() : Color.TRANSPARENT);
