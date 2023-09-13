@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Labeled;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 import java.util.List;
 import java.util.Vector;
@@ -14,7 +15,7 @@ public class BrushUtil {
         TOP, BOTTOM, LEFT, RIGHT
     }
 
-    public static BiConsumer<Region, Color> backgroundFill(CornerRadii cornerRadii) {
+    public static BiConsumer<Region, Paint> backgroundFill(CornerRadii cornerRadii) {
         return (region, color) -> region.setBackground(new Background(new BackgroundFill(
                 color,
                 cornerRadii,
@@ -22,13 +23,13 @@ public class BrushUtil {
         )));
     }
 
-    public static BiConsumer<Region, Color> textFill() {
+    public static BiConsumer<Region, Paint> textFill() {
         return (region, color) -> {
             if (region instanceof Labeled) ((Labeled) region).setTextFill(color);
         };
     }
 
-    public static BiConsumer<Region, Color> borderFill(BorderOrientation orientation, CornerRadii cornerRadii, double borderWidths, Insets insets) {
+    public static BiConsumer<Region, Paint> borderFill(BorderOrientation orientation, CornerRadii cornerRadii, double borderWidths, Insets insets) {
         return (region, color) -> {
             if (region.getBorder() == null || region.getBorder().getStrokes().size() == 0) {
                 region.setBorder(new Border(new BorderStroke(

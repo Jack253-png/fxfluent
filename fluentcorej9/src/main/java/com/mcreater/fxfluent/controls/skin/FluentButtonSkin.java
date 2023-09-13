@@ -25,7 +25,7 @@ import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
 public class FluentButtonSkin extends ButtonSkin {
     private final FluentButton button;
     private final ObjectProperty<StateType> state = new SimpleObjectProperty<>(null);
-    private final AnimatedValue<Color> backgroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
+    private final AnimatedValue<SolidColorBrush> backgroundColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(83));
     private final AnimatedValue<Color> foregroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(42));
 
     private final AnimatedValue<Color> upBorderColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
@@ -48,9 +48,8 @@ public class FluentButtonSkin extends ButtonSkin {
         CornerRadii cornerRadii = control.getCornerRadii();
 
         state.addListener((NewValueListener<StateType>) FluentButtonSkin.this::updateComponents);
-        backgroundColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.backgroundFill(cornerRadii))
+        backgroundColor.property.addListener((NewValueListener<SolidColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.backgroundFill(cornerRadii))
         );
         foregroundColor.property.addListener((NewValueListener<Color>) newValue ->
                 new SolidColorBrush(newValue)
@@ -84,7 +83,7 @@ public class FluentButtonSkin extends ButtonSkin {
 
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (button.getBackgroundRemap()).get(type)).getColor()
+                (button.getBackgroundRemap()).get(type))
         );
         foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)).getColor());
         Map<StateType, String> lft = button.getBorderRemap();
