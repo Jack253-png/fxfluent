@@ -139,4 +139,20 @@ public class ControlMaps {
             put(StateType.DISABLE, "CheckBoxCheckGlyphForegroundUncheckedDisabled");
         }};
     }
+    public static class HyperLinkButton {
+        public static final Map<StateType, String> BG_KEY_MAP = new HashMap<StateType, String>() {{
+            put(StateType.NONE, "HyperlinkButtonBackground");
+            put(StateType.FOCUS, "HyperlinkButtonBackground");
+            put(StateType.HOVER, "HyperlinkButtonBackgroundPointerOver");
+            put(StateType.PRESS, "HyperlinkButtonBackgroundPressed");
+            put(StateType.DISABLE, "HyperlinkButtonBackgroundDisabled");
+        }};
+        public static final Map<StateType, String> FG_KEY_MAP = new HashMap<StateType, String>() {{
+            put(StateType.NONE, "HyperlinkButtonForeground");
+            put(StateType.FOCUS, "HyperlinkButtonForeground");
+            put(StateType.HOVER, "HyperlinkButtonForegroundPointerOver");
+            put(StateType.PRESS, "HyperlinkButtonForegroundPressed");
+            put(StateType.DISABLE, "HyperlinkButtonForegroundDisabled");
+        }};
+    }
 }
