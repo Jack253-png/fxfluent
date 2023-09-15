@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls.skin;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.brush.SolidColorBrush;
 import com.mcreater.fxfluent.controls.FluentToggleButton;
 import com.mcreater.fxfluent.controls.state.StateType;
@@ -25,13 +26,13 @@ import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
 public class FluentToggleButtonSkin extends ToggleButtonSkin {
     private final FluentToggleButton button;
     private final ObjectProperty<StateType> state = new SimpleObjectProperty<>(null);
-    private final AnimatedValue<Color> backgroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
-    private final AnimatedValue<Color> foregroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(42));
+    private final AnimatedValue<AbstractColorBrush> backgroundColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(83));
+    private final AnimatedValue<AbstractColorBrush> foregroundColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(42));
 
-    private final AnimatedValue<Color> upBorderColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
-    private final AnimatedValue<Color> downBorderColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
-    private final AnimatedValue<Color> leftBorderColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
-    private final AnimatedValue<Color> rightBorderColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
+    private final AnimatedValue<AbstractColorBrush> upBorderColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(83));
+    private final AnimatedValue<AbstractColorBrush> downBorderColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(83));
+    private final AnimatedValue<AbstractColorBrush> leftBorderColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(83));
+    private final AnimatedValue<AbstractColorBrush> rightBorderColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(83));
     public FluentToggleButtonSkin(FluentToggleButton control) {
         super(control);
         button = control;
@@ -49,29 +50,23 @@ public class FluentToggleButtonSkin extends ToggleButtonSkin {
         CornerRadii cornerRadii = control.getCornerRadii();
 
         state.addListener((NewValueListener<StateType>) FluentToggleButtonSkin.this::updateComponents);
-        backgroundColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.backgroundFill(cornerRadii))
+        backgroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.backgroundFill(cornerRadii))
         );
-        foregroundColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.textFill())
+        foregroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.textFill())
         );
-        upBorderColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.TOP, cornerRadii, 1, Insets.EMPTY))
+        upBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.TOP, cornerRadii))
         );
-        downBorderColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.BOTTOM, cornerRadii, 1, Insets.EMPTY))
+        downBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.BOTTOM, cornerRadii))
         );
-        leftBorderColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.LEFT, cornerRadii, 1, Insets.EMPTY))
+        leftBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.LEFT, cornerRadii))
         );
-        rightBorderColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.RIGHT, cornerRadii, 1, Insets.EMPTY))
+        rightBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.RIGHT, cornerRadii))
         );
 
         updateState(null, null, null);
@@ -85,13 +80,13 @@ public class FluentToggleButtonSkin extends ToggleButtonSkin {
 
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (button.getBackgroundRemap()).get(type)).getColor()
+                (button.getBackgroundRemap()).get(type))
         );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)).getColor());
+        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)));
         Map<StateType, String> lft = button.getBorderRemap();
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
-        ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(StateType.PRESS)).getColor()));
-        downBorderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(type)).getColor());
+        ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(StateType.PRESS))));
+        downBorderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(type)));
     }
 }

@@ -1,4 +1,4 @@
-; dlltool --base-file C:\Users\ADMINI~1\AppData\Local\Temp\cca17572.base --output-exp UiShell.exp --dllname UiShell.dll --output-def libUiShell.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup --def C:\Users\ADMINI~1\AppData\Local\Temp\cca17572.def --output-lib libUiShell.a
+; dlltool --base-file C:\Users\ADMINI~1\AppData\Local\Temp\cca13720.base --output-exp UiShell.exp --dllname UiShell.dll --output-def libUiShell.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup --def C:\Users\ADMINI~1\AppData\Local\Temp\cca13720.def --output-lib libUiShell.a
 EXPORTS
 	GetCompositionColor @ 1
 	GetThemeIsDark @ 2

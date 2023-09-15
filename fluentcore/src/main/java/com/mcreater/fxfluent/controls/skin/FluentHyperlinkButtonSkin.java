@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls.skin;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.brush.SolidColorBrush;
 import com.mcreater.fxfluent.controls.FluentHyperlinkButton;
 import com.mcreater.fxfluent.controls.state.StateType;
@@ -24,8 +25,8 @@ import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
 public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
     private final FluentHyperlinkButton button;
     private final ObjectProperty<StateType> state = new SimpleObjectProperty<>(null);
-    private final AnimatedValue<Color> backgroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(83));
-    private final AnimatedValue<Color> foregroundColor = new AnimatedValue<>(Color.TRANSPARENT, Duration.millis(42));
+    private final AnimatedValue<AbstractColorBrush> backgroundColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(83));
+    private final AnimatedValue<AbstractColorBrush> foregroundColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(42));
     public FluentHyperlinkButtonSkin(FluentHyperlinkButton control) {
         super(control);
         button = control;
@@ -39,18 +40,16 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
         SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
         state.addListener((NewValueListener<StateType>) FluentHyperlinkButtonSkin.this::updateComponents);
         CornerRadii cornerRadii = control.getCornerRadii();
-        backgroundColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.backgroundFill(cornerRadii))
+        backgroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.backgroundFill(cornerRadii))
         );
-        foregroundColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.button, BrushUtil.textFill())
+        foregroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.button, BrushUtil.textFill())
         );
 
         updateState(null, null, null);
         updateComponents(state.get());
-        button.setPadding(new Insets(5, 11, 5, 11));
+        button.setPadding(new Insets(2, 11, 2, 11));
     }
 
     private void updateState(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -59,8 +58,8 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
 
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (button.getBackgroundRemap()).get(type)).getColor()
+                (button.getBackgroundRemap()).get(type))
         );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)).getColor());
+        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)));
     }
 }

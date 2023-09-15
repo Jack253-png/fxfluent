@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls.skin;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.brush.SolidColorBrush;
 import com.mcreater.fxfluent.controls.FluentCheckBox;
 import com.mcreater.fxfluent.controls.internals.CheckBoxCheckMark;
@@ -13,7 +14,6 @@ import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.Insets;
 import javafx.scene.control.skin.CheckBoxSkin;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
@@ -27,10 +27,10 @@ import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
 public class FluentCheckBoxSkin extends CheckBoxSkin {
     private final FluentCheckBox control;
     private final ObjectProperty<StateType> state = new SimpleObjectProperty<>(null);
-    private final AnimatedValue<Color> backgroundColor = new AnimatedValue<>(Color.BLACK, Duration.millis(42));
-    private final AnimatedValue<Color> borderColor = new AnimatedValue<>(Color.BLACK, Duration.millis(42));
-    private final AnimatedValue<Color> textColor = new AnimatedValue<>(Color.BLACK, Duration.millis(42));
-    private CheckBoxCheckMark mark;
+    private final AnimatedValue<AbstractColorBrush> backgroundColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(42));
+    private final AnimatedValue<AbstractColorBrush> borderColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(42));
+    private final AnimatedValue<AbstractColorBrush> textColor = new AnimatedValue<>(new SolidColorBrush(Color.TRANSPARENT), Duration.millis(42));
+    private final CheckBoxCheckMark mark;
     public FluentCheckBoxSkin(FluentCheckBox control) {
         super(control);
         this.control = control;
@@ -49,22 +49,17 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
 
         CornerRadii cornerRadii = control.getCornerRadii();
 
-        backgroundColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(getInternalBox(), BrushUtil.backgroundFill(cornerRadii))
+        backgroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(getInternalBox(), BrushUtil.backgroundFill(cornerRadii))
         );
-        textColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(this.control, BrushUtil.textFill())
+        textColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(this.control, BrushUtil.textFill())
         );
-        borderColor.property.addListener((NewValueListener<Color>) newValue ->
-                new SolidColorBrush(newValue)
-                        .accept(getInternalBox(), BrushUtil.borderFill(
+        borderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+                newValue.accept(getInternalBox(), BrushUtil.borderFill(
                                 null,
-                                cornerRadii,
-                                1,
-                                Insets.EMPTY
-                        ))
+                                cornerRadii
+                ))
         );
 
         mark = new CheckBoxCheckMark(this);
@@ -88,19 +83,19 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
 
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (this.control.getBackgroundRemap()).get(type)).getColor()
+                (this.control.getBackgroundRemap()).get(type))
         );
         borderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
-                (this.control.getBorderRemap()).get(type)).getColor()
+                (this.control.getBorderRemap()).get(type))
         );
         textColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
                 this.control.getForegroundRemap().get(type)
-        ).getColor());
+        ));
     }
 
     public Color getMarkColor() {
         return XAMLManager.getCurrentDict().foundSolidColorBrush(
                 this.control.getGlyphRemap().get(state.get())
-        ).getColor();
+        ).getPaint();
     }
 }
