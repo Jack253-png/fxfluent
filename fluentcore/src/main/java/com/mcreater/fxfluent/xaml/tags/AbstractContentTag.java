@@ -28,8 +28,10 @@ public interface AbstractContentTag<T> {
         converters.put(key, function);
     }
     static AbstractContentTag<?> create(ResourceDict dict, Element element) {
-        return Optional.ofNullable(converters.get(element.getName()))
+        AbstractContentTag<?> tag = Optional.ofNullable(converters.get(element.getName()))
                 .map(function -> function.apply(dict, element))
                 .orElse(null);
+        Object obj = tag != null ? tag.toObject() : null;
+        return tag;
     }
 }

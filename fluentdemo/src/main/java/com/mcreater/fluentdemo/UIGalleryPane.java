@@ -46,7 +46,7 @@ public class UIGalleryPane extends GridPane {
                 Color.TRANSPARENT,
                 new LinearGradient(
                         0, 0, 0, 3, true, CycleMethod.NO_CYCLE,
-                        new Stop(0.0, Color.TRANSPARENT), new Stop(0.33, Color.rgb(0, 0, 0, 35/255D)), new Stop(1, Color.rgb(0, 0, 0, 15/255D))
+                        new Stop(0.33, Color.rgb(0, 0, 0, 35/255D)), new Stop(1, Color.rgb(0, 0, 0, 15/255D))
                 ),
                 Color.TRANSPARENT,
                 BorderStrokeStyle.SOLID,
