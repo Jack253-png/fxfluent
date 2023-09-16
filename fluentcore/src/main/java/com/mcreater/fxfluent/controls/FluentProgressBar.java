@@ -5,6 +5,8 @@ import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
 import com.mcreater.fxfluent.controls.skin.FluentProgressBarSkin;
 import com.mcreater.fxfluent.controls.state.StateType;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Skin;
 
@@ -14,6 +16,21 @@ import java.util.Map;
 import static com.mcreater.fxfluent.brush.AbstractColorBrush.find;
 
 public class FluentProgressBar extends ProgressBar implements Backgroundable, Foregroundable {
+    public enum IndeterminateState {
+        NORMAL, PAUSE, ERROR
+    }
+    private final ObjectProperty<IndeterminateState> indeterminateState = new SimpleObjectProperty<>(IndeterminateState.NORMAL);
+    public ObjectProperty<IndeterminateState> indeterminateState() {
+        return indeterminateState;
+    }
+
+    public IndeterminateState getIndeterminateState() {
+        return indeterminateState().get();
+    }
+    public void setIndeterminateState(IndeterminateState state) {
+        indeterminateState().set(state);
+    }
+
     public FluentProgressBar() {
         init();
     }
@@ -44,6 +61,8 @@ public class FluentProgressBar extends ProgressBar implements Backgroundable, Fo
     public Map<StateType, AbstractColorBrush> getForegroundRemap() {
         return new HashMap<StateType, AbstractColorBrush>() {{
             put(StateType.NONE, find("AccentFillColorDefaultBrush"));
+            put(StateType.FOCUS, find("SystemFillColorCautionBrush"));
+            put(StateType.HOVER, find("SystemFillColorCriticalBrush"));
         }};
     }
 }
