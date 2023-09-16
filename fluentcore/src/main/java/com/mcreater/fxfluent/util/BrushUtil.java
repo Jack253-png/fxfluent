@@ -29,8 +29,8 @@ public class BrushUtil {
         };
     }
     public static BiConsumer<Region, AbstractColorBrush> borderFill(BorderOrientation orientation, CornerRadii cornerRadii) {
-        Insets insets = Insets.EMPTY;
         return (region, color) -> {
+            Insets insets = Insets.EMPTY;
             if (region.getBorder() == null || region.getBorder().getStrokes().size() == 0) {
                 region.setBorder(new Border(new BorderStroke(
                         orientation == null || orientation == BorderOrientation.TOP ? color.getPaint() : Color.TRANSPARENT,
@@ -42,7 +42,7 @@ public class BrushUtil {
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,
                         cornerRadii,
-                        color.getBorderWidths(),
+                        new BorderWidths(1),
                         insets
                 )));
             }
@@ -58,7 +58,7 @@ public class BrushUtil {
                         BorderStrokeStyle.SOLID,
                         BorderStrokeStyle.SOLID,
                         cornerRadii,
-                        color.getBorderWidths(),
+                        new BorderWidths(1),
                         insets
                 )));
                 region.setBorder(new Border(strokes, new Vector<>()));

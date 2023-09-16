@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Vector;
 
-public class LinearGradientContentTag extends SimpleContentTag<LinearGradientColorBrush> {
+public class LinearGradientBrushContentTag extends SimpleContentTag<LinearGradientColorBrush> {
     public LinearGradientColorBrush toObject() {
         String startPoint = element.attributeValue("StartPoint");
         String endPoint = element.attributeValue("EndPoint");
@@ -22,9 +22,17 @@ public class LinearGradientContentTag extends SimpleContentTag<LinearGradientCol
             Color color = XAMLHelper.parseAnyColor(dict, element.attributeValue("Color"), opacity);
             stops.add(new Stop(offset, color));
         });
+        if (stops.stream().noneMatch(stop -> stop.getOffset() == 0)) {
+            stops.add(0, new Stop(0, Color.TRANSPARENT));
+        }
 
         return new LinearGradientColorBrush(new LinearGradient(
-                0, 0, 0, 3, true, CycleMethod.NO_CYCLE,
+                Double.parseDouble(startPoint.split(",")[0]),
+                Double.parseDouble(startPoint.split(",")[1]),
+                Double.parseDouble(endPoint.split(",")[0]),
+                Double.parseDouble(endPoint.split(",")[1]),
+                true,
+                CycleMethod.NO_CYCLE,
                 stops
         ));
     }

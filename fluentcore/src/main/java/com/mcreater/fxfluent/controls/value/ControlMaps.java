@@ -36,16 +36,16 @@ public class ControlMaps {
             put(StateType.DISABLE, "AccentButtonForegroundDisabled");
         }};
         public static final Map<StateType, String> BRD_BOTTOM_KEY_MAP = new HashMap<StateType, String>() {{
-            put(StateType.NONE, "ControlStrokeColorSecondaryBrush");
-            put(StateType.FOCUS, "ControlStrokeColorSecondaryBrush");
-            put(StateType.HOVER, "ControlStrokeColorSecondaryBrush");
-            put(StateType.PRESS, "ControlStrokeColorDefaultBrush");
-            put(StateType.DISABLE, "ControlStrokeColorDefaultBrush");
+            put(StateType.NONE, "ButtonBorderBrush");
+            put(StateType.FOCUS, "ButtonBorderBrush");
+            put(StateType.HOVER, "ButtonBorderBrushPointOver");
+            put(StateType.PRESS, "ButtonBorderBrushPressed");
+            put(StateType.DISABLE, "ButtonBorderBrushDisabled");
         }};
         public static final Map<StateType, String> BRD_BOTTOM_ACCENT_KEY_MAP = new HashMap<StateType, String>() {{
-            put(StateType.NONE, "ControlStrokeColorOnAccentSecondary");
-            put(StateType.FOCUS, "ControlStrokeColorOnAccentSecondary");
-            put(StateType.HOVER, "ControlStrokeColorOnAccentSecondary");
+            put(StateType.NONE, "AccentButtonBorderBrush");
+            put(StateType.FOCUS, "AccentButtonBorderBrush");
+            put(StateType.HOVER, "AccentButtonBorderBrushPointOver");
             put(StateType.PRESS, "AccentButtonBorderBrushPressed");
             put(StateType.DISABLE, "AccentButtonBorderBrushDisabled");
         }};
@@ -81,16 +81,16 @@ public class ControlMaps {
             put(StateType.DISABLE, "AccentButtonForegroundDisabled");
         }};
         public static final Map<StateType, String> BRD_BOTTOM_KEY_MAP = new HashMap<StateType, String>() {{
-            put(StateType.NONE, "ControlStrokeColorSecondaryBrush");
-            put(StateType.FOCUS, "ControlStrokeColorSecondaryBrush");
-            put(StateType.HOVER, "ControlStrokeColorSecondaryBrush");
-            put(StateType.PRESS, "ControlStrokeColorDefaultBrush");
-            put(StateType.DISABLE, "ControlStrokeColorDefaultBrush");
+            put(StateType.NONE, "ButtonBorderBrush");
+            put(StateType.FOCUS, "ButtonBorderBrush");
+            put(StateType.HOVER, "ButtonBorderBrushPointOver");
+            put(StateType.PRESS, "ButtonBorderBrushPressed");
+            put(StateType.DISABLE, "ButtonBorderBrushDisabled");
         }};
         public static final Map<StateType, String> BRD_BOTTOM_ACCENT_KEY_MAP = new HashMap<StateType, String>() {{
-            put(StateType.NONE, "ControlStrokeColorOnAccentSecondary");
-            put(StateType.FOCUS, "ControlStrokeColorOnAccentSecondary");
-            put(StateType.HOVER, "ControlStrokeColorOnAccentSecondary");
+            put(StateType.NONE, "AccentButtonBorderBrush");
+            put(StateType.FOCUS, "AccentButtonBorderBrush");
+            put(StateType.HOVER, "AccentButtonBorderBrushPointOver");
             put(StateType.PRESS, "AccentButtonBorderBrushPressed");
             put(StateType.DISABLE, "AccentButtonBorderBrushDisabled");
         }};

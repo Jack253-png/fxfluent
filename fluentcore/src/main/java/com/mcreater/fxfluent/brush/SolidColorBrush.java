@@ -1,6 +1,5 @@
 package com.mcreater.fxfluent.brush;
 
-import javafx.scene.layout.BorderWidths;
 import javafx.scene.paint.Color;
 
 public class SolidColorBrush extends AbstractColorBrush {
@@ -15,9 +14,5 @@ public class SolidColorBrush extends AbstractColorBrush {
 
     public Color getPaint() {
         return color;
-    }
-
-    public BorderWidths getBorderWidths() {
-        return new BorderWidths(1);
     }
 }

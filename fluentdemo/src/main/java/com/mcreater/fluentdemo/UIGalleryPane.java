@@ -9,11 +9,8 @@ import com.mcreater.fxfluent.stage.FluentStage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 
 public class UIGalleryPane extends GridPane {
     public UIGalleryPane(FluentStage stage) {
@@ -41,22 +38,6 @@ public class UIGalleryPane extends GridPane {
         add(button, 0, 2);
         add(box2, 0, 3);
         add(hyperlink, 0, 4);
-        hyperlink.setBorder(new Border(new BorderStroke(
-                Color.TRANSPARENT,
-                Color.TRANSPARENT,
-                new LinearGradient(
-                        0, 0, 0, 3, true, CycleMethod.NO_CYCLE,
-                        new Stop(0.33, Color.rgb(0, 0, 0, 35/255D)), new Stop(1, Color.rgb(0, 0, 0, 15/255D))
-                ),
-                Color.TRANSPARENT,
-                BorderStrokeStyle.SOLID,
-                BorderStrokeStyle.SOLID,
-                BorderStrokeStyle.SOLID,
-                BorderStrokeStyle.SOLID,
-                new CornerRadii(6),
-                new BorderWidths(3),
-                Insets.EMPTY
-        )));
 
         // setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
     }

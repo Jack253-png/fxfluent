@@ -1,10 +1,9 @@
 package com.mcreater.fxfluent.xaml;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.brush.SolidColorBrush;
-import com.mcreater.fxfluent.xaml.tags.AbstractContentTag;
-import com.mcreater.fxfluent.xaml.tags.ColorContentTag;
-import com.mcreater.fxfluent.xaml.tags.SolidColorBrushContentTag;
-import com.mcreater.fxfluent.xaml.tags.StaticResourceRedirectContentTag;
+import com.mcreater.fxfluent.xaml.tags.*;
+import javafx.scene.paint.Color;
 
 import java.util.Vector;
 
@@ -28,12 +27,22 @@ public class ResourceDict extends Vector<AbstractContentTag<?>> {
         return this == XAMLManager.getGlobal() ? null : XAMLManager.getGlobal().foundTag(key, clazz);
     }
 
-    public SolidColorBrush foundSolidColorBrush(String key) {
+    public AbstractColorBrush findColorBrush(String key) {
         try {
             return foundTag(key, SolidColorBrushContentTag.class).toObject();
         }
-        catch (Exception e) {
+        catch (Exception ignored) {}
+
+        try {
+            return foundTag(key, LinearGradientBrushContentTag.class).toObject();
+        }
+        catch (Exception ignored) {}
+
+        try {
             return new SolidColorBrush(foundTag(key, ColorContentTag.class).toObject());
+        }
+        catch (Exception e) {
+            return new SolidColorBrush(Color.TRANSPARENT);
         }
     }
 }

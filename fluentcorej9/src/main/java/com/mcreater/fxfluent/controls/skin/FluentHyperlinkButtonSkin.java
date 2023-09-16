@@ -57,9 +57,9 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
+        backgroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
                 (button.getBackgroundRemap()).get(type))
         );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)));
+        foregroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush((button.getForegroundRemap()).get(type)));
     }
 }

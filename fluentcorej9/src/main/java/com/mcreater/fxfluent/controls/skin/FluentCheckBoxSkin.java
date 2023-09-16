@@ -18,6 +18,7 @@ import javafx.scene.control.skin.CheckBoxSkin;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.util.Duration;
 
 import java.util.stream.Stream;
@@ -82,19 +83,19 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
+        backgroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
                 (this.control.getBackgroundRemap()).get(type))
         );
-        borderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
+        borderColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
                 (this.control.getBorderRemap()).get(type))
         );
-        textColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
+        textColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
                 this.control.getForegroundRemap().get(type)
         ));
     }
 
-    public Color getMarkColor() {
-        return XAMLManager.getCurrentDict().foundSolidColorBrush(
+    public Paint getMarkColor() {
+        return XAMLManager.getCurrentDict().findColorBrush(
                 this.control.getGlyphRemap().get(state.get())
         ).getPaint();
     }

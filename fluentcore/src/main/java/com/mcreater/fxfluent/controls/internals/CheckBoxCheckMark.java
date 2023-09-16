@@ -8,6 +8,7 @@ import javafx.animation.Timeline;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Line;
 import javafx.util.Duration;
 
@@ -34,7 +35,7 @@ public class CheckBoxCheckMark extends Pane {
         this.skin.getSkinnable().indeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> this.onUpdateComponent());
     }
 
-    private Color getFill() {
+    private Paint getFill() {
         return this.skin.getMarkColor();
     }
 

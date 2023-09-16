@@ -78,14 +78,14 @@ public class FluentButtonSkin extends ButtonSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(
+        backgroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
                 (button.getBackgroundRemap()).get(type))
         );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush((button.getForegroundRemap()).get(type)));
+        foregroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush((button.getForegroundRemap()).get(type)));
         Map<StateType, String> lft = button.getBorderRemap();
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
-        ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(StateType.PRESS))));
-        downBorderColor.updateValue(XAMLManager.getCurrentDict().foundSolidColorBrush(lft.get(type)));
+        ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().findColorBrush(lft.get(StateType.PRESS))));
+        downBorderColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(lft.get(type)));
     }
 }

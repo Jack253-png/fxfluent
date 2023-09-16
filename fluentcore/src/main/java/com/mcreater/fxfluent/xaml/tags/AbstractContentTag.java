@@ -12,7 +12,7 @@ public interface AbstractContentTag<T> {
     Map<String, BiFunction<ResourceDict, Element, AbstractContentTag<?>>> converters = new HashMap<String, BiFunction<ResourceDict, Element, AbstractContentTag<?>>>() {{
         put("Color", (dict, a) -> new ColorContentTag().writeElement(a).setResourceDict(dict));
         put("SolidColorBrush", (dict, a) -> new SolidColorBrushContentTag().writeElement(a).setResourceDict(dict));
-        put("LinearGradientBrush", (dict, a) -> new LinearGradientContentTag().writeElement(a).setResourceDict(dict));
+        put("LinearGradientBrush", (dict, a) -> new LinearGradientBrushContentTag().writeElement(a).setResourceDict(dict));
         put("StaticResource", (dict, a) -> new StaticResourceRedirectContentTag().writeElement(a).setResourceDict(dict));
         put("String", (dict, a) -> new StringContentTag().writeElement(a).setResourceDict(dict));
         put("Thickness", (dict, a) -> new ThicknessContentTag().writeElement(a).setResourceDict(dict));
