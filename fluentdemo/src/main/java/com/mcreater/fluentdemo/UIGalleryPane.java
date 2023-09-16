@@ -9,6 +9,8 @@ import javafx.scene.control.ScrollBar;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
+import javax.swing.*;
+
 public class UIGalleryPane extends GridPane {
     public UIGalleryPane(FluentStage stage) {
         setPadding(new Insets(10));
@@ -32,11 +34,13 @@ public class UIGalleryPane extends GridPane {
         FluentHyperlinkButton hyperlink = new FluentHyperlinkButton("test");
         FluentToggleButton button = new FluentToggleButton("Test");
         FluentProgressBar progressBar = new FluentProgressBar();
+        Timer timer = new Timer(1000, e -> progressBar.setProgress((e.getWhen() % 100) / 100D));
+        // timer.start();
         add(bar, 0, 1);
         add(button, 0, 2);
         add(box2, 0, 3);
         add(hyperlink, 0, 4);
-        add(progressBar, 0, 5);
+        add(progressBar, 1, 1);
 
         // setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
     }

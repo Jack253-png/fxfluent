@@ -6,21 +6,30 @@ import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.ControlUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
+import javafx.animation.Timeline;
 import javafx.scene.control.skin.ProgressBarSkin;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.StackPane;
 
 public class FluentProgressBarSkin extends ProgressBarSkin {
-    private FluentProgressBar bar;
+    private final FluentProgressBar bar;
+    private final StackPane internalBar = new StackPane();
+    private final StackPane internalBarClip = new StackPane();
+    private Timeline normalIndeterminateAnimation;
     public FluentProgressBarSkin(FluentProgressBar progressBar) {
         super(progressBar);
         bar = progressBar;
         SystemThemeLoop.addListener(a -> this.updateComponents());
         progressBar.progressProperty().addListener((NewValueListener<Number>) t1 -> updateComponents());
         progressBar.indeterminateState().addListener((NewValueListener<FluentProgressBar.IndeterminateState>) t1 -> updateComponents());
+        progressBar.indeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> updateComponents());
+        internalBar.setTranslateX(-50);
+        internalBar.setClip(internalBarClip);
+
+        getChildren().add(internalBar);
 
         updateComponents();
-        getBar().setPrefHeight(3);
+        getBar().setOpacity(0);
         getTrack().setPrefHeight(1);
     }
     private StackPane getBar() {
@@ -31,7 +40,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
     }
     private void updateComponents() {
         StateType fg = StateType.NONE;
-        if (bar.getProgress() < 0) {
+        if (bar.isIndeterminate()) {
             switch (bar.getIndeterminateState()) {
                 case PAUSE:
                     fg = StateType.FOCUS;
@@ -49,15 +58,22 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                 BrushUtil.backgroundFill(CornerRadii.EMPTY)
         );
         bar.getForegroundRemap().get(fg).accept(
-                getBar(),
+                internalBar,
                 BrushUtil.backgroundFill(new CornerRadii(3))
         );
+
+        if (normalIndeterminateAnimation != null) normalIndeterminateAnimation.stop();
+        if (bar.isIndeterminate()) {
+
+        }
     }
 
-    @Override
     protected void layoutChildren(final double x, final double y,
                                             final double w, final double h) {
+        System.out.printf("%f, %f, %f, %f\n", x, y, w, h);
         super.layoutChildren(x, y, w, h);
         getTrack().resizeRelocate(x, y + 1, w, 1);
+        internalBarClip.resizeRelocate(x, y, w, h);
+        internalBar.resizeRelocate(x, y, getBar().getWidth(), 3);
     }
 }
