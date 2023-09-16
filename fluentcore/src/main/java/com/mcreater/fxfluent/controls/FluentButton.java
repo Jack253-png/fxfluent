@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
 import com.mcreater.fxfluent.controls.abstractions.Borderable;
 import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
@@ -44,15 +45,15 @@ public class FluentButton extends Button implements CornerRadiusable, Background
         return new CornerRadii(4);
     }
 
-    public Map<StateType, String> getBackgroundRemap() {
+    public Map<StateType, AbstractColorBrush> getBackgroundRemap() {
         return isDefaultButton() ? BG_ACCENT_KEY_MAP : BG_KEY_MAP;
     }
 
-    public Map<StateType, String> getForegroundRemap() {
+    public Map<StateType, AbstractColorBrush> getForegroundRemap() {
         return isDefaultButton() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP;
     }
 
-    public Map<StateType, String> getBorderRemap() {
+    public Map<StateType, AbstractColorBrush> getBorderRemap() {
         return isDefaultButton() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
     }
 }

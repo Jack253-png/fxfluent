@@ -7,7 +7,6 @@ import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.XAMLManager;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.sun.javafx.scene.control.skin.HyperlinkSkin;
 import javafx.beans.property.ObjectProperty;
@@ -57,9 +56,7 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
-                (button.getBackgroundRemap()).get(type))
-        );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush((button.getForegroundRemap()).get(type)));
+        backgroundColor.updateValue(button.getBackgroundRemap().get(type));
+        foregroundColor.updateValue(button.getForegroundRemap().get(type));
     }
 }

@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.brush;
 
+import com.mcreater.fxfluent.xaml.XAMLManager;
 import javafx.animation.Interpolatable;
 import javafx.scene.layout.Region;
 import javafx.scene.paint.CycleMethod;
@@ -73,5 +74,9 @@ public abstract class AbstractColorBrush implements Interpolatable<AbstractColor
     public abstract Paint getPaint();
     public void accept(Region region, BiConsumer<Region, AbstractColorBrush> regionAbstractColorBrushBiConsumer) {
         regionAbstractColorBrushBiConsumer.accept(region, this);
+    }
+
+    public static AbstractColorBrush find(String k) {
+        return XAMLManager.getCurrentDict().findColorBrush(k);
     }
 }

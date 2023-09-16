@@ -9,7 +9,6 @@ import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.ControlUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.XAMLManager;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.sun.javafx.scene.control.skin.CheckBoxSkin;
 import javafx.beans.property.ObjectProperty;
@@ -83,20 +82,12 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
-                (this.control.getBackgroundRemap()).get(type))
-        );
-        borderColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
-                (this.control.getBorderRemap()).get(type))
-        );
-        textColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
-                this.control.getForegroundRemap().get(type)
-        ));
+        backgroundColor.updateValue(this.control.getBackgroundRemap().get(type));
+        borderColor.updateValue(this.control.getBorderRemap().get(type));
+        textColor.updateValue(this.control.getForegroundRemap().get(type));
     }
 
     public Paint getMarkColor() {
-        return XAMLManager.getCurrentDict().findColorBrush(
-                this.control.getGlyphRemap().get(state.get())
-        ).getPaint();
+        return this.control.getGlyphRemap().get(state.get()).getPaint();
     }
 }

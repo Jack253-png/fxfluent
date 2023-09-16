@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
 import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
@@ -37,11 +38,11 @@ public class FluentHyperlinkButton extends Hyperlink implements CornerRadiusable
         return FluentToggleButton.class.getClassLoader().getResource("css/FluentHyperlinkButton.css").toString();
     }
 
-    public Map<StateType, String> getBackgroundRemap() {
+    public Map<StateType, AbstractColorBrush> getBackgroundRemap() {
         return BG_KEY_MAP;
     }
 
-    public Map<StateType, String> getForegroundRemap() {
+    public Map<StateType, AbstractColorBrush> getForegroundRemap() {
         return FG_KEY_MAP;
     }
 

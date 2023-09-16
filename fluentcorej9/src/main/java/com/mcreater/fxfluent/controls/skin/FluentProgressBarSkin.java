@@ -4,7 +4,6 @@ import com.mcreater.fxfluent.controls.FluentProgressBar;
 import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.ControlUtil;
-import com.mcreater.fxfluent.xaml.XAMLManager;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.scene.control.skin.ProgressBarSkin;
 import javafx.scene.layout.CornerRadii;
@@ -28,11 +27,11 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
         return (StackPane) ControlUtil.findControlInSkin(this, "track");
     }
     private void updateComponents() {
-        XAMLManager.getCurrentDict().findColorBrush(bar.getBackgroundRemap().get(StateType.NONE)).accept(
+        bar.getBackgroundRemap().get(StateType.NONE).accept(
                 getTrack(),
                 BrushUtil.backgroundFill(CornerRadii.EMPTY)
         );
-        XAMLManager.getCurrentDict().findColorBrush(bar.getForegroundRemap().get(StateType.NONE)).accept(
+        bar.getForegroundRemap().get(StateType.NONE).accept(
                 getBar(),
                 BrushUtil.backgroundFill(new CornerRadii(3))
         );

@@ -9,13 +9,13 @@
     -fx-indeterminate-bar-animation-time: 2;
 }
 .fluent-progress-bar > .bar {
-    -fx-background-color: black;
+    -fx-background-color: transparent;
     -fx-background-insets: 0 0 0 0;
     -fx-background-radius: 2;
     -fx-padding: 0.25em;
 }
 .fluent-progress-bar:indeterminate > .bar {
-    -fx-background-color: black;
+    -fx-background-color: transparent;
 }
 .fluent-progress-bar > .track {
     -fx-background-color: transparent;

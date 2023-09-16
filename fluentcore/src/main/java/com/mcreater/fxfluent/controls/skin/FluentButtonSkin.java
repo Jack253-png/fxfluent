@@ -7,7 +7,6 @@ import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.XAMLManager;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 import javafx.beans.property.ObjectProperty;
@@ -18,7 +17,6 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
-import java.util.Map;
 import java.util.stream.Stream;
 
 import static com.mcreater.fxfluent.controls.state.StateUtil.genState;
@@ -78,14 +76,11 @@ public class FluentButtonSkin extends ButtonSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(
-                (button.getBackgroundRemap()).get(type))
-        );
-        foregroundColor.updateValue(XAMLManager.getCurrentDict().findColorBrush((button.getForegroundRemap()).get(type)));
-        Map<StateType, String> lft = button.getBorderRemap();
+        backgroundColor.updateValue(button.getBackgroundRemap().get(type));
+        foregroundColor.updateValue(button.getForegroundRemap().get(type));
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
-        ).forEach(a -> a.updateValue(XAMLManager.getCurrentDict().findColorBrush(lft.get(StateType.PRESS))));
-        downBorderColor.updateValue(XAMLManager.getCurrentDict().findColorBrush(lft.get(type)));
+        ).forEach(a -> a.updateValue(button.getBorderRemap().get(StateType.PRESS)));
+        downBorderColor.updateValue(button.getBorderRemap().get(type));
     }
 }

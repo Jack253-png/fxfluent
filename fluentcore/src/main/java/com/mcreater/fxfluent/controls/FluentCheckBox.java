@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentCheckBoxSkin;
 import com.mcreater.fxfluent.controls.state.StateType;
@@ -37,20 +38,20 @@ public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgr
         return new CornerRadii(5);
     }
 
-    public Map<StateType, String> getBackgroundRemap() {
+    public Map<StateType, AbstractColorBrush> getBackgroundRemap() {
 
         return isSelected() || isIndeterminate() ? BG_PRESSED_KEY_MAP : BG_KEY_MAP;
     }
 
-    public Map<StateType, String> getBorderRemap() {
+    public Map<StateType, AbstractColorBrush> getBorderRemap() {
         return isSelected() || isIndeterminate() ? BRD_PRESSED_KEY_MAP : BRD_KEY_MAP;
     }
 
-    public Map<StateType, String> getForegroundRemap() {
+    public Map<StateType, AbstractColorBrush> getForegroundRemap() {
         return FG_KEY_MAP;
     }
 
-    public Map<StateType, String> getGlyphRemap() {
+    public Map<StateType, AbstractColorBrush> getGlyphRemap() {
         return GLY_KEY_MAP;
     }
 }

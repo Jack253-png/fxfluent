@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
 import com.mcreater.fxfluent.controls.abstractions.Borderable;
 import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
@@ -13,7 +14,7 @@ import javafx.scene.layout.CornerRadii;
 
 import java.util.Map;
 
-import static com.mcreater.fxfluent.controls.value.ControlMaps.ToggleButton.*;
+import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.*;
 
 public class FluentToggleButton extends ToggleButton implements CornerRadiusable, Backgroundable, Foregroundable, Borderable {
     public FluentToggleButton() {
@@ -43,15 +44,15 @@ public class FluentToggleButton extends ToggleButton implements CornerRadiusable
         return new CornerRadii(4);
     }
 
-    public Map<StateType, String> getBackgroundRemap() {
+    public Map<StateType, AbstractColorBrush> getBackgroundRemap() {
         return isSelected() ? BG_ACCENT_KEY_MAP : BG_KEY_MAP;
     }
 
-    public Map<StateType, String> getBorderRemap() {
+    public Map<StateType, AbstractColorBrush> getBorderRemap() {
         return isSelected() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
     }
 
-    public Map<StateType, String> getForegroundRemap() {
+    public Map<StateType, AbstractColorBrush> getForegroundRemap() {
         return isSelected() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP;
     }
 }

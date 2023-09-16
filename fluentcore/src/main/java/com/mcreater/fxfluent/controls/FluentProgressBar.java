@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
 import com.mcreater.fxfluent.controls.skin.FluentProgressBarSkin;
@@ -9,6 +10,8 @@ import javafx.scene.control.Skin;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.mcreater.fxfluent.brush.AbstractColorBrush.find;
 
 public class FluentProgressBar extends ProgressBar implements Backgroundable, Foregroundable {
     public FluentProgressBar() {
@@ -32,15 +35,15 @@ public class FluentProgressBar extends ProgressBar implements Backgroundable, Fo
         return new FluentProgressBarSkin(this);
     }
 
-    public Map<StateType, String> getBackgroundRemap() {
-        return new HashMap<StateType, String>() {{
-            put(StateType.NONE, "SystemFillColorNeutralBrush");
+    public Map<StateType, AbstractColorBrush> getBackgroundRemap() {
+        return new HashMap<StateType, AbstractColorBrush>() {{
+            put(StateType.NONE, find("SystemFillColorNeutralBrush"));
         }};
     }
 
-    public Map<StateType, String> getForegroundRemap() {
-        return new HashMap<StateType, String>() {{
-            put(StateType.NONE, "AccentFillColorDefaultBrush");
+    public Map<StateType, AbstractColorBrush> getForegroundRemap() {
+        return new HashMap<StateType, AbstractColorBrush>() {{
+            put(StateType.NONE, find("AccentFillColorDefaultBrush"));
         }};
     }
 }
