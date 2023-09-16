@@ -13,6 +13,8 @@ import java.util.function.BiConsumer;
 
 public abstract class AbstractColorBrush implements Interpolatable<AbstractColorBrush>, BiConsumer<Region, BiConsumer<Region, AbstractColorBrush>> {
     public AbstractColorBrush interpolate(AbstractColorBrush abstractColorBrush, double v) {
+        if (v == 0) return this;
+        if (v == 1) return abstractColorBrush;
         if (abstractColorBrush instanceof SolidColorBrush && this instanceof SolidColorBrush) {
             return new SolidColorBrush(toSolidColorBrush().getPaint().interpolate(abstractColorBrush.toSolidColorBrush().getPaint(), v));
         }
@@ -58,7 +60,7 @@ public abstract class AbstractColorBrush implements Interpolatable<AbstractColor
         try {
             return (LinearGradientColorBrush) this;
         }
-        catch (Exception e) {}
+        catch (Exception ignored) {}
 
         return new LinearGradientColorBrush(
                 new LinearGradient(

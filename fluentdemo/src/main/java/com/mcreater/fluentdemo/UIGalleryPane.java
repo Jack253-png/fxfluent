@@ -1,10 +1,7 @@
 package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.brush.AcrylicInAppFillColorBrush;
-import com.mcreater.fxfluent.controls.FluentButton;
-import com.mcreater.fxfluent.controls.FluentCheckBox;
-import com.mcreater.fxfluent.controls.FluentHyperlinkButton;
-import com.mcreater.fxfluent.controls.FluentToggleButton;
+import com.mcreater.fxfluent.controls.*;
 import com.mcreater.fxfluent.stage.FluentStage;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -34,10 +31,12 @@ public class UIGalleryPane extends GridPane {
         new AcrylicInAppFillColorBrush().accept(bar, null);
         FluentHyperlinkButton hyperlink = new FluentHyperlinkButton("test");
         FluentToggleButton button = new FluentToggleButton("Test");
+        FluentProgressBar progressBar = new FluentProgressBar();
         add(bar, 0, 1);
         add(button, 0, 2);
         add(box2, 0, 3);
         add(hyperlink, 0, 4);
+        add(progressBar, 0, 5);
 
         // setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
     }
