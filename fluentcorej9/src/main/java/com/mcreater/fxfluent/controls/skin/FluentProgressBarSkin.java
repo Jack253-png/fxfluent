@@ -84,6 +84,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
             normalIndeterminateAnimation.stop();
             internalBar.setTranslateX(0);
             internalBar.setPrefWidth(-1);
+            internalBar.setScaleX(1);
         }
         if (bar.isIndeterminate()) {
             if (bar.getIndeterminateState() == FluentProgressBar.IndeterminateState.NORMAL) {
@@ -94,6 +95,11 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                         internalBar.translateXProperty(),
                                         -60,
                                         Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        internalBar.scaleXProperty(),
+                                        1,
+                                        Interpolator.EASE_BOTH
                                 )
                         ),
                         new KeyFrame(
@@ -101,6 +107,11 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth(),
+                                        Interpolator.EASE_BOTH
+                                ),
+                                new KeyValue(
+                                        internalBar.scaleXProperty(),
+                                        1,
                                         Interpolator.EASE_BOTH
                                 )
                         ),
@@ -110,24 +121,29 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                         internalBar.translateXProperty(),
                                         -60,
                                         Interpolator.EASE_BOTH
-                                )
-                        ),
-                        new KeyFrame(
-                                Duration.millis(1750),
+                                ),
                                 new KeyValue(
-                                        internalBar.translateXProperty(),
-                                        bar.getWidth(),
+                                        internalBar.scaleXProperty(),
+                                        1.5,
                                         Interpolator.EASE_BOTH
                                 )
                         ),
                         new KeyFrame(
+                                Duration.millis(2050),
+                                new KeyValue(
+                                        internalBar.translateXProperty(),
+                                        bar.getWidth() + 60,
+                                        Interpolator.EASE_BOTH
+                                )
+                        )
+                        /*new KeyFrame(
                                 Duration.millis(2150),
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth(),
                                         Interpolator.EASE_BOTH
                                 )
-                        )
+                        )*/
                 );
                 normalIndeterminateAnimation.setAutoReverse(false);
                 normalIndeterminateAnimation.setCycleCount(Timeline.INDEFINITE);
