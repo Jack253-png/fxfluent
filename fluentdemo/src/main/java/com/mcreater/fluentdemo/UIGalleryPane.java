@@ -38,7 +38,5 @@ public class UIGalleryPane extends GridPane {
         add(box2, 0, 3);
         add(hyperlink, 0, 4);
         add(progressBar, 0, 5);
-
-        // setBackground(new Background(new BackgroundFill(Color.TRANSPARENT, CornerRadii.EMPTY, Insets.EMPTY)));
     }
 }
