@@ -77,11 +77,11 @@ public class FluentToggleButtonSkin extends ToggleButtonSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(button.getBackgroundRemap().get(type));
-        foregroundColor.updateValue(button.getForegroundRemap().get(type));
+        backgroundColor.updateValue(button.getBackgroundRemap().get(type).get());
+        foregroundColor.updateValue(button.getForegroundRemap().get(type).get());
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
-        ).forEach(a -> a.updateValue(button.getBorderRemap().get(StateType.PRESS)));
-        downBorderColor.updateValue(button.getBorderRemap().get(type));
+        ).forEach(a -> a.updateValue(button.getBorderRemap().get(StateType.PRESS).get()));
+        downBorderColor.updateValue(button.getBorderRemap().get(type).get());
     }
 }

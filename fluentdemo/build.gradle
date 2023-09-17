@@ -14,7 +14,7 @@ targetCompatibility = "1.9"
 
 application {
     mainClass = 'com.mcreater.fluentdemo.Main'
-    applicationDefaultJvmArgs = ["--add-opens", "java.base/java.lang=ALL-UNNAMED", "-Xmx145M"]
+    applicationDefaultJvmArgs = ["-XX:+UseZGC", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-Xmx4G"]
 }
 
 repositories {

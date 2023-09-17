@@ -1,14 +1,11 @@
 package com.mcreater.fxfluent.controls;
 
-import com.mcreater.fxfluent.brush.AbstractColorBrush;
 import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentCheckBoxSkin;
-import com.mcreater.fxfluent.controls.state.StateType;
+import com.mcreater.fxfluent.controls.value.StateMap;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.CornerRadii;
-
-import java.util.Map;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.CheckBox.*;
 
@@ -38,20 +35,20 @@ public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgr
         return new CornerRadii(5);
     }
 
-    public Map<StateType, AbstractColorBrush> getBackgroundRemap() {
+    public StateMap getBackgroundRemap() {
 
         return isSelected() || isIndeterminate() ? BG_PRESSED_KEY_MAP : BG_KEY_MAP;
     }
 
-    public Map<StateType, AbstractColorBrush> getBorderRemap() {
+    public StateMap getBorderRemap() {
         return isSelected() || isIndeterminate() ? BRD_PRESSED_KEY_MAP : BRD_KEY_MAP;
     }
 
-    public Map<StateType, AbstractColorBrush> getForegroundRemap() {
+    public StateMap getForegroundRemap() {
         return FG_KEY_MAP;
     }
 
-    public Map<StateType, AbstractColorBrush> getGlyphRemap() {
+    public StateMap getGlyphRemap() {
         return GLY_KEY_MAP;
     }
 }
