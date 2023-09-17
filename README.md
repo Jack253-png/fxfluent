@@ -1,2 +1,2 @@
-# fxfluent
-Fluent design for JavaFX
+# FxFluent
+Fluent design library for JavaFX
