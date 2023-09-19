@@ -12,7 +12,6 @@ import javafx.scene.layout.VBox;
 public class UIGalleryPane extends GridPane {
     public UIGalleryPane(FluentStage stage) {
         setPadding(new Insets(10));
-
         VBox buttons = new VBox();
         buttons.getChildren().add(new Label("按钮"));
         buttons.getChildren().add(new FluentButton("正常的按钮"));
