@@ -4,9 +4,9 @@ import com.mcreater.fxfluent.controls.FluentProgressBar;
 import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.ControlUtil;
+import com.mcreater.fxfluent.util.interpolatables.Interpolators;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
-import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -94,12 +94,12 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         -60,
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 ),
                                 new KeyValue(
                                         internalBar.scaleXProperty(),
                                         1,
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
                         ),
                         new KeyFrame(
@@ -107,25 +107,25 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth(),
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 ),
                                 new KeyValue(
                                         internalBar.scaleXProperty(),
                                         1,
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
                         ),
                         new KeyFrame(
                                 Duration.millis(1000.0000000001),
                                 new KeyValue(
                                         internalBar.translateXProperty(),
-                                        -60,
-                                        Interpolator.EASE_BOTH
+                                        -60 * 1.5,
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 ),
                                 new KeyValue(
                                         internalBar.scaleXProperty(),
                                         1.5,
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
                         ),
                         new KeyFrame(
@@ -133,17 +133,17 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth() + 60,
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
-                        )
-                        /*new KeyFrame(
-                                Duration.millis(2150),
+                        ),
+                        new KeyFrame(
+                                Duration.millis(2500),
                                 new KeyValue(
                                         internalBar.translateXProperty(),
-                                        bar.getWidth(),
-                                        Interpolator.EASE_BOTH
+                                        bar.getWidth() + 60,
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
-                        )*/
+                        )
                 );
                 normalIndeterminateAnimation.setAutoReverse(false);
                 normalIndeterminateAnimation.setCycleCount(Timeline.INDEFINITE);
@@ -156,7 +156,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         60,
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
                         ),
                         new KeyFrame(
@@ -164,7 +164,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         bar.getWidth(),
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
                         ),
                         new KeyFrame(
@@ -172,7 +172,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         0,
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
                         ),
                         new KeyFrame(
@@ -180,7 +180,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         bar.getWidth(),
-                                        Interpolator.EASE_BOTH
+                                        Interpolators.SINUSOIDAL_EASEBOTH
                                 )
                         )
                 );

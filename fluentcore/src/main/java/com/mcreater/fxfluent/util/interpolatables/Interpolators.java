@@ -230,4 +230,32 @@ public class Interpolators {
             return (i3 * i3 * ((i4 + 1) * i3 + i4) + 2) / 2;
         }
     };
+
+    public static Interpolator BOUNCE_EASEOUT = new Interpolator() {
+        protected double curve(double v) {
+            double i1 = v;
+            if (i1 < 1 / 2.75) return 7.5625 * i1 * i1;
+            if (i1 < 2 / 2.75) {
+                i1 = i1 - (1.5 / 2.75);
+                return 7.5625 * i1 * i1 + 0.75;
+            }
+            if (i1 < 2.5 / 2.75) {
+                i1 = i1 - (2.25 / 2.75);
+                return 7.5625 * i1 * i1 + 0.9375;
+            }
+            i1 = i1 - (2.625 / 2.75);
+            return 7.5625 * i1 * i1 + 0.984375;
+        }
+    };
+    public static Interpolator BOUNCE_EASEIN = new Interpolator() {
+        protected double curve(double v) {
+            return 1 - BOUNCE_EASEOUT.interpolate(0D, 1D, 1 - v);
+        }
+    };
+    public static Interpolator BOUNCE_EASEBOTH = new Interpolator() {
+        protected double curve(double v) {
+            if (v < 0.5) return BOUNCE_EASEIN.interpolate(0D, 1D, v * 2) / 2;
+            return 0.5 + BOUNCE_EASEOUT.interpolate(0D, 1D, v * 2 - 1) / 2;
+        }
+    };
 }
