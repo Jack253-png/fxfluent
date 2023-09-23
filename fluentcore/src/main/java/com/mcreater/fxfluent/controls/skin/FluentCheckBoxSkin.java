@@ -82,12 +82,12 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(this.control.getBackgroundRemap().get(type).get());
-        borderColor.updateValue(this.control.getBorderRemap().get(type).get());
-        textColor.updateValue(this.control.getForegroundRemap().get(type).get());
+        backgroundColor.updateValue(this.control.getBackgroundRemap().get(type).apply(control.getResourceDict()));
+        borderColor.updateValue(this.control.getBorderRemap().get(type).apply(control.getResourceDict()));
+        textColor.updateValue(this.control.getForegroundRemap().get(type).apply(control.getResourceDict()));
     }
 
     public Paint getMarkColor() {
-        return this.control.getGlyphRemap().get(state.get()).get().getPaint();
+        return this.control.getGlyphRemap().get(state.get()).apply(control.getResourceDict()).getPaint();
     }
 }

@@ -71,11 +71,11 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                     break;
             }
         }
-        bar.getBackgroundRemap().get(!bar.isIndeterminate() ? StateType.NONE : StateType.HOVER).get().accept(
+        bar.getBackgroundRemap().get(!bar.isIndeterminate() ? StateType.NONE : StateType.HOVER).apply(bar.getResourceDict()).accept(
                 getTrack(),
                 BrushUtil.backgroundFill(CornerRadii.EMPTY)
         );
-        bar.getForegroundRemap().get(fg).get().accept(
+        bar.getForegroundRemap().get(fg).apply(bar.getResourceDict()).accept(
                 internalBar,
                 BrushUtil.backgroundFill(new CornerRadii(3))
         );

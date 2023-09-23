@@ -76,11 +76,11 @@ public class FluentButtonSkin extends ButtonSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(button.getBackgroundRemap().get(type).get());
-        foregroundColor.updateValue(button.getForegroundRemap().get(type).get());
+        backgroundColor.updateValue(button.getBackgroundRemap().get(type).apply(button.getResourceDict()));
+        foregroundColor.updateValue(button.getForegroundRemap().get(type).apply(button.getResourceDict()));
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
-        ).forEach(a -> a.updateValue(button.getBorderRemap().get(StateType.PRESS).get()));
-        downBorderColor.updateValue(button.getBorderRemap().get(type).get());
+        ).forEach(a -> a.updateValue(button.getBorderRemap().get(StateType.PRESS).apply(button.getResourceDict())));
+        downBorderColor.updateValue(button.getBorderRemap().get(type).apply(button.getResourceDict()));
     }
 }

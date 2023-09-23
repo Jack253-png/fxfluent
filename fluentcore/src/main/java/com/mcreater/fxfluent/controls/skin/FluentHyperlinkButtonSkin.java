@@ -56,7 +56,7 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(button.getBackgroundRemap().get(type).get());
-        foregroundColor.updateValue(button.getForegroundRemap().get(type).get());
+        backgroundColor.updateValue(button.getBackgroundRemap().get(type).apply(button.getResourceDict()));
+        foregroundColor.updateValue(button.getForegroundRemap().get(type).apply(button.getResourceDict()));
     }
 }

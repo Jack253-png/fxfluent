@@ -7,118 +7,118 @@ import static com.mcreater.fxfluent.brush.AbstractColorBrush.find;
 public class ControlMaps {
     public static class Button {
         public static final StateMap BG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("ButtonBackground"));
-            put(StateType.FOCUS, () -> find("ButtonBackground"));
-            put(StateType.HOVER, () -> find("ButtonBackgroundPointerOver"));
-            put(StateType.PRESS, () -> find("ButtonBackgroundPressed"));
-            put(StateType.DISABLE, () -> find("ButtonBackgroundDisabled"));
+            put(StateType.NONE, d -> find("ButtonBackground", d));
+            put(StateType.FOCUS, d -> find("ButtonBackground", d));
+            put(StateType.HOVER, d -> find("ButtonBackgroundPointerOver", d));
+            put(StateType.PRESS, d -> find("ButtonBackgroundPressed", d));
+            put(StateType.DISABLE, d -> find("ButtonBackgroundDisabled", d));
         }};
         public static final StateMap BG_ACCENT_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("AccentButtonBackground"));
-            put(StateType.FOCUS, () -> find("AccentButtonBackground"));
-            put(StateType.HOVER, () -> find("AccentButtonBackgroundPointerOver"));
-            put(StateType.PRESS, () -> find("AccentButtonBackgroundPressed"));
-            put(StateType.DISABLE, () -> find("AccentButtonBackgroundDisabled"));
+            put(StateType.NONE, d -> find("AccentButtonBackground", d));
+            put(StateType.FOCUS, d -> find("AccentButtonBackground", d));
+            put(StateType.HOVER, d -> find("AccentButtonBackgroundPointerOver", d));
+            put(StateType.PRESS, d -> find("AccentButtonBackgroundPressed", d));
+            put(StateType.DISABLE, d -> find("AccentButtonBackgroundDisabled", d));
         }};
         public static final StateMap FG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("ButtonForeground"));
-            put(StateType.FOCUS, () -> find("ButtonForeground"));
-            put(StateType.HOVER, () -> find("ButtonForegroundPointerOver"));
-            put(StateType.PRESS, () -> find("ButtonForegroundPressed"));
-            put(StateType.DISABLE, () -> find("ButtonForegroundDisabled"));
+            put(StateType.NONE, d -> find("ButtonForeground", d));
+            put(StateType.FOCUS, d -> find("ButtonForeground", d));
+            put(StateType.HOVER, d -> find("ButtonForegroundPointerOver", d));
+            put(StateType.PRESS, d -> find("ButtonForegroundPressed", d));
+            put(StateType.DISABLE, d -> find("ButtonForegroundDisabled", d));
         }};
         public static final StateMap FG_ACCENT_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("AccentButtonForeground"));
-            put(StateType.FOCUS, () -> find("AccentButtonForeground"));
-            put(StateType.HOVER, () -> find("AccentButtonForegroundPointerOver"));
-            put(StateType.PRESS, () -> find("AccentButtonForegroundPressed"));
-            put(StateType.DISABLE, () -> find("AccentButtonForegroundDisabled"));
+            put(StateType.NONE, d -> find("AccentButtonForeground", d));
+            put(StateType.FOCUS, d -> find("AccentButtonForeground", d));
+            put(StateType.HOVER, d -> find("AccentButtonForegroundPointerOver", d));
+            put(StateType.PRESS, d -> find("AccentButtonForegroundPressed", d));
+            put(StateType.DISABLE, d -> find("AccentButtonForegroundDisabled", d));
         }};
         public static final StateMap BRD_BOTTOM_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("ButtonBorderBrush"));
-            put(StateType.FOCUS, () -> find("ButtonBorderBrush"));
-            put(StateType.HOVER, () -> find("ButtonBorderBrushPointerOver"));
-            put(StateType.PRESS, () -> find("ButtonBorderBrushPressed"));
-            put(StateType.DISABLE, () -> find("ButtonBorderBrushDisabled"));
+            put(StateType.NONE, d -> find("ButtonBorderBrush", d));
+            put(StateType.FOCUS, d -> find("ButtonBorderBrush", d));
+            put(StateType.HOVER, d -> find("ButtonBorderBrushPointerOver", d));
+            put(StateType.PRESS, d -> find("ButtonBorderBrushPressed", d));
+            put(StateType.DISABLE, d -> find("ButtonBorderBrushDisabled", d));
         }};
         public static final StateMap BRD_BOTTOM_ACCENT_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("AccentButtonBorderBrush"));
-            put(StateType.FOCUS, () -> find("AccentButtonBorderBrush"));
-            put(StateType.HOVER, () -> find("AccentButtonBorderBrushPointerOver"));
-            put(StateType.PRESS, () -> find("AccentButtonBorderBrushPressed"));
-            put(StateType.DISABLE, () -> find("AccentButtonBorderBrushDisabled"));
+            put(StateType.NONE, d -> find("AccentButtonBorderBrush", d));
+            put(StateType.FOCUS, d -> find("AccentButtonBorderBrush", d));
+            put(StateType.HOVER, d -> find("AccentButtonBorderBrushPointerOver", d));
+            put(StateType.PRESS, d -> find("AccentButtonBorderBrushPressed", d));
+            put(StateType.DISABLE, d -> find("AccentButtonBorderBrushDisabled", d));
         }};
     }
     public static class CheckBox {
         public static final StateMap BG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("CheckBoxCheckBackgroundFillUnchecked"));
-            put(StateType.FOCUS, () -> find("CheckBoxCheckBackgroundFillUnchecked"));
-            put(StateType.HOVER, () -> find("CheckBoxCheckBackgroundFillUncheckedPointerOver"));
-            put(StateType.PRESS, () -> find("CheckBoxCheckBackgroundFillUncheckedPressed"));
-            put(StateType.DISABLE, () -> find("CheckBoxCheckBackgroundFillUncheckedDisabled"));
+            put(StateType.NONE, d -> find("CheckBoxCheckBackgroundFillUnchecked", d));
+            put(StateType.FOCUS, d -> find("CheckBoxCheckBackgroundFillUnchecked", d));
+            put(StateType.HOVER, d -> find("CheckBoxCheckBackgroundFillUncheckedPointerOver", d));
+            put(StateType.PRESS, d -> find("CheckBoxCheckBackgroundFillUncheckedPressed", d));
+            put(StateType.DISABLE, d -> find("CheckBoxCheckBackgroundFillUncheckedDisabled", d));
         }};
         public static final StateMap BG_PRESSED_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("CheckBoxCheckBackgroundFillChecked"));
-            put(StateType.FOCUS, () -> find("CheckBoxCheckBackgroundFillChecked"));
-            put(StateType.HOVER, () -> find("CheckBoxCheckBackgroundFillCheckedPointerOver"));
-            put(StateType.PRESS, () -> find("CheckBoxCheckBackgroundFillCheckedPressed"));
-            put(StateType.DISABLE, () -> find("CheckBoxCheckBackgroundFillCheckedDisabled"));
+            put(StateType.NONE, d -> find("CheckBoxCheckBackgroundFillChecked", d));
+            put(StateType.FOCUS, d -> find("CheckBoxCheckBackgroundFillChecked", d));
+            put(StateType.HOVER, d -> find("CheckBoxCheckBackgroundFillCheckedPointerOver", d));
+            put(StateType.PRESS, d -> find("CheckBoxCheckBackgroundFillCheckedPressed", d));
+            put(StateType.DISABLE, d -> find("CheckBoxCheckBackgroundFillCheckedDisabled", d));
         }};
         public static final StateMap BRD_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("CheckBoxCheckBackgroundStrokeUnchecked"));
-            put(StateType.FOCUS, () -> find("CheckBoxCheckBackgroundStrokeUnchecked"));
-            put(StateType.HOVER, () -> find("CheckBoxCheckBackgroundStrokeUncheckedPointerOver"));
-            put(StateType.PRESS, () -> find("CheckBoxCheckBackgroundStrokeUncheckedPressed"));
-            put(StateType.DISABLE, () -> find("CheckBoxCheckBackgroundStrokeUncheckedDisabled"));
+            put(StateType.NONE, d -> find("CheckBoxCheckBackgroundStrokeUnchecked", d));
+            put(StateType.FOCUS, d -> find("CheckBoxCheckBackgroundStrokeUnchecked", d));
+            put(StateType.HOVER, d -> find("CheckBoxCheckBackgroundStrokeUncheckedPointerOver", d));
+            put(StateType.PRESS, d -> find("CheckBoxCheckBackgroundStrokeUncheckedPressed", d));
+            put(StateType.DISABLE, d -> find("CheckBoxCheckBackgroundStrokeUncheckedDisabled", d));
         }};
         public static final StateMap BRD_PRESSED_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("CheckBoxCheckBackgroundStrokeChecked"));
-            put(StateType.FOCUS, () -> find("CheckBoxCheckBackgroundStrokeChecked"));
-            put(StateType.HOVER, () -> find("CheckBoxCheckBackgroundStrokeCheckedPointerOver"));
-            put(StateType.PRESS, () -> find("CheckBoxCheckBackgroundStrokeCheckedPressed"));
-            put(StateType.DISABLE, () -> find("CheckBoxCheckBackgroundStrokeCheckedDisabled"));
+            put(StateType.NONE, d -> find("CheckBoxCheckBackgroundStrokeChecked", d));
+            put(StateType.FOCUS, d -> find("CheckBoxCheckBackgroundStrokeChecked", d));
+            put(StateType.HOVER, d -> find("CheckBoxCheckBackgroundStrokeCheckedPointerOver", d));
+            put(StateType.PRESS, d -> find("CheckBoxCheckBackgroundStrokeCheckedPressed", d));
+            put(StateType.DISABLE, d -> find("CheckBoxCheckBackgroundStrokeCheckedDisabled", d));
         }};
         public static final StateMap FG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("CheckBoxForegroundUnchecked"));
-            put(StateType.FOCUS, () -> find("CheckBoxForegroundUnchecked"));
-            put(StateType.HOVER, () -> find("CheckBoxForegroundUncheckedPointerOver"));
-            put(StateType.PRESS, () -> find("CheckBoxForegroundUncheckedPressed"));
-            put(StateType.DISABLE, () -> find("CheckBoxForegroundUncheckedDisabled"));
+            put(StateType.NONE, d -> find("CheckBoxForegroundUnchecked", d));
+            put(StateType.FOCUS, d -> find("CheckBoxForegroundUnchecked", d));
+            put(StateType.HOVER, d -> find("CheckBoxForegroundUncheckedPointerOver", d));
+            put(StateType.PRESS, d -> find("CheckBoxForegroundUncheckedPressed", d));
+            put(StateType.DISABLE, d -> find("CheckBoxForegroundUncheckedDisabled", d));
         }};
         public static final StateMap GLY_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("CheckBoxCheckGlyphForegroundUnchecked"));
-            put(StateType.FOCUS, () -> find("CheckBoxCheckGlyphForegroundUnchecked"));
-            put(StateType.HOVER, () -> find("CheckBoxCheckGlyphForegroundUncheckedPointerOver"));
-            put(StateType.PRESS, () -> find("CheckBoxCheckGlyphForegroundUncheckedPressed"));
-            put(StateType.DISABLE, () -> find("CheckBoxCheckGlyphForegroundUncheckedDisabled"));
+            put(StateType.NONE, d -> find("CheckBoxCheckGlyphForegroundUnchecked", d));
+            put(StateType.FOCUS, d -> find("CheckBoxCheckGlyphForegroundUnchecked", d));
+            put(StateType.HOVER, d -> find("CheckBoxCheckGlyphForegroundUncheckedPointerOver", d));
+            put(StateType.PRESS, d -> find("CheckBoxCheckGlyphForegroundUncheckedPressed", d));
+            put(StateType.DISABLE, d -> find("CheckBoxCheckGlyphForegroundUncheckedDisabled", d));
         }};
     }
     public static class HyperLinkButton {
         public static final StateMap BG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("HyperlinkButtonBackground"));
-            put(StateType.FOCUS, () -> find("HyperlinkButtonBackground"));
-            put(StateType.HOVER, () -> find("HyperlinkButtonBackgroundPointerOver"));
-            put(StateType.PRESS, () -> find("HyperlinkButtonBackgroundPressed"));
-            put(StateType.DISABLE, () -> find("HyperlinkButtonBackgroundDisabled"));
+            put(StateType.NONE, d -> find("HyperlinkButtonBackground", d));
+            put(StateType.FOCUS, d -> find("HyperlinkButtonBackground", d));
+            put(StateType.HOVER, d -> find("HyperlinkButtonBackgroundPointerOver", d));
+            put(StateType.PRESS, d -> find("HyperlinkButtonBackgroundPressed", d));
+            put(StateType.DISABLE, d -> find("HyperlinkButtonBackgroundDisabled", d));
         }};
         public static final StateMap FG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("HyperlinkButtonForeground"));
-            put(StateType.FOCUS, () -> find("HyperlinkButtonForeground"));
-            put(StateType.HOVER, () -> find("HyperlinkButtonForegroundPointerOver"));
-            put(StateType.PRESS, () -> find("HyperlinkButtonForegroundPressed"));
-            put(StateType.DISABLE, () -> find("HyperlinkButtonForegroundDisabled"));
+            put(StateType.NONE, d -> find("HyperlinkButtonForeground", d));
+            put(StateType.FOCUS, d -> find("HyperlinkButtonForeground", d));
+            put(StateType.HOVER, d -> find("HyperlinkButtonForegroundPointerOver", d));
+            put(StateType.PRESS, d -> find("HyperlinkButtonForegroundPressed", d));
+            put(StateType.DISABLE, d -> find("HyperlinkButtonForegroundDisabled", d));
         }};
     }
 
     public static class ProgressBar {
         public static final StateMap BG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("SystemFillColorNeutralBrush"));
-            put(StateType.HOVER, () -> find("ControlFillColorTransparentBrush"));
+            put(StateType.NONE, d -> find("SystemFillColorNeutralBrush", d));
+            put(StateType.HOVER, d -> find("ControlFillColorTransparentBrush", d));
         }};
         public static final StateMap FG_KEY_MAP = new StateMap() {{
-            put(StateType.NONE, () -> find("AccentFillColorDefaultBrush"));
-            put(StateType.FOCUS, () -> find("SystemFillColorCautionBrush"));
-            put(StateType.HOVER, () -> find("SystemFillColorCriticalBrush"));
+            put(StateType.NONE, d -> find("AccentFillColorDefaultBrush", d));
+            put(StateType.FOCUS, d -> find("SystemFillColorCautionBrush", d));
+            put(StateType.HOVER, d -> find("SystemFillColorCriticalBrush", d));
         }};
     }
 }
