@@ -1,9 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
-import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
-import com.mcreater.fxfluent.controls.abstractions.Borderable;
-import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
-import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
+import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentButtonSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
 import javafx.scene.Node;
@@ -13,7 +10,7 @@ import javafx.scene.layout.CornerRadii;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.*;
 
-public class FluentButton extends Button implements CornerRadiusable, Backgroundable, Foregroundable, Borderable {
+public class FluentButton extends Button implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable {
     public FluentButton() {
         this.init();
     }

@@ -2,6 +2,7 @@ package com.mcreater.fxfluent.controls;
 
 import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
 import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
+import com.mcreater.fxfluent.controls.abstractions.Dictable;
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
 import com.mcreater.fxfluent.controls.skin.FluentHyperlinkButtonSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
@@ -13,7 +14,7 @@ import javafx.scene.layout.CornerRadii;
 import static com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.BG_KEY_MAP;
 import static com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.FG_KEY_MAP;
 
-public class FluentHyperlinkButton extends Hyperlink implements CornerRadiusable, Backgroundable, Foregroundable {
+public class FluentHyperlinkButton extends Hyperlink implements CornerRadiusable, Backgroundable, Foregroundable, Dictable {
     public FluentHyperlinkButton() {
         init();
     }

@@ -1,9 +1,6 @@
 package com.mcreater.fxfluent.controls;
 
-import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
-import com.mcreater.fxfluent.controls.abstractions.Borderable;
-import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
-import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
+import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentToggleButtonSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
 import javafx.scene.Node;
@@ -13,7 +10,7 @@ import javafx.scene.layout.CornerRadii;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.*;
 
-public class FluentToggleButton extends ToggleButton implements CornerRadiusable, Backgroundable, Foregroundable, Borderable {
+public class FluentToggleButton extends ToggleButton implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable {
     public FluentToggleButton() {
         init();
     }

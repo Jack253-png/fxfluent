@@ -9,7 +9,7 @@ import javafx.scene.layout.CornerRadii;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.CheckBox.*;
 
-public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Glyphable {
+public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Glyphable, Dictable {
     public FluentCheckBox() {
         init();
     }

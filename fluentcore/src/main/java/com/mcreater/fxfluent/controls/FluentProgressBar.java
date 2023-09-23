@@ -1,6 +1,7 @@
 package com.mcreater.fxfluent.controls;
 
 import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
+import com.mcreater.fxfluent.controls.abstractions.Dictable;
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
 import com.mcreater.fxfluent.controls.skin.FluentProgressBarSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
@@ -12,7 +13,7 @@ import javafx.scene.control.Skin;
 import static com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.BG_KEY_MAP;
 import static com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.FG_KEY_MAP;
 
-public class FluentProgressBar extends ProgressBar implements Backgroundable, Foregroundable {
+public class FluentProgressBar extends ProgressBar implements Backgroundable, Foregroundable, Dictable {
     public enum IndeterminateState {
         NORMAL, PAUSE, ERROR
     }
