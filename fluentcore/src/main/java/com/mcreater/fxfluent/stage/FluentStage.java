@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.stage;
 
+import com.mcreater.fxfluent.controls.abstractions.SystemThemeListenable;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.stage.controls.FluentTitleBar;
 import com.mcreater.fxfluent.syslib.UiShellWrapper;
@@ -92,8 +93,10 @@ public class FluentStage extends Stage {
      * @param content {@link Node}
      */
     public void setContent(Node content) {
-        this.content = content;
-        this.updateScene();
+        if (content instanceof SystemThemeListenable) {
+            this.content = content;
+            this.updateScene();
+        }
     }
 
     private FluentTitleBar buildTitleBar() {
@@ -113,7 +116,6 @@ public class FluentStage extends Stage {
     }
 
     private void updateScene() {
-        int i = isDarkMode ? 32 : 243;
         windowColor.updateValue(getWindowBackground());
         windowColor.property.addListener((observableValue, color, t1) -> FluentStage.this.sceneContent.setBackground(new Background(
                 new BackgroundFill(
