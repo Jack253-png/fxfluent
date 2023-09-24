@@ -9,7 +9,6 @@ import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.ControlUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -43,9 +42,7 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
         state.addListener((NewValueListener<StateType>) FluentCheckBoxSkin.this::updateComponents);
         this.control.selectedProperty().addListener((NewValueListener<Boolean>) t1 -> FluentCheckBoxSkin.this.updateComponents(state.get()));
         this.control.indeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> FluentCheckBoxSkin.this.updateComponents(state.get()));
-
-        SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
-        control.allowIndeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> FluentCheckBoxSkin.this.updateComponents(state.get()));
+        this.control.allowIndeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> FluentCheckBoxSkin.this.updateComponents(state.get()));
 
         CornerRadii cornerRadii = control.getCornerRadii();
 
@@ -89,5 +86,9 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
 
     public Paint getMarkColor() {
         return this.control.getGlyphRemap().get(state.get()).apply(control.getResourceDict()).getPaint();
+    }
+
+    public void implUpdate() {
+        this.updateComponents(state.get());
     }
 }

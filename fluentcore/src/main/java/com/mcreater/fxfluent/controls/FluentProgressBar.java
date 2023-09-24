@@ -3,8 +3,12 @@ package com.mcreater.fxfluent.controls;
 import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
 import com.mcreater.fxfluent.controls.abstractions.Dictable;
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
+import com.mcreater.fxfluent.controls.abstractions.Themeable;
 import com.mcreater.fxfluent.controls.skin.FluentProgressBarSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
+import com.mcreater.fxfluent.xaml.ResourceDict;
+import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ProgressBar;
@@ -13,7 +17,8 @@ import javafx.scene.control.Skin;
 import static com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.BG_KEY_MAP;
 import static com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.FG_KEY_MAP;
 
-public class FluentProgressBar extends ProgressBar implements Backgroundable, Foregroundable, Dictable {
+public class FluentProgressBar extends ProgressBar implements Backgroundable, Foregroundable, Dictable, Themeable {
+    private AppColorTheme theme = AppColorTheme.SYSTEM;
     public enum IndeterminateState {
         NORMAL, PAUSE, ERROR
     }
@@ -56,5 +61,14 @@ public class FluentProgressBar extends ProgressBar implements Backgroundable, Fo
 
     public StateMap getForegroundRemap() {
         return FG_KEY_MAP;
+    }
+
+    public ResourceDict getResourceDict() {
+        return XAMLManager.getDict(theme);
+    }
+
+    public void onUpdateTheme(AppColorTheme theme) {
+        this.theme = theme;
+        ((FluentProgressBarSkin) getSkin()).implUpdate();
     }
 }

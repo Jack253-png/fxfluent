@@ -3,6 +3,9 @@ package com.mcreater.fxfluent.controls;
 import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentButtonSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
+import com.mcreater.fxfluent.xaml.ResourceDict;
+import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Skin;
@@ -10,7 +13,8 @@ import javafx.scene.layout.CornerRadii;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.*;
 
-public class FluentButton extends Button implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable {
+public class FluentButton extends Button implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable, Themeable {
+    private AppColorTheme theme = AppColorTheme.SYSTEM;
     public FluentButton() {
         this.init();
     }
@@ -49,5 +53,14 @@ public class FluentButton extends Button implements CornerRadiusable, Background
 
     public StateMap getBorderRemap() {
         return isDefaultButton() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
+    }
+
+    public ResourceDict getResourceDict() {
+        return XAMLManager.getDict(theme);
+    }
+
+    public void onUpdateTheme(AppColorTheme theme) {
+        this.theme = theme;
+        ((FluentButtonSkin) getSkin()).implUpdate();
     }
 }

@@ -7,7 +7,6 @@ import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.sun.javafx.scene.control.skin.HyperlinkSkin;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -36,7 +35,6 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
                 control.disabledProperty()
         ).forEach(a -> a.addListener(this::updateState));
 
-        SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
         state.addListener((NewValueListener<StateType>) FluentHyperlinkButtonSkin.this::updateComponents);
         CornerRadii cornerRadii = control.getCornerRadii();
         backgroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
@@ -58,5 +56,9 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
     private void updateComponents(StateType type) {
         backgroundColor.updateValue(button.getBackgroundRemap().get(type).apply(button.getResourceDict()));
         foregroundColor.updateValue(button.getForegroundRemap().get(type).apply(button.getResourceDict()));
+    }
+
+    public void implUpdate() {
+        this.updateComponents(state.get());
     }
 }

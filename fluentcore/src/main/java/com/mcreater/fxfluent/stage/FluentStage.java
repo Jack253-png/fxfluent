@@ -5,6 +5,7 @@ import com.mcreater.fxfluent.stage.controls.FluentTitleBar;
 import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import com.mcreater.fxfluent.util.NativeUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
+import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -25,6 +26,12 @@ public class FluentStage extends Stage {
     private boolean isFirstInit = true;
     private boolean disableBackdrop = false;
     private boolean disableBackground = false;
+    private AppColorTheme colorThemeOverride = AppColorTheme.SYSTEM;
+
+    public void setColorThemeOverride(AppColorTheme colorThemeOverride) {
+        this.colorThemeOverride = colorThemeOverride;
+        this.applyBackdropType();
+    }
 
     public void setDisableBackdrop(boolean disableBackdrop) {
         this.disableBackdrop = disableBackdrop;
@@ -62,7 +69,7 @@ public class FluentStage extends Stage {
      */
     public void applyBackdropType() {
         try {
-            isDarkMode = UiShellWrapper.GetSystemIsDark();
+            isDarkMode = colorThemeOverride == AppColorTheme.SYSTEM ? UiShellWrapper.GetSystemIsDark() : (colorThemeOverride == AppColorTheme.DARK);
             if (!disableBackdrop) {
                 lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
             }

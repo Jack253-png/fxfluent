@@ -118,7 +118,12 @@ public class XAMLManager {
     }
 
     public static ResourceDict getCurrentDict() {
-        String key = SystemThemeLoop.getTheme() == AppColorTheme.LIGHT ? "Light" : "Default";
+        return getDict(SystemThemeLoop.getTheme());
+    }
+
+    public static ResourceDict getDict(AppColorTheme t) {
+        if (t == AppColorTheme.SYSTEM) return getCurrentDict();
+        String key = t == AppColorTheme.LIGHT ? "Light" : "Default";
         return registeredContents.getOrDefault(key, ResourceDict.createEmpty(key + " (Empty fallback)"));
     }
 

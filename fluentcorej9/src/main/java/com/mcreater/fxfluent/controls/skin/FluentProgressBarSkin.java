@@ -6,7 +6,6 @@ import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.ControlUtil;
 import com.mcreater.fxfluent.util.interpolatables.Interpolators;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -28,7 +27,6 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
     public FluentProgressBarSkin(FluentProgressBar progressBar) {
         super(progressBar);
         bar = progressBar;
-        SystemThemeLoop.addListener(a -> this.updateComponents());
         progressBar.progressProperty().addListener((NewValueListener<Number>) t1 -> updateComponents());
         progressBar.indeterminateState().addListener((NewValueListener<FluentProgressBar.IndeterminateState>) t1 -> updateComponents());
         progressBar.indeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> updateComponents());
@@ -206,5 +204,9 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
         getTrack().resizeRelocate(x, y + 1, w, 1);
         internalBarClip.resizeRelocate(0, 0, w, 3);
         layoutInternalBar(x, y);
+    }
+
+    public void implUpdate() {
+        this.updateComponents();
     }
 }

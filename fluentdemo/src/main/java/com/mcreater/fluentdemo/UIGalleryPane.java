@@ -2,18 +2,17 @@ package com.mcreater.fluentdemo;
 
 import com.mcreater.fxfluent.brush.AcrylicInAppFillColorBrush;
 import com.mcreater.fxfluent.controls.*;
+import com.mcreater.fxfluent.controls.containers.FluentGridPane;
 import com.mcreater.fxfluent.stage.FluentStage;
 import javafx.geometry.Insets;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollBar;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
-public class UIGalleryPane extends GridPane {
+public class UIGalleryPane extends FluentGridPane {
     public UIGalleryPane(FluentStage stage) {
         setPadding(new Insets(10));
         VBox buttons = new VBox();
-        buttons.getChildren().add(new Label("按钮"));
+        buttons.getChildren().add(new FluentLabel("按钮"));
         buttons.getChildren().add(new FluentButton("正常的按钮"));
         FluentButton disabledButton = new FluentButton("禁用的按钮");
         disabledButton.setDisable(true);
