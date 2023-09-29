@@ -127,7 +127,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 )
                         ),
                         new KeyFrame(
-                                Duration.millis(2050),
+                                Duration.millis(2250),
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth() + 60,
@@ -135,7 +135,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 )
                         ),
                         new KeyFrame(
-                                Duration.millis(2500),
+                                Duration.millis(2600),
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth() + 60,

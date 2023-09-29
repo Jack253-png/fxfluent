@@ -3,6 +3,7 @@ package com.mcreater.fxfluent.stage;
 import com.mcreater.fxfluent.controls.abstractions.SystemThemeListenable;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.stage.controls.FluentTitleBar;
+import com.mcreater.fxfluent.syslib.BackdropType;
 import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import com.mcreater.fxfluent.util.NativeUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
@@ -19,11 +20,11 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class FluentStage extends Stage {
-    private UiShellWrapper.BackdropType backdropType;
+    private BackdropType backdropType;
     private Node content;
     private Pane sceneContent;
     private boolean lastApply = false;
-    private boolean isDarkMode = UiShellWrapper.GetSystemIsDark();
+    private boolean isDarkMode = UiShellWrapper.getSystemIsDark();
     private boolean isFirstInit = true;
     private boolean disableBackdrop = false;
     private boolean disableBackground = false;
@@ -51,7 +52,7 @@ public class FluentStage extends Stage {
         init();
     }
     private void init() {
-        this.backdropType = UiShellWrapper.BackdropType.getDefault();
+        this.backdropType = BackdropType.Companion.getDefault();
         this.content = new Pane();
         this.sceneContent = new VBox();
         SystemThemeLoop.addListener(a -> this.applyBackdropType());
@@ -59,9 +60,9 @@ public class FluentStage extends Stage {
 
     /**
      * Set backdrop type of this stage (Windows only)<br>设置该窗口的背景类型 (仅 Windows)
-     * @param backdropType {@link UiShellWrapper.BackdropType}
+     * @param backdropType {@link BackdropType}
      */
-    public void setBackdropType(UiShellWrapper.BackdropType backdropType) {
+    public void setBackdropType(BackdropType backdropType) {
         this.backdropType = backdropType;
     }
 
@@ -70,20 +71,16 @@ public class FluentStage extends Stage {
      */
     public void applyBackdropType() {
         try {
-            isDarkMode = colorThemeOverride == AppColorTheme.SYSTEM ? UiShellWrapper.GetSystemIsDark() : (colorThemeOverride == AppColorTheme.DARK);
+            isDarkMode = colorThemeOverride == AppColorTheme.SYSTEM ? UiShellWrapper.getSystemIsDark() : (colorThemeOverride == AppColorTheme.DARK);
             if (!disableBackdrop) {
-                lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
+                lastApply = UiShellWrapper.applyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
             }
             this.updateScene();
-            if (!isFirstInit) {
-                setIconified(true);
-                setIconified(false);
-            }
-            else isFirstInit = false;
+            isFirstInit = false;
         }
         catch (Exception e) {
             e.printStackTrace();
-            UiShellWrapper.NativeWarn();
+            UiShellWrapper.nativeWarn();
             lastApply = false;
         }
     }
