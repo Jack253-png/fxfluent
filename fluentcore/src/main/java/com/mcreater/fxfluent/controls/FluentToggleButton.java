@@ -54,7 +54,7 @@ public class FluentToggleButton extends ToggleButton implements CornerRadiusable
         return isSelected() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP;
     }
 
-    public ResourceDict getResourceDict() {
+    public ResourceDict getResourceDictKt() {
         return XAMLManager.getDict(theme);
     }
 

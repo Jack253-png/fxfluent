@@ -55,7 +55,7 @@ public class FluentButton extends Button implements CornerRadiusable, Background
         return isDefaultButton() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
     }
 
-    public ResourceDict getResourceDict() {
+    public ResourceDict getResourceDictKt() {
         return XAMLManager.getDict(theme);
     }
 

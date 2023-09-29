@@ -92,12 +92,12 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         -60,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 ),
                                 new KeyValue(
                                         internalBar.scaleXProperty(),
                                         1,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         ),
                         new KeyFrame(
@@ -105,12 +105,12 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth(),
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 ),
                                 new KeyValue(
                                         internalBar.scaleXProperty(),
                                         1,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         ),
                         new KeyFrame(
@@ -118,12 +118,12 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         -60 * 1.5,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 ),
                                 new KeyValue(
                                         internalBar.scaleXProperty(),
                                         1.5,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         ),
                         new KeyFrame(
@@ -131,7 +131,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth() + 60,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         ),
                         new KeyFrame(
@@ -139,7 +139,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth() + 60,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         )
                 );
@@ -154,7 +154,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         60,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         ),
                         new KeyFrame(
@@ -162,7 +162,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         bar.getWidth(),
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         ),
                         new KeyFrame(
@@ -170,7 +170,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         0,
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         ),
                         new KeyFrame(
@@ -178,7 +178,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 new KeyValue(
                                         internalBar.prefWidthProperty(),
                                         bar.getWidth(),
-                                        Interpolators.SINUSOIDAL_EASEBOTH
+                                        Interpolators.Companion.getSinusoidalEaseboth()
                                 )
                         )
                 );

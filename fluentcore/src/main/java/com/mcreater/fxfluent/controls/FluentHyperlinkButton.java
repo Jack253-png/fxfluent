@@ -53,7 +53,7 @@ public class FluentHyperlinkButton extends Hyperlink implements CornerRadiusable
         return new CornerRadii(6);
     }
 
-    public ResourceDict getResourceDict() {
+    public ResourceDict getResourceDictKt() {
         return XAMLManager.getDict(theme);
     }
 

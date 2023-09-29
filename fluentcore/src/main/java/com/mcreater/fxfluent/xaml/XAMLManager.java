@@ -28,7 +28,7 @@ public class XAMLManager {
             XAMLLoader.loadAll();
         }
         catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
     public static void addFile(File file) throws IOException {

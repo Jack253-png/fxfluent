@@ -79,6 +79,7 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
     }
 
     private void updateComponents(StateType type) {
+        System.out.println(this.control.getBackgroundRemap().get(type).apply(control.getResourceDict()));
         backgroundColor.updateValue(this.control.getBackgroundRemap().get(type).apply(control.getResourceDict()));
         borderColor.updateValue(this.control.getBorderRemap().get(type).apply(control.getResourceDict()));
         textColor.updateValue(this.control.getForegroundRemap().get(type).apply(control.getResourceDict()));
