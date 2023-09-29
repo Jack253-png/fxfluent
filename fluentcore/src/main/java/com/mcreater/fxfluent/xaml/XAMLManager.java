@@ -54,9 +54,9 @@ public class XAMLManager {
         });
     }
     private static void registerAccent() {
-        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColor", UiShellWrapper::GetSystemCompositionColor));
+        globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColor", UiShellWrapper::getSystemCompositionColor));
         globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorDark1", () -> {
-            Color color = UiShellWrapper.GetSystemCompositionColor();
+            Color color = UiShellWrapper.getSystemCompositionColor();
             return Color.hsb(
                     lim(color.getHue()*0.9992+0.4584, 0, 360),
                     lim(color.getSaturation()*0.8824+0.1139, 0, 1),
@@ -65,7 +65,7 @@ public class XAMLManager {
             );
         }));
         globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorDark2", () -> {
-            Color color = UiShellWrapper.GetSystemCompositionColor();
+            Color color = UiShellWrapper.getSystemCompositionColor();
             return Color.hsb(
                     lim(color.getHue()+1.495, 0, 360),
                     lim(color.getSaturation()*0.7728+0.2247, 0, 1),
@@ -74,7 +74,7 @@ public class XAMLManager {
             );
         }));
         globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorDark3", () -> {
-            Color color = UiShellWrapper.GetSystemCompositionColor();
+            Color color = UiShellWrapper.getSystemCompositionColor();
             return Color.hsb(
                     lim(color.getHue()*1.005+0.32, 0, 360),
                     lim(color.getSaturation()*0.4227+0.5717, 0, 1),
@@ -83,7 +83,7 @@ public class XAMLManager {
             );
         }));
         globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorLight2", () -> {
-            Color color = UiShellWrapper.GetSystemCompositionColor();
+            Color color = UiShellWrapper.getSystemCompositionColor();
             return Color.hsb(
                     lim(color.getHue()*0.9699+0.05696, 0, 360),
                     lim(color.getSaturation()*0.9707-0.2644, 0, 1),
@@ -92,7 +92,7 @@ public class XAMLManager {
             );
         }));
         globalRegisteredContents.add(new DynamicColorContentTag("SystemAccentColorLight3", () -> {
-            Color color = UiShellWrapper.GetSystemCompositionColor();
+            Color color = UiShellWrapper.getSystemCompositionColor();
             return Color.hsb(
                     lim(color.getHue()*0.9488+4, 0, 360), // +8.839
                     lim(color.getSaturation()*0.5576-0.09745, 0, 1),
@@ -118,7 +118,12 @@ public class XAMLManager {
     }
 
     public static ResourceDict getCurrentDict() {
-        String key = SystemThemeLoop.getTheme() == AppColorTheme.LIGHT ? "Light" : "Default";
+        return getDict(SystemThemeLoop.getTheme());
+    }
+
+    public static ResourceDict getDict(AppColorTheme t) {
+        if (t == AppColorTheme.SYSTEM) return getCurrentDict();
+        String key = t == AppColorTheme.LIGHT ? "Light" : "Default";
         return registeredContents.getOrDefault(key, ResourceDict.createEmpty(key + " (Empty fallback)"));
     }
 

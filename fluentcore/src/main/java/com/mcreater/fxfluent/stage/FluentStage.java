@@ -1,10 +1,13 @@
 package com.mcreater.fxfluent.stage;
 
+import com.mcreater.fxfluent.controls.abstractions.SystemThemeListenable;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.stage.controls.FluentTitleBar;
+import com.mcreater.fxfluent.syslib.BackdropType;
 import com.mcreater.fxfluent.syslib.UiShellWrapper;
 import com.mcreater.fxfluent.util.NativeUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
+import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -17,14 +20,20 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 
 public class FluentStage extends Stage {
-    private UiShellWrapper.BackdropType backdropType;
+    private BackdropType backdropType;
     private Node content;
     private Pane sceneContent;
     private boolean lastApply = false;
-    private boolean isDarkMode = UiShellWrapper.GetSystemIsDark();
+    private boolean isDarkMode = UiShellWrapper.getSystemIsDark();
     private boolean isFirstInit = true;
     private boolean disableBackdrop = false;
     private boolean disableBackground = false;
+    private AppColorTheme colorThemeOverride = AppColorTheme.SYSTEM;
+
+    public void setColorThemeOverride(AppColorTheme colorThemeOverride) {
+        this.colorThemeOverride = colorThemeOverride;
+        this.applyBackdropType();
+    }
 
     public void setDisableBackdrop(boolean disableBackdrop) {
         this.disableBackdrop = disableBackdrop;
@@ -43,7 +52,7 @@ public class FluentStage extends Stage {
         init();
     }
     private void init() {
-        this.backdropType = UiShellWrapper.BackdropType.getDefault();
+        this.backdropType = BackdropType.Companion.getDefault();
         this.content = new Pane();
         this.sceneContent = new VBox();
         SystemThemeLoop.addListener(a -> this.applyBackdropType());
@@ -51,9 +60,9 @@ public class FluentStage extends Stage {
 
     /**
      * Set backdrop type of this stage (Windows only)<br>设置该窗口的背景类型 (仅 Windows)
-     * @param backdropType {@link UiShellWrapper.BackdropType}
+     * @param backdropType {@link BackdropType}
      */
-    public void setBackdropType(UiShellWrapper.BackdropType backdropType) {
+    public void setBackdropType(BackdropType backdropType) {
         this.backdropType = backdropType;
     }
 
@@ -62,20 +71,16 @@ public class FluentStage extends Stage {
      */
     public void applyBackdropType() {
         try {
-            isDarkMode = UiShellWrapper.GetSystemIsDark();
+            isDarkMode = colorThemeOverride == AppColorTheme.SYSTEM ? UiShellWrapper.getSystemIsDark() : (colorThemeOverride == AppColorTheme.DARK);
             if (!disableBackdrop) {
-                lastApply = UiShellWrapper.ApplyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
+                lastApply = UiShellWrapper.applyBlur(NativeUtil.getWindowHandle(this), backdropType, isDarkMode);
             }
             this.updateScene();
-            if (!isFirstInit) {
-                setIconified(true);
-                setIconified(false);
-            }
-            else isFirstInit = false;
+            isFirstInit = false;
         }
         catch (Exception e) {
             e.printStackTrace();
-            UiShellWrapper.NativeWarn();
+            UiShellWrapper.nativeWarn();
             lastApply = false;
         }
     }
@@ -85,8 +90,10 @@ public class FluentStage extends Stage {
      * @param content {@link Node}
      */
     public void setContent(Node content) {
-        this.content = content;
-        this.updateScene();
+        if (content instanceof SystemThemeListenable) {
+            this.content = content;
+            this.updateScene();
+        }
     }
 
     private FluentTitleBar buildTitleBar() {
@@ -106,7 +113,6 @@ public class FluentStage extends Stage {
     }
 
     private void updateScene() {
-        int i = isDarkMode ? 32 : 243;
         windowColor.updateValue(getWindowBackground());
         windowColor.property.addListener((observableValue, color, t1) -> FluentStage.this.sceneContent.setBackground(new Background(
                 new BackgroundFill(

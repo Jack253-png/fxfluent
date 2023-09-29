@@ -7,7 +7,6 @@ import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.controls.value.AnimatedValue;
 import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.sun.javafx.scene.control.skin.ToggleButtonSkin;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -42,7 +41,6 @@ public class FluentToggleButtonSkin extends ToggleButtonSkin {
                 control.disabledProperty()
         ).forEach(a -> a.addListener(this::updateState));
 
-        SystemThemeLoop.addListener(a -> this.updateComponents(state.get()));
         button.selectedProperty().addListener((NewValueListener<Boolean>) t1 -> FluentToggleButtonSkin.this.updateComponents(state.get()));
 
         CornerRadii cornerRadii = control.getCornerRadii();
@@ -77,11 +75,15 @@ public class FluentToggleButtonSkin extends ToggleButtonSkin {
     }
 
     private void updateComponents(StateType type) {
-        backgroundColor.updateValue(button.getBackgroundRemap().get(type).get());
-        foregroundColor.updateValue(button.getForegroundRemap().get(type).get());
+        backgroundColor.updateValue(button.getBackgroundRemap().get(type).apply(button.getResourceDict()));
+        foregroundColor.updateValue(button.getForegroundRemap().get(type).apply(button.getResourceDict()));
         Stream.of(
                 upBorderColor, leftBorderColor, rightBorderColor
-        ).forEach(a -> a.updateValue(button.getBorderRemap().get(StateType.PRESS).get()));
-        downBorderColor.updateValue(button.getBorderRemap().get(type).get());
+        ).forEach(a -> a.updateValue(button.getBorderRemap().get(StateType.PRESS).apply(button.getResourceDict())));
+        downBorderColor.updateValue(button.getBorderRemap().get(type).apply(button.getResourceDict()));
+    }
+
+    public void implUpdate() {
+        this.updateComponents(state.get());
     }
 }

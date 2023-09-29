@@ -4,6 +4,7 @@ plugins {
     id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
+    id 'org.jetbrains.kotlin.jvm'
 }
 
 group 'com.mcreater'
@@ -14,7 +15,7 @@ targetCompatibility = "1.9"
 
 application {
     mainClass = 'com.mcreater.fluentdemo.Main'
-    applicationDefaultJvmArgs = ["-XX:+UseZGC", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-Xmx4G"]
+    applicationDefaultJvmArgs = ["-XX:+UseZGC", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-Xmx320M"]
 }
 
 repositories {
@@ -55,6 +56,7 @@ dependencies {
     }
     implementation "net.java.dev.jna:jna:5.7.0"
     implementation "net.java.dev.jna:jna-platform:5.7.0"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 }
 
 test {
@@ -62,7 +64,7 @@ test {
 }
 
 application {
-    mainClassName = "com.mcreater.fluentdemo.Main"
+    mainClassName = "com.mcreater.fluentdemo.MainKt"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -112,5 +114,15 @@ publishing {
 
     repositories {
         maven { url uri(new File(rootProject.projectDir.getAbsolutePath(), "maven").getAbsolutePath()) }
+    }
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "1.8"
     }
 }

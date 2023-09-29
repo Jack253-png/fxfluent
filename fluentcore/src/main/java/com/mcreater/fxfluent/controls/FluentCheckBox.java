@@ -3,13 +3,17 @@ package com.mcreater.fxfluent.controls;
 import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentCheckBoxSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
+import com.mcreater.fxfluent.xaml.ResourceDict;
+import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.CornerRadii;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.CheckBox.*;
 
-public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Glyphable {
+public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Glyphable, Dictable, Themeable {
+    private AppColorTheme theme = AppColorTheme.SYSTEM;
     public FluentCheckBox() {
         init();
     }
@@ -50,5 +54,14 @@ public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgr
 
     public StateMap getGlyphRemap() {
         return GLY_KEY_MAP;
+    }
+
+    public ResourceDict getResourceDict() {
+        return XAMLManager.getDict(theme);
+    }
+
+    public void onUpdateTheme(AppColorTheme theme) {
+        this.theme = theme;
+        ((FluentCheckBoxSkin) getSkin()).implUpdate();
     }
 }

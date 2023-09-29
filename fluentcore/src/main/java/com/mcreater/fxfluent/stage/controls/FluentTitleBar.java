@@ -39,10 +39,10 @@ public class FluentTitleBar extends AnchorPane {
         maximizeButton.setGraphic(iconMax[0]);
         stage.maximizedProperty().addListener((NewValueListener<Boolean>) t1 -> {
             iconMax[0] = new FluentIcon(t1 ? '\uE923' : '\uE922');
-            iconMax[0].setTextFill(UiShellWrapper.GetSystemIsDark() ? Color.WHITE : Color.BLACK);
+            iconMax[0].setTextFill(UiShellWrapper.getSystemIsDark() ? Color.WHITE : Color.BLACK);
             maximizeButton.setGraphic(iconMax[0]);
         });
-        iconMax[0].setTextFill(UiShellWrapper.GetSystemIsDark() ? Color.WHITE : Color.BLACK);
+        iconMax[0].setTextFill(UiShellWrapper.getSystemIsDark() ? Color.WHITE : Color.BLACK);
 
         FluentWindowButton minimizeButton = new FluentWindowButton();
         minimizeButton.setOnAction(actionEvent -> stage.setIconified(true));
@@ -50,13 +50,13 @@ public class FluentTitleBar extends AnchorPane {
         AnchorPane.setRightAnchor(minimizeButton, maximizeButton.getPrefWidth() + closeButton.getPrefWidth());
         FluentIcon iconMin = new FluentIcon('\uE921');
         minimizeButton.setGraphic(iconMin);
-        iconMin.setTextFill(UiShellWrapper.GetSystemIsDark() ? Color.WHITE : Color.BLACK);
+        iconMin.setTextFill(UiShellWrapper.getSystemIsDark() ? Color.WHITE : Color.BLACK);
 
-        ImageView view = new ImageView(stage.getIcons().size() > 0 ? stage.getIcons().get(0) : null);
+        ImageView view = new ImageView(!stage.getIcons().isEmpty() ? stage.getIcons().get(0) : null);
         view.setFitWidth(16);
         view.setFitHeight(16);
         stage.getIcons().addListener((ListChangeListener<Image>) change -> {
-            if (stage.getIcons().size() > 0) view.setImage(stage.getIcons().get(0));
+            if (!stage.getIcons().isEmpty()) view.setImage(stage.getIcons().get(0));
         });
         AnchorPane.setTopAnchor(view, (50 - 16) / 2D);
         AnchorPane.setLeftAnchor(view, 16D);

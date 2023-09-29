@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.brush;
 
+import com.mcreater.fxfluent.xaml.ResourceDict;
 import com.mcreater.fxfluent.xaml.XAMLManager;
 import javafx.animation.Interpolatable;
 import javafx.scene.layout.Region;
@@ -78,5 +79,9 @@ public abstract class AbstractColorBrush implements Interpolatable<AbstractColor
 
     public static AbstractColorBrush find(String k) {
         return XAMLManager.getCurrentDict().findColorBrush(k);
+    }
+
+    public static AbstractColorBrush find(String k, ResourceDict dict) {
+        return dict.findColorBrush(k);
     }
 }

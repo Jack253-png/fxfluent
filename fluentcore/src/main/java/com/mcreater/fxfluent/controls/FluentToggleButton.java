@@ -1,11 +1,11 @@
 package com.mcreater.fxfluent.controls;
 
-import com.mcreater.fxfluent.controls.abstractions.Backgroundable;
-import com.mcreater.fxfluent.controls.abstractions.Borderable;
-import com.mcreater.fxfluent.controls.abstractions.CornerRadiusable;
-import com.mcreater.fxfluent.controls.abstractions.Foregroundable;
+import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentToggleButtonSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
+import com.mcreater.fxfluent.xaml.ResourceDict;
+import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.scene.Node;
 import javafx.scene.control.Skin;
 import javafx.scene.control.ToggleButton;
@@ -13,7 +13,8 @@ import javafx.scene.layout.CornerRadii;
 
 import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.*;
 
-public class FluentToggleButton extends ToggleButton implements CornerRadiusable, Backgroundable, Foregroundable, Borderable {
+public class FluentToggleButton extends ToggleButton implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable, Themeable {
+    private AppColorTheme theme = AppColorTheme.SYSTEM;
     public FluentToggleButton() {
         init();
     }
@@ -51,5 +52,14 @@ public class FluentToggleButton extends ToggleButton implements CornerRadiusable
 
     public StateMap getForegroundRemap() {
         return isSelected() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP;
+    }
+
+    public ResourceDict getResourceDict() {
+        return XAMLManager.getDict(theme);
+    }
+
+    public void onUpdateTheme(AppColorTheme theme) {
+        this.theme = theme;
+        ((FluentToggleButtonSkin) getSkin()).implUpdate();
     }
 }

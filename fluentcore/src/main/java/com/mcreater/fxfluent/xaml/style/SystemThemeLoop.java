@@ -9,16 +9,16 @@ import java.util.Vector;
 import java.util.function.Consumer;
 
 public class SystemThemeLoop {
-    private static AppColorTheme theme = UiShellWrapper.GetSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
+    private static AppColorTheme theme = UiShellWrapper.getSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
     private static AppColorTheme predictedTheme = AppColorTheme.SYSTEM;
-    private static Color systemAccentColor = UiShellWrapper.GetSystemCompositionColor();
+    private static Color systemAccentColor = UiShellWrapper.getSystemCompositionColor();
 
     public static void setPredictedTheme(AppColorTheme predictedTheme) {
         SystemThemeLoop.predictedTheme = predictedTheme;
     }
 
     private static boolean transparencyEnabled = false;
-    private static List<Consumer<AppColorTheme>> listeners = new Vector<>();
+    private static final List<Consumer<AppColorTheme>> listeners = new Vector<>();
     public static AppColorTheme getTheme() {
         return theme;
     }
@@ -33,7 +33,7 @@ public class SystemThemeLoop {
         new Thread("System theme detect thread") {
             public void run() {
                 while (true) {
-                    AppColorTheme theme1 = UiShellWrapper.GetSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
+                    AppColorTheme theme1 = UiShellWrapper.getSystemIsDark() ? AppColorTheme.DARK : AppColorTheme.LIGHT;
                     if (predictedTheme == AppColorTheme.SYSTEM) {
                         if (theme1 != theme) {
                             theme = theme1;
@@ -44,13 +44,13 @@ public class SystemThemeLoop {
                         theme = predictedTheme;
                         listeners.forEach(a -> Platform.runLater(() -> a.accept(theme)));
                     }
-                    Color systemAccentColor2 = UiShellWrapper.GetSystemCompositionColor();
+                    Color systemAccentColor2 = UiShellWrapper.getSystemCompositionColor();
                     if (!systemAccentColor2.equals(systemAccentColor)) {
                         systemAccentColor = systemAccentColor2;
                         listeners.forEach(a -> Platform.runLater(() -> a.accept(theme)));
                     }
 
-                    boolean tra = UiShellWrapper.GetSystemTransparencyEnabled();
+                    boolean tra = UiShellWrapper.getSystemTransparencyEnabled();
                     if (tra != transparencyEnabled) {
                         transparencyEnabled = tra;
                         listeners.forEach(a -> Platform.runLater(() -> a.accept(theme)));

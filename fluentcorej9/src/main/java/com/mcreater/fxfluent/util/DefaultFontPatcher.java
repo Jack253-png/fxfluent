@@ -18,5 +18,6 @@ public class DefaultFontPatcher {
         Field field = Font.class.getDeclaredField("DEFAULT");
         field.setAccessible(true);
         field.set(null, font);
+
     }
 }

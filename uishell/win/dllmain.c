@@ -7,11 +7,11 @@
 #include <stdlib.h>
 #include <wingdi.h>
 
-DLLIMPORT void NativeWarningReflect() {
-    MessageBox(0, "Reflect failed, please check your console for resolution. \n", "Reflect failed", MB_ICONWARNING);
+DLLIMPORT void implNativeWarning() {
+    MessageBox(0, "Backdrop set failed, please check your console for resolution. \n", "Backdrop setting failed", MB_ICONWARNING);
 }
 
-DLLIMPORT DWORD GetCompositionColor() {
+DLLIMPORT DWORD implGetCompositionColor() {
   DWORD color = 0;
   BOOL opaque = FALSE;
   
@@ -41,7 +41,7 @@ DLLIMPORT DWORD GetCompositionColor() {
   }
 }
 
-DLLIMPORT BOOL GetThemeIsDark() {
+DLLIMPORT BOOL implGetThemeIsDark() {
     HKEY hk;
     LONG lReturn = RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", 0, KEY_READ, &hk);
     if (ERROR_SUCCESS == lReturn) {
@@ -54,7 +54,7 @@ DLLIMPORT BOOL GetThemeIsDark() {
     return TRUE;
 }
 
-DLLIMPORT BOOL GetTransparencyEnabled() {
+DLLIMPORT BOOL implGetTransparencyEnabled() {
     HKEY hk;
     LONG lReturn = RegOpenKeyEx(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Themes\\Personalize", 0, KEY_READ, &hk);
     if (ERROR_SUCCESS == lReturn) {
@@ -67,7 +67,7 @@ DLLIMPORT BOOL GetTransparencyEnabled() {
     return TRUE;
 }
 
-DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType, BOOL isDark) {
+DLLIMPORT BOOL implApplyBlur(HWND hwnd, DWORD blurType, BOOL isDark) {
   OSVERSIONINFOEX osver;
   osver.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
   if (!GetVersionEx((LPOSVERSIONINFOA)&osver)) {
@@ -105,7 +105,7 @@ DLLIMPORT BOOL ApplyBlur(HWND hwnd, DWORD blurType, BOOL isDark) {
   return TRUE;
 }
 
-DLLIMPORT BOOL SetWindowRadius(HWND hwnd, DWORD radius) {
+DLLIMPORT BOOL implSetWindowRadius(HWND hwnd, DWORD radius) {
 	RECT m_rc;
 	GetWindowRect(hwnd, &m_rc);
     /*HRGN m_rgn = CreateRoundRectRgn(m_rc.left, m_rc.top, m_rc.right, m_rc.bottom, radius, radius);
@@ -115,7 +115,7 @@ DLLIMPORT BOOL SetWindowRadius(HWND hwnd, DWORD radius) {
     SetWindowRgn(hwnd, m_rgn, TRUE);
 }
 
-DLLIMPORT BOOL IsWindows11() {
+DLLIMPORT BOOL implIsWindows11() {
     OSVERSIONINFOEX osver;
     osver.dwOSVersionInfoSize = sizeof(OSVERSIONINFOEX);
     if (!GetVersionEx((LPOSVERSIONINFOA)&osver)) {
@@ -125,7 +125,7 @@ DLLIMPORT BOOL IsWindows11() {
     return build >= 22621;
 }
 
-DLLIMPORT void SetWindowIsDark(HWND hwnd, BOOL isDark) {
+DLLIMPORT void implSetWindowIsDark(HWND hwnd, BOOL isDark) {
     WindowImmersiveDarkModeFast(hwnd, isDark);
 }
 

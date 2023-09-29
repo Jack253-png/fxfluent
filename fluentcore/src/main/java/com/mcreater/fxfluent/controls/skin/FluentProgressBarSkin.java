@@ -6,7 +6,6 @@ import com.mcreater.fxfluent.util.BrushUtil;
 import com.mcreater.fxfluent.util.ControlUtil;
 import com.mcreater.fxfluent.util.interpolatables.Interpolators;
 import com.mcreater.fxfluent.util.listeners.NewValueListener;
-import com.mcreater.fxfluent.xaml.style.SystemThemeLoop;
 import com.sun.javafx.scene.control.skin.ProgressBarSkin;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -28,7 +27,6 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
     public FluentProgressBarSkin(FluentProgressBar progressBar) {
         super(progressBar);
         bar = progressBar;
-        SystemThemeLoop.addListener(a -> this.updateComponents());
         progressBar.progressProperty().addListener((NewValueListener<Number>) t1 -> updateComponents());
         progressBar.indeterminateState().addListener((NewValueListener<FluentProgressBar.IndeterminateState>) t1 -> updateComponents());
         progressBar.indeterminateProperty().addListener((NewValueListener<Boolean>) t1 -> updateComponents());
@@ -71,11 +69,11 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                     break;
             }
         }
-        bar.getBackgroundRemap().get(!bar.isIndeterminate() ? StateType.NONE : StateType.HOVER).get().accept(
+        bar.getBackgroundRemap().get(!bar.isIndeterminate() ? StateType.NONE : StateType.HOVER).apply(bar.getResourceDict()).accept(
                 getTrack(),
                 BrushUtil.backgroundFill(CornerRadii.EMPTY)
         );
-        bar.getForegroundRemap().get(fg).get().accept(
+        bar.getForegroundRemap().get(fg).apply(bar.getResourceDict()).accept(
                 internalBar,
                 BrushUtil.backgroundFill(new CornerRadii(3))
         );
@@ -129,7 +127,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 )
                         ),
                         new KeyFrame(
-                                Duration.millis(2050),
+                                Duration.millis(2250),
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth() + 60,
@@ -137,7 +135,7 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
                                 )
                         ),
                         new KeyFrame(
-                                Duration.millis(2500),
+                                Duration.millis(2600),
                                 new KeyValue(
                                         internalBar.translateXProperty(),
                                         bar.getWidth() + 60,
@@ -206,5 +204,9 @@ public class FluentProgressBarSkin extends ProgressBarSkin {
         getTrack().resizeRelocate(x, y + 1, w, 1);
         internalBarClip.resizeRelocate(0, 0, w, 3);
         layoutInternalBar(x, y);
+    }
+
+    public void implUpdate() {
+        this.updateComponents();
     }
 }
