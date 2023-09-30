@@ -26,17 +26,12 @@ class FluentProgressBar : ProgressBar, Backgroundable, Foregroundable, Dictable,
         ERROR
     }
 
-    private val indeterminateState: ObjectProperty<IndeterminateState> = SimpleObjectProperty(IndeterminateState.NORMAL)
-    fun indeterminateState(): ObjectProperty<IndeterminateState> {
-        return indeterminateState
-    }
-
-    fun getIndeterminateState(): IndeterminateState {
-        return indeterminateState().get()
-    }
-
-    fun setIndeterminateState(state: IndeterminateState) {
-        indeterminateState().set(state)
+    private val indeterminateStateProperty: ObjectProperty<IndeterminateState> = SimpleObjectProperty(IndeterminateState.NORMAL)
+    var indeterminateState: IndeterminateState
+        get() = indeterminateStateProperty.get()
+        set(value) = indeterminateStateProperty.set(value)
+    fun indeterminateStateProperty(): ObjectProperty<IndeterminateState> {
+        return indeterminateStateProperty
     }
 
     constructor() {

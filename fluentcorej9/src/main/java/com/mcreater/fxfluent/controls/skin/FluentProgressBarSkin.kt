@@ -27,7 +27,7 @@ class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSki
 
     init {
         bar.progressProperty().addListener(NewValueListener { updateComponents() })
-        bar.indeterminateState().addListener(NewValueListener { updateComponents() })
+        bar.indeterminateStateProperty().addListener(NewValueListener { updateComponents() })
         bar.indeterminateProperty().addListener(NewValueListener { updateComponents() })
         bar.widthProperty().addListener(NewValueListener { updateComponents() })
         bar.layoutXProperty().addListener(NewValueListener { updateComponents() })
@@ -60,7 +60,7 @@ class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSki
     private fun updateComponents() {
         var fg = StateType.NONE
         if (bar.isIndeterminate) {
-            when (bar.getIndeterminateState()) {
+            when (bar.indeterminateState) {
                 FluentProgressBar.IndeterminateState.PAUSE -> fg = StateType.FOCUS
                 FluentProgressBar.IndeterminateState.ERROR -> fg = StateType.HOVER
                 FluentProgressBar.IndeterminateState.NORMAL -> {}
@@ -82,7 +82,7 @@ class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSki
             internalBar.scaleX = 1.0
         }
         if (bar.isIndeterminate) {
-            if (bar.getIndeterminateState() === FluentProgressBar.IndeterminateState.NORMAL) {
+            if (bar.indeterminateState === FluentProgressBar.IndeterminateState.NORMAL) {
                 normalIndeterminateAnimation = Timeline(
                     KeyFrame(
                         Duration.ZERO,
@@ -192,7 +192,7 @@ class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSki
     }
 
     private fun layoutInternalBar(x: Double, y: Double) {
-        if (!bar.isIndeterminate || bar.getIndeterminateState() === FluentProgressBar.IndeterminateState.NORMAL) internalBar.resizeRelocate(
+        if (!bar.isIndeterminate || bar.indeterminateState === FluentProgressBar.IndeterminateState.NORMAL) internalBar.resizeRelocate(
             x,
             y,
             getBar()!!.width,
