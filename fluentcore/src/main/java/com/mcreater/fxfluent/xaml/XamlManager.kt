@@ -136,7 +136,7 @@ class XamlManager {
                     })
                 root.elements().stream().filter { a: Element -> a.name == "String" }.forEach { element: Element? ->
                     globalRegisteredContents.add(
-                        AbstractContentTag.create(globalRegisteredContents, element!!) as AbstractContentTag<out Any>
+                        AbstractContentTag.create(globalRegisteredContents, element!!)!! as AbstractContentTag<out Any>
                     )
                 }
             }
