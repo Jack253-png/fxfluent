@@ -110,7 +110,7 @@ class FluentCheckBoxSkin(private val control: FluentCheckBox) : CheckBoxSkin(con
     }
 
     val markColor: Paint
-        get() = this.control.glyphRemap[state.get()]!!.apply(control.resourceDict)!!.getPaint()
+        get() = this.control.glyphRemap[state.get()]!!.apply(control.resourceDict)!!.getPaint()!!
 
     fun implUpdate() {
         updateComponents(state.get())

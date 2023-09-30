@@ -1,8 +1,8 @@
 package com.mcreater.fxfluent.controls.value
 
-import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.xaml.ResourceDict
+import com.mcreater.fxfluent.xaml.XamlManager
 import java.util.function.Function
 
 
@@ -13,35 +13,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBackground",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBackground",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBackgroundPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBackgroundPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBackgroundDisabled",
                                 d
                             )
@@ -52,35 +52,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBackground",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBackground",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBackgroundPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBackgroundPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBackgroundDisabled",
                                 d
                             )
@@ -91,35 +91,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonForeground",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonForeground",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonForegroundPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonForegroundPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonForegroundDisabled",
                                 d
                             )
@@ -130,35 +130,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonForeground",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonForeground",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonForegroundPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonForegroundPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonForegroundDisabled",
                                 d
                             )
@@ -169,35 +169,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBorderBrush",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBorderBrush",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBorderBrushPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBorderBrushPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ButtonBorderBrushDisabled",
                                 d
                             )
@@ -208,35 +208,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBorderBrush",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBorderBrush",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBorderBrushPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBorderBrushPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentButtonBorderBrushDisabled",
                                 d
                             )
@@ -252,35 +252,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillUnchecked",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillUnchecked",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillUncheckedPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillUncheckedPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillUncheckedDisabled",
                                 d
                             )
@@ -291,35 +291,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillChecked",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillChecked",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillCheckedPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillCheckedPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundFillCheckedDisabled",
                                 d
                             )
@@ -330,35 +330,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeUnchecked",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeUnchecked",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeUncheckedPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeUncheckedPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeUncheckedDisabled",
                                 d
                             )
@@ -369,35 +369,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeChecked",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeChecked",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeCheckedPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeCheckedPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckBackgroundStrokeCheckedDisabled",
                                 d
                             )
@@ -408,35 +408,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxForegroundUnchecked",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxForegroundUnchecked",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxForegroundUncheckedPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxForegroundUncheckedPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxForegroundUncheckedDisabled",
                                 d
                             )
@@ -447,35 +447,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckGlyphForegroundUnchecked",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckGlyphForegroundUnchecked",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckGlyphForegroundUncheckedPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckGlyphForegroundUncheckedPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "CheckBoxCheckGlyphForegroundUncheckedDisabled",
                                 d
                             )
@@ -491,35 +491,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonBackground",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonBackground",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonBackgroundPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonBackgroundPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonBackgroundDisabled",
                                 d
                             )
@@ -530,35 +530,35 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonForeground",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonForeground",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonForegroundPointerOver",
                                 d
                             )
                         })
                     put(StateType.PRESS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonForegroundPressed",
                                 d
                             )
                         })
                     put(StateType.DISABLE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "HyperlinkButtonForegroundDisabled",
                                 d
                             )
@@ -574,14 +574,14 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "SystemFillColorNeutralBrush",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "ControlFillColorTransparentBrush",
                                 d
                             )
@@ -592,21 +592,21 @@ class ControlMaps {
                 init {
                     put(StateType.NONE,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "AccentFillColorDefaultBrush",
                                 d
                             )
                         })
                     put(StateType.FOCUS,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "SystemFillColorCautionBrush",
                                 d
                             )
                         })
                     put(StateType.HOVER,
                         Function { d: ResourceDict? ->
-                            AbstractColorBrush.find(
+                            XamlManager.find(
                                 "SystemFillColorCriticalBrush",
                                 d
                             )

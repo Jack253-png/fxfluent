@@ -1,5 +1,6 @@
 package com.mcreater.fxfluent.xaml
 
+import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.syslib.UiShellWrapper.Companion.getSystemCompositionColor
 import com.mcreater.fxfluent.util.NumberUtil.Companion.lim
 import com.mcreater.fxfluent.xaml.ResourceDict.Companion.createEmpty
@@ -169,6 +170,14 @@ class XamlManager {
         @JvmStatic
         fun getAll(): Map<String, ResourceDict> {
             return registeredContents
+        }
+        @JvmStatic
+        fun find(k: String?): AbstractColorBrush {
+            return getCurrentDict().findColorBrush(k!!)
+        }
+        @JvmStatic
+        fun find(k: String, dict: ResourceDict?): AbstractColorBrush {
+            return dict!!.findColorBrush(k)
         }
     }
 }

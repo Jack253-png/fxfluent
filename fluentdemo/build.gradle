@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'maven-publish'
+    id 'application'
     id 'org.openjfx.javafxplugin' version '0.0.10'
     id 'org.beryx.jlink' version '2.24.1'
     id 'org.jetbrains.kotlin.jvm'
@@ -20,6 +21,11 @@ repositories {
     maven { url = "https://maven.aliyun.com/repository/central" }
     maven { url 'https://mvnrepository.com/artifact/' }
     maven { url 'https://jitpack.io/' }
+}
+
+application {
+    mainClass = 'com.mcreater.fluentdemo.Main'
+    applicationDefaultJvmArgs = ["-XX:+UseZGC", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-Xmx320M"]
 }
 
 javafx {
