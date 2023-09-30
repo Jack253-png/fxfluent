@@ -138,7 +138,7 @@ class FluentStage(style: StageStyle) : Stage(style) {
         maximizedProperty().addListener(NewValueListener { t1: Boolean ->
             rectangle.arcWidth = (if (t1) 0 else 15).toDouble()
             rectangle.arcHeight = (if (t1) 0 else 15).toDouble()
-        } as NewValueListener<Boolean>)
+        })
         sceneContent!!.clip = rectangle
         titleBar.prefWidthProperty().bind(widthProperty())
         sceneContent!!.prefWidthProperty().bind(widthProperty())

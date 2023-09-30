@@ -45,52 +45,23 @@ class FluentCheckBoxSkin(private val control: FluentCheckBox) : CheckBoxSkin(con
             }
         }
         state.addListener(NewValueListener { updateComponents(it) })
-        this.control.selectedProperty().addListener(NewValueListener {
-            updateComponents(
-                state.get()
-            )
-        })
-        this.control.indeterminateProperty().addListener(NewValueListener {
-            updateComponents(
-                state.get()
-            )
-        })
-        this.control.allowIndeterminateProperty().addListener(NewValueListener {
-            updateComponents(
-                state.get()
-            )
-        })
+        this.control.selectedProperty().addListener(NewValueListener { updateComponents(state.get()) })
+        this.control.indeterminateProperty().addListener(NewValueListener { updateComponents(state.get()) })
+        this.control.allowIndeterminateProperty().addListener(NewValueListener { updateComponents(state.get()) })
         val cornerRadii = control.cornerRadii
         backgroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    internalBox,
-                    backgroundFill(cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(internalBox, backgroundFill(cornerRadii)) }
         )
         textColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    this.control,
-                    textFill()
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(this.control, textFill()) }
         )
         borderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    internalBox, borderFill(
-                        null,
-                        cornerRadii
-                    )
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(internalBox, borderFill(null, cornerRadii)) }
         )
         mark = CheckBoxCheckMark(this)
         internalBox!!.children.add(mark)
         control.selectedProperty()
-            .addListener(NewValueListener { t1: Boolean -> if (t1) mark.startInAnimate() else mark.startOutAnimate() } as NewValueListener<Boolean>)
+            .addListener(NewValueListener { if (it) mark.startInAnimate() else mark.startOutAnimate() })
         updateState()
         updateComponents(state.get())
     }

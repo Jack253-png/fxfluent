@@ -38,7 +38,7 @@ class FluentButtonSkin(private val button: FluentButton) : ButtonSkin(button) {
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(83.0))
 
     init {
-        Stream.of<ReadOnlyBooleanProperty>(
+        Stream.of(
             button.hoverProperty(),
             button.pressedProperty(),
             button.focusedProperty(),
@@ -54,54 +54,24 @@ class FluentButtonSkin(private val button: FluentButton) : ButtonSkin(button) {
             )
         })
         val cornerRadii = button.cornerRadii
-        state.addListener(NewValueListener<StateType?> { updateComponents(it) })
+        state.addListener(NewValueListener { updateComponents(it!!) })
         backgroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    backgroundFill(cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, backgroundFill(cornerRadii)) }
         )
         foregroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    textFill()
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, textFill()) }
         )
         upBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    borderFill(BrushUtil.BorderOrientation.TOP, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.TOP, cornerRadii)) }
         )
         downBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    borderFill(BrushUtil.BorderOrientation.BOTTOM, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.BOTTOM, cornerRadii)) }
         )
         leftBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    borderFill(BrushUtil.BorderOrientation.LEFT, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.LEFT, cornerRadii)) }
         )
         rightBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    borderFill(BrushUtil.BorderOrientation.RIGHT, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.RIGHT, cornerRadii)) }
         )
         updateState()
         updateComponents(state.get()!!)

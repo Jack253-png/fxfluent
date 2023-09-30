@@ -7,12 +7,12 @@ import org.dom4j.Element
 abstract class SimpleContentTag<T> : AbstractContentTag<T> {
     protected var element: Element? = null
     var dict: ResourceDict? = null
-    override fun writeElement(element: Element): SimpleContentTag<T> {
+    override fun writeElement(element: Element?): SimpleContentTag<T> {
         this.element = element
         return this
     }
 
-    override fun setResourceDict(dict: ResourceDict): SimpleContentTag<T> {
+    override fun setResourceDict(dict: ResourceDict?): SimpleContentTag<T> {
         this.dict = dict
         return this
     }
