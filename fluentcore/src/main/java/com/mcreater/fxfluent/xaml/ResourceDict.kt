@@ -20,7 +20,7 @@ class ResourceDict(name: String?): Vector<AbstractContentTag<out Any>>() {
 
     fun <T : AbstractContentTag<*>?> foundTag(key: String, clazz: Class<T>?): T? {
         for (abstractContentTag in this) {
-            if (abstractContentTag.key == key) {
+            if (abstractContentTag.getKey() == key) {
                 return if (abstractContentTag is StaticResourceRedirectContentTag) foundTag(
                     abstractContentTag.toObject(),
                     clazz

@@ -51,7 +51,7 @@ class XamlManager {
 
         @JvmStatic
         fun parse() {
-            registeredContents.values.forEach(Consumer { obj: ResourceDict -> obj.clear() })
+            registeredContents.values.forEach(Consumer { it.clear() })
             registeredContents.clear()
             globalRegisteredContents.clear()
             registerAccent()
@@ -136,7 +136,7 @@ class XamlManager {
                     })
                 root.elements().stream().filter { a: Element -> a.name == "String" }.forEach { element: Element? ->
                     globalRegisteredContents.add(
-                        AbstractContentTag.create(globalRegisteredContents, element)
+                        AbstractContentTag.create(globalRegisteredContents, element!!) as AbstractContentTag<out Any>
                     )
                 }
             }
@@ -147,7 +147,7 @@ class XamlManager {
             if (!registeredContents.containsKey(dict)) registeredContents[dict] =
                 createEmpty(dict)
             Optional.ofNullable(AbstractContentTag.create(registeredContents[dict], subEle))
-                .ifPresent { registeredContents[dict]!!.add(it) }
+                .ifPresent { registeredContents[dict]!!.add(it as AbstractContentTag<out Any>) }
         }
 
         @JvmStatic

@@ -40,23 +40,13 @@ class FluentHyperlinkButtonSkin(private val button: FluentHyperlinkButton) : Hyp
                 updateState()
             }
         }
-        state.addListener(NewValueListener<StateType?> { updateComponents(it) })
+        state.addListener(NewValueListener { updateComponents(it!!) })
         val cornerRadii = button.cornerRadii
         backgroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    backgroundFill(cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, backgroundFill(cornerRadii)) }
         )
         foregroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    textFill()
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, textFill()) }
         )
         updateState()
         updateComponents(state.get()!!)

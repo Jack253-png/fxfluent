@@ -7,6 +7,9 @@ import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil
 import com.mcreater.fxfluent.controls.value.AnimatedValue
 import com.mcreater.fxfluent.util.BrushUtil
+import com.mcreater.fxfluent.util.BrushUtil.Companion.backgroundFill
+import com.mcreater.fxfluent.util.BrushUtil.Companion.borderFill
+import com.mcreater.fxfluent.util.BrushUtil.Companion.textFill
 import com.mcreater.fxfluent.util.listeners.NewValueListener
 import javafx.beans.property.ObjectProperty
 import javafx.beans.property.ReadOnlyBooleanProperty
@@ -52,54 +55,24 @@ class FluentToggleButtonSkin(private val button: FluentToggleButton) : ToggleBut
             )
         })
         val cornerRadii = button.cornerRadii
-        state.addListener(NewValueListener<StateType?> { updateComponents(it) })
+        state.addListener(NewValueListener<StateType?> { updateComponents(it!!) })
         backgroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    BrushUtil.backgroundFill(cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, backgroundFill(cornerRadii)) }
         )
         foregroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    BrushUtil.textFill()
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, textFill()) }
         )
         upBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    BrushUtil.borderFill(BrushUtil.BorderOrientation.TOP, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.TOP, cornerRadii)) }
         )
         downBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    BrushUtil.borderFill(BrushUtil.BorderOrientation.BOTTOM, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.BOTTOM, cornerRadii)) }
         )
         leftBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    BrushUtil.borderFill(BrushUtil.BorderOrientation.LEFT, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.LEFT, cornerRadii)) }
         )
         rightBorderColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    button,
-                    BrushUtil.borderFill(BrushUtil.BorderOrientation.RIGHT, cornerRadii)
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(button, borderFill(BrushUtil.BorderOrientation.RIGHT, cornerRadii)) }
         )
         updateState()
         updateComponents(state.get()!!)

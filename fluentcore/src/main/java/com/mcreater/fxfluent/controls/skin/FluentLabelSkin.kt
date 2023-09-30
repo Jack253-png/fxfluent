@@ -18,12 +18,7 @@ class FluentLabelSkin(private val label: FluentLabel) : LabelSkin(label) {
 
     init {
         foregroundColor.property.addListener(
-            NewValueListener { newValue: AbstractColorBrush ->
-                newValue.accept(
-                    label,
-                    textFill()
-                )
-            } as NewValueListener<AbstractColorBrush>
+            NewValueListener { it.accept(label, textFill()) }
         )
     }
 
