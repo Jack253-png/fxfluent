@@ -7,12 +7,16 @@ import javafx.scene.layout.GridPane
 
 open class FluentGridPane : GridPane, SystemThemeListenable {
     constructor() {
-        init()
+        initialize()
     }
 
     constructor(vararg var1: Node?) {
         children.addAll(*var1)
-        init()
+        initialize()
+    }
+
+    private fun initialize() {
+        super.init()
     }
 
     override fun getNode(): Collection<Node> {
