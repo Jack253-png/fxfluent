@@ -1,0 +1,40 @@
+package com.mcreater.fxfluent.controls.skin
+
+import com.mcreater.fxfluent.brush.AbstractColorBrush
+import com.mcreater.fxfluent.brush.SolidColorBrush
+import com.mcreater.fxfluent.controls.FluentLabel
+import com.mcreater.fxfluent.controls.state.StateType
+import com.mcreater.fxfluent.controls.value.AnimatedValue
+import com.mcreater.fxfluent.util.BrushUtil.Companion.textFill
+import com.mcreater.fxfluent.util.listeners.NewValueListener
+import javafx.scene.control.skin.LabelSkin
+import javafx.scene.paint.Color
+import javafx.util.Duration
+
+
+class FluentLabelSkin(private val label: FluentLabel) : LabelSkin(label) {
+    private val foregroundColor =
+        AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(42.0))
+
+    init {
+        foregroundColor.property.addListener(
+            NewValueListener { newValue: AbstractColorBrush ->
+                newValue.accept(
+                    label,
+                    textFill()
+                )
+            } as NewValueListener<AbstractColorBrush>
+        )
+    }
+
+    private fun updateComponents() {
+        foregroundColor.updateValue(
+            label.foregroundRemap[StateType.NONE]!!.apply(label.resourceDict)!!
+        )
+    }
+
+    fun implUpdate() {
+        updateComponents()
+    }
+}
+
