@@ -29,16 +29,8 @@ class CheckBoxCheckMark(private val skin: FluentCheckBoxSkin) : Pane() {
     private var outAnimation = Timeline()
 
     init {
-        skin.internalBox.widthProperty().addListener(NewValueListener {
-            updateSize(
-                skin.internalBox
-            )
-        })
-        skin.internalBox.heightProperty().addListener(NewValueListener {
-            updateSize(
-                skin.internalBox
-            )
-        })
+        skin.internalBox?.widthProperty()?.addListener(NewValueListener { updateSize(skin.internalBox!!) })
+        skin.internalBox?.heightProperty()?.addListener(NewValueListener { updateSize(skin.internalBox!!) })
         skin.skinnable.indeterminateProperty().addListener(NewValueListener { onUpdateComponent() })
     }
 

@@ -33,7 +33,7 @@ class FluentCloseButton: Button() {
         ).forEach { a: ReadOnlyBooleanProperty ->
             a.addListener(
                 NewValueListener {
-                    when (StateUtil.genState(isDisabled, isHover, isPressed, isFocused)!!) {
+                    when (StateUtil.genState(isDisabled, isHover, isPressed, isFocused)) {
                         StateType.FOCUS, StateType.NONE -> icon!!.textFill =
                             if (SystemThemeLoop.isDark()) Color.WHITE else Color.BLACK
 
