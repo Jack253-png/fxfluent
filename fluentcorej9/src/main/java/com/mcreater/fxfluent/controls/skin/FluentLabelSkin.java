@@ -18,7 +18,7 @@ public class FluentLabelSkin extends LabelSkin {
         super(label);
         this.label = label;
 
-        foregroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        foregroundColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.label, BrushUtil.textFill())
         );
     }

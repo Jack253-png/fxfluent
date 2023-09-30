@@ -11,7 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.CornerRadii;
 
-import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.*;
+import static com.mcreater.fxfluent.controls.value.ControlMaps.Button.Companion;
 
 public class FluentButton extends Button implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable, Themeable {
     private AppColorTheme theme = AppColorTheme.SYSTEM;
@@ -44,15 +44,15 @@ public class FluentButton extends Button implements CornerRadiusable, Background
     }
 
     public StateMap getBackgroundRemap() {
-        return isDefaultButton() ? BG_ACCENT_KEY_MAP : BG_KEY_MAP;
+        return isDefaultButton() ? Companion.getBG_ACCENT_KEY_MAP() : Companion.getBG_KEY_MAP();
     }
 
     public StateMap getForegroundRemap() {
-        return isDefaultButton() ? FG_ACCENT_KEY_MAP : FG_KEY_MAP;
+        return isDefaultButton() ? Companion.getFG_ACCENT_KEY_MAP() : Companion.getFG_KEY_MAP();
     }
 
     public StateMap getBorderRemap() {
-        return isDefaultButton() ? BRD_BOTTOM_ACCENT_KEY_MAP : BRD_BOTTOM_KEY_MAP;
+        return isDefaultButton() ? Companion.getBRD_BOTTOM_ACCENT_KEY_MAP() : Companion.getBRD_BOTTOM_KEY_MAP();
     }
 
     public ResourceDict getResourceDict() {

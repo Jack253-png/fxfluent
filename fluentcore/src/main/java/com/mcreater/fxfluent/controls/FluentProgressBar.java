@@ -14,8 +14,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.Skin;
 
-import static com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.BG_KEY_MAP;
-import static com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.FG_KEY_MAP;
+import static com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.Companion;
 
 public class FluentProgressBar extends ProgressBar implements Backgroundable, Foregroundable, Dictable, Themeable {
     private AppColorTheme theme = AppColorTheme.SYSTEM;
@@ -56,11 +55,11 @@ public class FluentProgressBar extends ProgressBar implements Backgroundable, Fo
     }
 
     public StateMap getBackgroundRemap() {
-        return BG_KEY_MAP;
+        return Companion.getBG_KEY_MAP();
     }
 
     public StateMap getForegroundRemap() {
-        return FG_KEY_MAP;
+        return Companion.getFG_KEY_MAP();
     }
 
     public ResourceDict getResourceDict() {

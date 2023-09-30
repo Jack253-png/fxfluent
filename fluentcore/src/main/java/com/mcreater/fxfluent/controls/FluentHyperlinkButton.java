@@ -11,8 +11,7 @@ import javafx.scene.control.Hyperlink;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.CornerRadii;
 
-import static com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.BG_KEY_MAP;
-import static com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.FG_KEY_MAP;
+import static com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.Companion;
 
 public class FluentHyperlinkButton extends Hyperlink implements CornerRadiusable, Backgroundable, Foregroundable, Dictable, Themeable {
     private AppColorTheme theme = AppColorTheme.SYSTEM;
@@ -38,11 +37,11 @@ public class FluentHyperlinkButton extends Hyperlink implements CornerRadiusable
     }
 
     public StateMap getBackgroundRemap() {
-        return BG_KEY_MAP;
+        return Companion.getBG_KEY_MAP();
     }
 
     public StateMap getForegroundRemap() {
-        return FG_KEY_MAP;
+        return Companion.getFG_KEY_MAP();
     }
 
     protected Skin<?> createDefaultSkin() {

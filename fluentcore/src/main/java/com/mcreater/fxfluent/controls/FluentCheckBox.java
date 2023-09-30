@@ -10,7 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
 import javafx.scene.layout.CornerRadii;
 
-import static com.mcreater.fxfluent.controls.value.ControlMaps.CheckBox.*;
+import static com.mcreater.fxfluent.controls.value.ControlMaps.CheckBox.Companion;
 
 public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgroundable, Foregroundable, Borderable, Glyphable, Dictable, Themeable {
     private AppColorTheme theme = AppColorTheme.SYSTEM;
@@ -41,19 +41,19 @@ public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgr
 
     public StateMap getBackgroundRemap() {
 
-        return isSelected() || isIndeterminate() ? BG_PRESSED_KEY_MAP : BG_KEY_MAP;
+        return isSelected() || isIndeterminate() ? Companion.getBG_PRESSED_KEY_MAP() : Companion.getBG_KEY_MAP();
     }
 
     public StateMap getBorderRemap() {
-        return isSelected() || isIndeterminate() ? BRD_PRESSED_KEY_MAP : BRD_KEY_MAP;
+        return isSelected() || isIndeterminate() ? Companion.getBRD_PRESSED_KEY_MAP() : Companion.getBRD_KEY_MAP();
     }
 
     public StateMap getForegroundRemap() {
-        return FG_KEY_MAP;
+        return Companion.getFG_KEY_MAP();
     }
 
     public StateMap getGlyphRemap() {
-        return GLY_KEY_MAP;
+        return Companion.getGLY_KEY_MAP();
     }
 
     public ResourceDict getResourceDict() {

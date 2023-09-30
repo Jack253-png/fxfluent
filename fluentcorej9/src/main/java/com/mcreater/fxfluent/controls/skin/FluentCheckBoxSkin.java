@@ -46,13 +46,13 @@ public class FluentCheckBoxSkin extends CheckBoxSkin {
 
         CornerRadii cornerRadii = control.getCornerRadii();
 
-        backgroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        backgroundColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(getInternalBox(), BrushUtil.backgroundFill(cornerRadii))
         );
-        textColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        textColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.control, BrushUtil.textFill())
         );
-        borderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        borderColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(getInternalBox(), BrushUtil.borderFill(
                         null,
                         cornerRadii

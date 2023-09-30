@@ -37,10 +37,10 @@ public class FluentHyperlinkButtonSkin extends HyperlinkSkin {
 
         state.addListener((NewValueListener<StateType>) FluentHyperlinkButtonSkin.this::updateComponents);
         CornerRadii cornerRadii = control.getCornerRadii();
-        backgroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        backgroundColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.backgroundFill(cornerRadii))
         );
-        foregroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        foregroundColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.textFill())
         );
 

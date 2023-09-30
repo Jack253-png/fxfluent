@@ -45,22 +45,22 @@ public class FluentButtonSkin extends ButtonSkin {
         CornerRadii cornerRadii = control.getCornerRadii();
 
         state.addListener((NewValueListener<StateType>) FluentButtonSkin.this::updateComponents);
-        backgroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        backgroundColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.backgroundFill(cornerRadii))
         );
-        foregroundColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        foregroundColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.textFill())
         );
-        upBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        upBorderColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.TOP, cornerRadii))
         );
-        downBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        downBorderColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.BOTTOM, cornerRadii))
         );
-        leftBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        leftBorderColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.LEFT, cornerRadii))
         );
-        rightBorderColor.property.addListener((NewValueListener<AbstractColorBrush>) newValue ->
+        rightBorderColor.getProperty().addListener((NewValueListener<AbstractColorBrush>) newValue ->
                 newValue.accept(this.button, BrushUtil.borderFill(BrushUtil.BorderOrientation.RIGHT, cornerRadii))
         );
 
