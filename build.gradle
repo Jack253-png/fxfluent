@@ -16,14 +16,19 @@ ext {
     junitVersion = '5.8.2'
 }
 
-sourceCompatibility = "8"
-targetCompatibility = "8"
+sourceCompatibility = "9"
+targetCompatibility = "9"
 
 tasks.withType(JavaCompile) {
     options.encoding = "utf-8"
 }
 tasks.withType(Javadoc) {
     options.encoding = "utf-8"
+}
+
+application {
+    mainClass = 'com.mcreater.fluentdemo.Main'
+    applicationDefaultJvmArgs = ["-XX:+UseZGC", "--add-opens", "java.base/java.lang=ALL-UNNAMED", "-Xmx320M"]
 }
 
 javafx {
@@ -44,6 +49,9 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation project(":fluentcore")
+    implementation project(":fluentcorej9")
+    implementation project(":fluentdemo")
 }
 
 if (checkPlatform(System.WINDOWS, Arch.X86_64)) {
