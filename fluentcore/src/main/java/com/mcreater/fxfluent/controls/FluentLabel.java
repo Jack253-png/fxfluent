@@ -7,7 +7,7 @@ import com.mcreater.fxfluent.controls.skin.FluentLabelSkin;
 import com.mcreater.fxfluent.controls.state.StateType;
 import com.mcreater.fxfluent.controls.value.StateMap;
 import com.mcreater.fxfluent.xaml.ResourceDict;
-import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.XamlManager;
 import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
@@ -45,7 +45,7 @@ public class FluentLabel extends Label implements Foregroundable, Dictable, Them
     }
 
     public ResourceDict getResourceDict() {
-        return XAMLManager.getDict(theme);
+        return XamlManager.getDict(theme);
     }
 
     public void onUpdateTheme(AppColorTheme theme) {

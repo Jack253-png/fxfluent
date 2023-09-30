@@ -4,7 +4,7 @@ import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentToggleButtonSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
 import com.mcreater.fxfluent.xaml.ResourceDict;
-import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.XamlManager;
 import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.scene.Node;
 import javafx.scene.control.Skin;
@@ -55,7 +55,7 @@ public class FluentToggleButton extends ToggleButton implements CornerRadiusable
     }
 
     public ResourceDict getResourceDict() {
-        return XAMLManager.getDict(theme);
+        return XamlManager.getDict(theme);
     }
 
     public void onUpdateTheme(AppColorTheme theme) {

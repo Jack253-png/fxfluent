@@ -4,7 +4,7 @@ import com.mcreater.fxfluent.controls.abstractions.*;
 import com.mcreater.fxfluent.controls.skin.FluentCheckBoxSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
 import com.mcreater.fxfluent.xaml.ResourceDict;
-import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.XamlManager;
 import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Skin;
@@ -57,7 +57,7 @@ public class FluentCheckBox extends CheckBox implements CornerRadiusable, Backgr
     }
 
     public ResourceDict getResourceDict() {
-        return XAMLManager.getDict(theme);
+        return XamlManager.getDict(theme);
     }
 
     public void onUpdateTheme(AppColorTheme theme) {

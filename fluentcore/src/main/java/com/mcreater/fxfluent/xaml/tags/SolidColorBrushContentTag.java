@@ -10,6 +10,6 @@ public class SolidColorBrushContentTag extends SimpleContentTag<SolidColorBrush>
         String opacity = getElement().attributeValue("Opacity");
         double opacityD = opacity == null ? 1.0 : Double.parseDouble(opacity);
 
-        return new SolidColorBrush(XamlHelper.parseAnyColor(dict, content, opacityD));
+        return new SolidColorBrush(XamlHelper.parseAnyColor(getDict(), content, opacityD));
     }
 }

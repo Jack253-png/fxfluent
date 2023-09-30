@@ -19,9 +19,9 @@ public interface AbstractContentTag<T> {
     }};
     AbstractContentTag<T> writeElement(Element element);
     AbstractContentTag<T> setResourceDict(ResourceDict dict);
-    Element getElement();
+    Element element();
     default String getKey() {
-        return getElement().attributeValue("Key");
+        return element().attributeValue("Key");
     }
     T toObject();
     static void register(String key, BiFunction<ResourceDict, Element, AbstractContentTag<?>> function) {

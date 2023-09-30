@@ -28,7 +28,7 @@ class ResourceDict(name: String?): Vector<AbstractContentTag<out Any>>() {
                     abstractContentTag as T
             }
         }
-        return if (this === XAMLManager.getGlobal()) null else XAMLManager.getGlobal().foundTag(key, clazz)
+        return if (this === XamlManager.getGlobal()) null else XamlManager.getGlobal().foundTag(key, clazz)
     }
 
     fun findColorBrush(key: String): AbstractColorBrush {

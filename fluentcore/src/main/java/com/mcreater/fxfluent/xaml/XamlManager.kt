@@ -20,7 +20,7 @@ import java.nio.file.Files
 import java.util.*
 import java.util.function.Consumer
 
-class XAMLManager {
+class XamlManager {
     companion object {
         @JvmStatic
         private val files: MutableList<InputStream> = Vector()
@@ -45,7 +45,7 @@ class XAMLManager {
 
         @JvmStatic
         fun addFileFromClasspath(path: String?) {
-            XAMLManager::class.java.getClassLoader().getResourceAsStream(path)?.let { files.add(it) }
+            XamlManager::class.java.getClassLoader().getResourceAsStream(path)?.let { files.add(it) }
         }
 
         @JvmStatic
@@ -121,13 +121,13 @@ class XAMLManager {
             val root = document.rootElement
             if (root.name == "ResourceDictionary") {
                 root.elements("ResourceDictionary.ThemeDictionaries")
-                    .forEach(Consumer { themedict: Element ->
-                        themedict.elements("ResourceDictionary").forEach(
-                            Consumer { dicts: Element ->
-                                dicts.elements()
+                    .forEach(Consumer { it2 ->
+                        it2.elements("ResourceDictionary").forEach(
+                            Consumer {
+                                it.elements()
                                     .forEach(Consumer { subEle: Element ->
                                         operateDict(
-                                            dicts.attributeValue("Key"),
+                                            it.attributeValue("Key"),
                                             subEle
                                         )
                                     })

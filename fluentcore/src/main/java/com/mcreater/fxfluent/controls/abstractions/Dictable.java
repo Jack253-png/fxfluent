@@ -1,10 +1,10 @@
 package com.mcreater.fxfluent.controls.abstractions;
 
 import com.mcreater.fxfluent.xaml.ResourceDict;
-import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.XamlManager;
 
 public interface Dictable {
     default ResourceDict getResourceDict() {
-        return XAMLManager.getCurrentDict();
+        return XamlManager.getCurrentDict();
     }
 }

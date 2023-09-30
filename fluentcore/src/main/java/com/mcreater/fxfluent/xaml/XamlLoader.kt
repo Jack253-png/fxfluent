@@ -15,14 +15,14 @@ class XamlLoader {
                 }, MutableMap::class.java
             )
             (map["paths"] as List<*>?)!!.forEach {
-                XAMLManager.addFileFromClasspath(it as String)
+                XamlManager.addFileFromClasspath(it as String)
             }
-            XAMLManager.parse()
+            XamlManager.parse()
         }
         @JvmStatic
         fun load(path: String?) {
-            XAMLManager.addFileFromClasspath(path)
-            XAMLManager.parse()
+            XamlManager.addFileFromClasspath(path)
+            XamlManager.parse()
         }
     }
 }

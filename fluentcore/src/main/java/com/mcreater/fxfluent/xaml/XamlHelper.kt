@@ -25,7 +25,7 @@ class XamlHelper {
 
         @JvmStatic
         fun parseAnyColor(dict: ResourceDict?, content: String?, opacity: Double): Color {
-            val tag = relativeTag(dict!!, content, ColorContentTag::class.java)
+            val tag: ColorContentTag? = relativeTag(dict!!, content, ColorContentTag::class.java)
             return Optional.ofNullable(tag)
                 .map { it.toObject() }
                 .map {

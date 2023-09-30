@@ -4,7 +4,7 @@ import javafx.geometry.Insets
 
 class ThicknessContentTag : SimpleContentTag<Insets>() {
     override fun toObject(): Insets {
-        val s = element.data.toString()
+        val s = element?.data.toString()
         try {
             return Insets(s.toInt().toDouble())
         } catch (ignored: Exception) {

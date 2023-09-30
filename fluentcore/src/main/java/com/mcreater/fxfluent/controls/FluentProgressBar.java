@@ -7,7 +7,7 @@ import com.mcreater.fxfluent.controls.abstractions.Themeable;
 import com.mcreater.fxfluent.controls.skin.FluentProgressBarSkin;
 import com.mcreater.fxfluent.controls.value.StateMap;
 import com.mcreater.fxfluent.xaml.ResourceDict;
-import com.mcreater.fxfluent.xaml.XAMLManager;
+import com.mcreater.fxfluent.xaml.XamlManager;
 import com.mcreater.fxfluent.xaml.style.AppColorTheme;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -64,7 +64,7 @@ public class FluentProgressBar extends ProgressBar implements Backgroundable, Fo
     }
 
     public ResourceDict getResourceDict() {
-        return XAMLManager.getDict(theme);
+        return XamlManager.getDict(theme);
     }
 
     public void onUpdateTheme(AppColorTheme theme) {
