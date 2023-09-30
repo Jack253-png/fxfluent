@@ -1,6 +1,5 @@
 package com.mcreater.fxfluent.controls
 
-import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.controls.abstractions.Dictable
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable
 import com.mcreater.fxfluent.controls.abstractions.Themeable
@@ -8,6 +7,7 @@ import com.mcreater.fxfluent.controls.skin.FluentLabelSkin
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.value.StateMap
 import com.mcreater.fxfluent.xaml.ResourceDict
+import com.mcreater.fxfluent.xaml.XamlManager
 import com.mcreater.fxfluent.xaml.XamlManager.Companion.getDict
 import com.mcreater.fxfluent.xaml.style.AppColorTheme
 import javafx.scene.Node
@@ -43,7 +43,7 @@ class FluentLabel : Label, Foregroundable, Dictable, Themeable {
             init {
                 put(StateType.NONE,
                     Function { d: ResourceDict? ->
-                        AbstractColorBrush.find(
+                        XamlManager.find(
                             "TextFillColorPrimaryBrush",
                             d
                         )

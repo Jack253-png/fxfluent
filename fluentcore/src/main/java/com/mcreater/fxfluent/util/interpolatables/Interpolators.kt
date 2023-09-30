@@ -5,7 +5,6 @@ import kotlin.math.*
 
 class Interpolators {
     companion object {
-        private const val TWO = 2.0
         val linear: Interpolator = object : Interpolator() {
             override fun curve(v: Double): Double {
                 return v
@@ -53,14 +52,14 @@ class Interpolators {
         
         val exponentialEasein: Interpolator = object : Interpolator() {
             override fun curve(v: Double): Double {
-                return if (v == 0.0) 0.0 else TWO.pow(10 * (v - 1))
+                return if (v == 0.0) 0.0 else (2.0).pow(10 * (v - 1))
             }
         }
 
         
         val exponentialEaseout: Interpolator = object : Interpolator() {
             override fun curve(v: Double): Double {
-                return if (v == 1.0) 1.0 else (-TWO).pow(-10 * v) + 1
+                return if (v == 1.0) 1.0 else (-2.0).pow(-10 * v) + 1
             }
         }
 
@@ -70,7 +69,7 @@ class Interpolators {
                 if (v == 0.0) return 0.0
                 if (v == 1.0) return 1.0
                 val i1 = v * 2
-                return if (i1 < 1) TWO.pow(10 * (i1 - 1)) / 2 else ((-TWO).pow(-10 * (i1 - 1)) + 2) / 2
+                return if (i1 < 1) (2.0).pow(10 * (i1 - 1)) / 2 else ((-2.0).pow(-10 * (i1 - 1)) + 2) / 2
             }
         }
 
@@ -182,7 +181,7 @@ class Interpolators {
                 val p = 0.3
                 val s: Double = p / (2 * Math.PI) * asin(1 / a)
                 val i1 = t - 1
-                return -(a * TWO.pow(10 * i1) * sin((i1 - s) * (2 * Math.PI) / p))
+                return -(a * (2.0).pow(10 * i1) * sin((i1 - s) * (2 * Math.PI) / p))
             }
         }
 
@@ -194,7 +193,7 @@ class Interpolators {
                 if (t == 1.0) return 1.0
                 val p = 0.3
                 val s: Double = p / (2 * Math.PI) * asin(1 / a)
-                return a * TWO.pow(-10 * t) * sin((t - s) * (2 * Math.PI) / p)
+                return a * (2.0).pow(-10 * t) * sin((t - s) * (2 * Math.PI) / p)
             }
         }
 
@@ -209,10 +208,10 @@ class Interpolators {
                 val s: Double = p / (2 * Math.PI) * asin(1 / a)
                 if (i1 < 1) {
                     val i2 = i1 - 1
-                    return -0.5 * (a * TWO.pow(10 * i2) * sin((i2 - s) * (2 * Math.PI) / p))
+                    return -0.5 * (a * (2.0).pow(10 * i2) * sin((i2 - s) * (2 * Math.PI) / p))
                 }
                 val i3 = i1 - 1
-                return a * TWO.pow(-10 * i3) * sin((i3 - s) * (2 * Math.PI) / p) * 0.5
+                return a * (2.0).pow(-10 * i3) * sin((i3 - s) * (2 * Math.PI) / p) * 0.5
             }
         }
 

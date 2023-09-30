@@ -5,8 +5,8 @@ import com.mcreater.fxfluent.controls.abstractions.Dictable
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable
 import com.mcreater.fxfluent.controls.abstractions.Themeable
 import com.mcreater.fxfluent.controls.skin.FluentProgressBarSkin
-import com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.Companion.BG_KEY_MAP
-import com.mcreater.fxfluent.controls.value.ControlMaps.HyperLinkButton.Companion.FG_KEY_MAP
+import com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.Companion.BG_KEY_MAP
+import com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.Companion.FG_KEY_MAP
 import com.mcreater.fxfluent.controls.value.StateMap
 import com.mcreater.fxfluent.xaml.ResourceDict
 import com.mcreater.fxfluent.xaml.XamlManager.Companion.getDict

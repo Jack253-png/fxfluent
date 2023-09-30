@@ -18,11 +18,11 @@ class BrushUtil {
     }
     companion object {
         @JvmStatic
-        fun backgroundFill(cornerRadii: CornerRadii?): BiConsumer<Region, AbstractColorBrush> {
-            return BiConsumer { region: Region, color: AbstractColorBrush ->
-                region.background = Background(
+        fun backgroundFill(cornerRadii: CornerRadii?): BiConsumer<Region?, AbstractColorBrush?> {
+            return BiConsumer { region: Region?, color: AbstractColorBrush? ->
+                region?.background = Background(
                     BackgroundFill(
-                        color.getPaint(),
+                        color?.getPaint(),
                         cornerRadii,
                         Insets.EMPTY
                     )
@@ -31,9 +31,9 @@ class BrushUtil {
         }
 
         @JvmStatic
-        fun textFill(): BiConsumer<Region, AbstractColorBrush> {
-            return BiConsumer { region: Region?, color: AbstractColorBrush ->
-                if (region is Labeled) region.textFill = color.getPaint()
+        fun textFill(): BiConsumer<Region?, AbstractColorBrush?> {
+            return BiConsumer { region: Region?, color: AbstractColorBrush? ->
+                if (region is Labeled) region.textFill = color?.getPaint()
             }
         }
 
@@ -41,16 +41,16 @@ class BrushUtil {
         fun borderFill(
             orientation: BorderOrientation?,
             cornerRadii: CornerRadii?
-        ): BiConsumer<Region, AbstractColorBrush> {
-            return BiConsumer { region: Region, color: AbstractColorBrush ->
+        ): BiConsumer<Region?, AbstractColorBrush?> {
+            return BiConsumer { region: Region?, color: AbstractColorBrush? ->
                 val insets = Insets.EMPTY
-                if (region.border == null || region.border.strokes.size == 0) {
-                    region.border = Border(
+                if (region?.border == null || region.border.strokes.size == 0) {
+                    region?.border = Border(
                         BorderStroke(
-                            if (orientation == null || orientation == BorderOrientation.TOP) color.getPaint() else Color.TRANSPARENT,
-                            if (orientation == null || orientation == BorderOrientation.RIGHT) color.getPaint() else Color.TRANSPARENT,
-                            if (orientation == null || orientation == BorderOrientation.BOTTOM) color.getPaint() else Color.TRANSPARENT,
-                            if (orientation == null || orientation == BorderOrientation.LEFT) color.getPaint() else Color.TRANSPARENT,
+                            if (orientation == null || orientation == BorderOrientation.TOP) color?.getPaint() else Color.TRANSPARENT,
+                            if (orientation == null || orientation == BorderOrientation.RIGHT) color?.getPaint() else Color.TRANSPARENT,
+                            if (orientation == null || orientation == BorderOrientation.BOTTOM) color?.getPaint() else Color.TRANSPARENT,
+                            if (orientation == null || orientation == BorderOrientation.LEFT) color?.getPaint() else Color.TRANSPARENT,
                             BorderStrokeStyle.SOLID,
                             BorderStrokeStyle.SOLID,
                             BorderStrokeStyle.SOLID,
@@ -67,10 +67,10 @@ class BrushUtil {
                         .forEach(Consumer { borderStroke: BorderStroke ->
                             strokes.add(
                                 BorderStroke(
-                                    if (orientation == null || orientation == BorderOrientation.TOP) color.getPaint() else borderStroke.topStroke,
-                                    if (orientation == null || orientation == BorderOrientation.RIGHT) color.getPaint() else borderStroke.rightStroke,
-                                    if (orientation == null || orientation == BorderOrientation.BOTTOM) color.getPaint() else borderStroke.bottomStroke,
-                                    if (orientation == null || orientation == BorderOrientation.LEFT) color.getPaint() else borderStroke.leftStroke,
+                                    if (orientation == null || orientation == BorderOrientation.TOP) color?.getPaint() else borderStroke.topStroke,
+                                    if (orientation == null || orientation == BorderOrientation.RIGHT) color?.getPaint() else borderStroke.rightStroke,
+                                    if (orientation == null || orientation == BorderOrientation.BOTTOM) color?.getPaint() else borderStroke.bottomStroke,
+                                    if (orientation == null || orientation == BorderOrientation.LEFT) color?.getPaint() else borderStroke.leftStroke,
                                     BorderStrokeStyle.SOLID,
                                     BorderStrokeStyle.SOLID,
                                     BorderStrokeStyle.SOLID,

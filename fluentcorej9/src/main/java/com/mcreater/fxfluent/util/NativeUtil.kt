@@ -1,7 +1,8 @@
 package com.mcreater.fxfluent.util
 
 import com.mcreater.fxfluent.util.ReflectUtil.Companion.openModuleToAllUnnamed
-import com.sun.javafx.tk.TKStage
+import com.sun.javafx.stage.WindowHelper
+import javafx.application.Application
 import javafx.stage.Stage
 import javafx.stage.Window
 import java.lang.reflect.InvocationTargetException
@@ -23,15 +24,15 @@ class NativeUtil {
                     "com.sun.javafx.tk",
                     "com.sun.javafx.tk.quantum",
                     "com.sun.glass.ui"
+                ) || !openModuleToAllUnnamed(
+                    Application::class.java.module,
+                    "com.sun.javafx.stage"
                 )
             ) return -1
-            val field = Window::class.java.getDeclaredField("peer")
-            field.isAccessible = true
-            val internalStage = field[window] as TKStage
             val platformWindow =
                 Class.forName("com.sun.javafx.tk.quantum.WindowStage").getDeclaredField("platformWindow")
             platformWindow.isAccessible = true
-            val platformWindowInstance = platformWindow[internalStage] as com.sun.glass.ui.Window
+            val platformWindowInstance = platformWindow[WindowHelper.getPeer(window)] as com.sun.glass.ui.Window
             val getNativeHandle = com.sun.glass.ui.Window::class.java.getDeclaredMethod("getNativeHandle")
             getNativeHandle.isAccessible = true
             return getNativeHandle.invoke(platformWindowInstance) as Long

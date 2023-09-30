@@ -35,6 +35,7 @@ class UiShellWrapper {
         }
         @JvmStatic
         fun applyBlur(windowHandle: Long, type: BackdropType, isDark: Boolean): Boolean {
+            if (windowHandle == (-1).toLong()) return false;
             if (getSystemTransparencyEnabled()) {
                 if (SystemUtil.isWindows()) {
                     return Win32UiShellLib.INSTANCE.implApplyBlur(
