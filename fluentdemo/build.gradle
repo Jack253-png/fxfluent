@@ -64,7 +64,7 @@ test {
 }
 
 application {
-    mainClassName = "com.mcreater.fluentdemo.MainKt"
+    mainClassName = "com.mcreater.fluentdemo.Main"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

@@ -1,7 +1,9 @@
 package com.mcreater.fxfluent.brush;
 
+import com.mcreater.fxfluent.util.ImageUtil;
 import javafx.geometry.Bounds;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 import java.util.AbstractMap;
 import java.util.List;
@@ -24,7 +26,7 @@ public class AcrylicInAppFillColorBrush implements BiConsumer<Region, Map<String
                         if (reg.getScaleX() != 1 || reg.getScaleY() != 1) throw new Exception("Not supported for scaling");
 
                         Bounds boundsInScene = reg.localToScene(reg.getBoundsInLocal());
-                        /*reg.setBackground(new Background(
+                        reg.setBackground(new Background(
                                 new BackgroundImage(
                                         ImageUtil.snapshot(
                                                 reg.getScene(),
@@ -37,7 +39,7 @@ public class AcrylicInAppFillColorBrush implements BiConsumer<Region, Map<String
                                         BackgroundPosition.DEFAULT,
                                         BackgroundSize.DEFAULT
                                 )
-                        ));*/
+                        ));
                     }
                     catch (Exception e) {
                         e.printStackTrace();

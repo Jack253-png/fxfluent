@@ -11,7 +11,7 @@ class MainApp : Application() {
     override fun start(primaryStage: Stage) {
         val stage = FluentStage(StageStyle.TRANSPARENT)
         stage.setContent(UIGalleryPane())
-        stage.setBackdropType(BackdropType.ACRYLIC)
+        stage.backdropType = BackdropType.ACRYLIC
         stage.icons.add(Image(MainApp::class.java.getClassLoader().getResourceAsStream("icons/TitlebarLogo.png")))
         // stage.setDisableBackdrop(true)
         stage.width = 800.0
