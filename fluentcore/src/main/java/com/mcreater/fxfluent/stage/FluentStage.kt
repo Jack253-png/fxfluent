@@ -44,7 +44,7 @@ class FluentStage(style: StageStyle) : Stage(style) {
     var colorThemeOverride = AppColorTheme.SYSTEM
         /**
          * Set backdrop type of this stage (Windows only)<br></br>设置该窗口的背景类型 (仅 Windows)
-         * @param backdropType [BackdropType]
+         * @param [BackdropType]
          */
         set(a) {
             field = a
@@ -156,14 +156,16 @@ class FluentStage(style: StageStyle) : Stage(style) {
         var y_stage = 0.0
         fun <V : Region?, K : Stage?> windowMove(listenedObject: V, stage: K) {
             listenedObject!!.onMouseDragged = EventHandler { event: MouseEvent ->
-                stage!!.x = x_stage + event.screenX - x1
+                if (stage!!.isMaximized) return@EventHandler
+                stage.x = x_stage + event.screenX - x1
                 stage.y = y_stage + event.screenY - y1
             }
             listenedObject.onDragEntered = null
             listenedObject.onMousePressed = EventHandler { event: MouseEvent ->
+                if (stage!!.isMaximized) return@EventHandler
                 x1 = event.screenX
                 y1 = event.screenY
-                x_stage = stage!!.x
+                x_stage = stage.x
                 y_stage = stage.y
             }
         }

@@ -1,7 +1,7 @@
 package com.mcreater.fxfluent.xaml.tags;
 
 import com.mcreater.fxfluent.brush.LinearGradientColorBrush;
-import com.mcreater.fxfluent.xaml.XAMLHelper;
+import com.mcreater.fxfluent.xaml.XamlHelper;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
@@ -19,7 +19,7 @@ public class LinearGradientBrushContentTag extends SimpleContentTag<LinearGradie
         element.element("LinearGradientBrush.GradientStops").elements().forEach(element -> {
             double offset = Double.parseDouble(element.attributeValue("Offset"));
             double opacity = Double.parseDouble(Optional.ofNullable(element.attributeValue("Opacity")).orElse("1.0"));
-            Color color = XAMLHelper.parseAnyColor(dict, element.attributeValue("Color"), opacity);
+            Color color = XamlHelper.parseAnyColor(dict, element.attributeValue("Color"), opacity);
             stops.add(new Stop(offset, color));
         });
         if (stops.stream().noneMatch(stop -> stop.getOffset() == 0)) {

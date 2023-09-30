@@ -63,7 +63,7 @@ public class FluentProgressBar extends ProgressBar implements Backgroundable, Fo
         return FG_KEY_MAP;
     }
 
-    public ResourceDict getResourceDictKt() {
+    public ResourceDict getResourceDict() {
         return XAMLManager.getDict(theme);
     }
 
