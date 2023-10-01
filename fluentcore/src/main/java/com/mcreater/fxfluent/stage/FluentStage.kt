@@ -28,13 +28,11 @@ import javafx.stage.StageStyle
 import javafx.util.Duration
 
 class FluentStage(style: StageStyle) : Stage(style) {
-    private val xOffset = 0.0
-    private var yOffset = 0.0
-    private var isRight = false // 是否处于右边界调整窗口状态
-
-    private var isBottomRight = false // 是否处于右下角调整窗口状态
-
-    private var isBottom = false // 是否处于下边界调整窗口状态
+    private var isBottomLeft = false
+    private var isRight = false
+    private var isBottomRight = false
+    private var isBottom = false
+    private var isTopRight = false
     init {
         init()
     }
@@ -167,34 +165,48 @@ class FluentStage(style: StageStyle) : Stage(style) {
             val y = event.sceneY
             val width: Double = this.width
             val height: Double = this.height
-            var cursorType: Cursor = Cursor.DEFAULT // 鼠标光标初始为默认类型，若未进入调整窗口状态，保持默认类型
-            // 先将所有调整窗口状态重置
+            var cursorType: Cursor = Cursor.DEFAULT
             isBottom = false
-            isBottomRight = isBottom
-            isRight = isBottomRight
+            isBottomRight = false
+            isRight = false
+            isBottomLeft = false
+            isTopRight = false
             if (y >= height - 5) {
-                if (x <= 5) { // 左下角调整窗口状态
-                    //不处理
-                } else if (x >= width - 5) { // 右下角调整窗口状态
+                if (x <= 5) {
+                    isBottomLeft = true
+                    cursorType = Cursor.SW_RESIZE
+                }
+                else if (x >= width - 5) {
                     isBottomRight = true
                     cursorType = Cursor.SE_RESIZE
-                } else { // 下边界调整窗口状态
+                }
+                else {
                     isBottom = true
                     cursorType = Cursor.S_RESIZE
                 }
-            } else if (x >= width - 5) { // 右边界调整窗口状态
-                isRight = true
-                cursorType = Cursor.E_RESIZE
             }
-            // 最后改变鼠标光标
+            else if (y <= 5) {
+                if (x >= width - 5) {
+                    isTopRight = true
+                    cursorType = Cursor.NE_RESIZE
+                }
+            }
+            else {
+                if (x >= width - 5) {
+                    isRight = true
+                    cursorType = Cursor.E_RESIZE
+                }
+            }
             sceneContent!!.cursor = cursorType
         }
         sceneContent!!.setOnMouseDragged { event: MouseEvent ->
             event.consume()
-            println(event.sceneX)
-            println(minWidth)
-            if ((isBottom || isBottomRight) && event.sceneY >= minHeight) this.height = event.sceneY
-            if ((isRight || isBottomRight) && event.sceneX >= minWidth) this.width = event.sceneX
+
+            val righted = isTopRight || isRight || isBottomRight
+            val bottomed = isBottomLeft || isBottom || isBottomRight
+
+            if (bottomed && event.sceneY >= minHeight) this.height = event.sceneY
+            if (righted && event.sceneX >= minWidth) this.width = event.sceneX
         }
 
         val scene = Scene(sceneContent)
@@ -204,10 +216,10 @@ class FluentStage(style: StageStyle) : Stage(style) {
 
 
     class WindowMovement private constructor() {
-        var x1 = 0.0
-        var y1 = 0.0
-        var x_stage = 0.0
-        var y_stage = 0.0
+        private var x1 = 0.0
+        private var y1 = 0.0
+        private var x_stage = 0.0
+        private var y_stage = 0.0
         fun <V : Region?, K : Stage?> windowMove(listenedObject: V, stage: K) {
             listenedObject!!.onMouseDragged = EventHandler { event: MouseEvent ->
                 if (stage!!.isMaximized) return@EventHandler
