@@ -13,9 +13,9 @@ class MainApp : Application() {
         stage.setContent(UIGalleryPane())
         stage.backdropType = BackdropType.ACRYLIC
         stage.icons.add(Image(MainApp::class.java.getClassLoader().getResourceAsStream("icons/TitlebarLogo.png")))
-        // stage.setDisableBackdrop(true)
-        stage.width = 800.0
-        stage.height = 600.0
+        // stage.disableBackdrop = true
+        /*stage.width = Screen.getPrimary().visualBounds.width
+        stage.height = Screen.getPrimary().visualBounds.height*/
         stage.title = "FxFluent Gallery"
         stage.show()
         stage.applyBackdropType()

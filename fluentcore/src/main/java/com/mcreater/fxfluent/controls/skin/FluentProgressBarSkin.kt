@@ -22,7 +22,7 @@ import javafx.scene.paint.Color
 import javafx.util.Duration
 
 
-class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSkin(bar) {
+open class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSkin(bar) {
     private val internalBar = StackPane()
     private val internalBarClip = StackPane()
     private var normalIndeterminateAnimation: Timeline? = null

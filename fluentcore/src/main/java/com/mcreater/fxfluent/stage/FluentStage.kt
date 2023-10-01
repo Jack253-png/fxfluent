@@ -16,6 +16,7 @@ import com.mcreater.fxfluent.xaml.style.SystemThemeLoop
 import javafx.beans.value.ObservableValue
 import javafx.event.EventHandler
 import javafx.geometry.Insets
+import javafx.scene.Cursor
 import javafx.scene.Node
 import javafx.scene.Scene
 import javafx.scene.input.MouseEvent
@@ -27,6 +28,13 @@ import javafx.stage.StageStyle
 import javafx.util.Duration
 
 class FluentStage(style: StageStyle) : Stage(style) {
+    private val xOffset = 0.0
+    private var yOffset = 0.0
+    private var isRight = false // 是否处于右边界调整窗口状态
+
+    private var isBottomRight = false // 是否处于右下角调整窗口状态
+
+    private var isBottom = false // 是否处于下边界调整窗口状态
     init {
         init()
     }
@@ -130,19 +138,65 @@ class FluentStage(style: StageStyle) : Stage(style) {
                 Insets.EMPTY
             )
         )
+        /*sceneContent?.border = Border(
+            BorderStroke(
+                Color.rgb(0, 0, 0, 0.5),
+                BorderStrokeStyle.SOLID,
+                CornerRadii(5.0),
+                BorderWidths(1.0),
+                Insets.EMPTY
+            )
+        )*/
         val rectangle = Rectangle()
         rectangle.widthProperty().bind(widthProperty())
         rectangle.heightProperty().bind(heightProperty())
         rectangle.arcWidth = 15.0
         rectangle.arcHeight = 15.0
-        maximizedProperty().addListener(NewValueListener { t1: Boolean ->
-            rectangle.arcWidth = (if (t1) 0 else 15).toDouble()
-            rectangle.arcHeight = (if (t1) 0 else 15).toDouble()
+        maximizedProperty().addListener (NewValueListener {
+            rectangle.arcWidth = (if (isMaximized) 0 else 15).toDouble()
+            rectangle.arcHeight = (if (isMaximized) 0 else 15).toDouble()
         })
         sceneContent!!.clip = rectangle
         titleBar.prefWidthProperty().bind(widthProperty())
-        sceneContent!!.prefWidthProperty().bind(widthProperty())
-        sceneContent!!.prefHeightProperty().bind(heightProperty())
+        /*sceneContent!!.prefWidthProperty().bind(widthProperty())
+        sceneContent!!.prefHeightProperty().bind(heightProperty())*/
+
+        sceneContent!!.setOnMouseMoved { event: MouseEvent ->
+            event.consume()
+            val x = event.sceneX
+            val y = event.sceneY
+            val width: Double = this.width
+            val height: Double = this.height
+            var cursorType: Cursor = Cursor.DEFAULT // 鼠标光标初始为默认类型，若未进入调整窗口状态，保持默认类型
+            // 先将所有调整窗口状态重置
+            isBottom = false
+            isBottomRight = isBottom
+            isRight = isBottomRight
+            if (y >= height - 5) {
+                if (x <= 5) { // 左下角调整窗口状态
+                    //不处理
+                } else if (x >= width - 5) { // 右下角调整窗口状态
+                    isBottomRight = true
+                    cursorType = Cursor.SE_RESIZE
+                } else { // 下边界调整窗口状态
+                    isBottom = true
+                    cursorType = Cursor.S_RESIZE
+                }
+            } else if (x >= width - 5) { // 右边界调整窗口状态
+                isRight = true
+                cursorType = Cursor.E_RESIZE
+            }
+            // 最后改变鼠标光标
+            sceneContent!!.cursor = cursorType
+        }
+        sceneContent!!.setOnMouseDragged { event: MouseEvent ->
+            event.consume()
+            println(event.sceneX)
+            println(minWidth)
+            if ((isBottom || isBottomRight) && event.sceneY >= minHeight) this.height = event.sceneY
+            if ((isRight || isBottomRight) && event.sceneX >= minWidth) this.width = event.sceneX
+        }
+
         val scene = Scene(sceneContent)
         scene.fill = Color.TRANSPARENT
         this.scene = scene

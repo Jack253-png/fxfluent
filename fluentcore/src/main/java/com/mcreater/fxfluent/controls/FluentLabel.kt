@@ -15,7 +15,7 @@ import javafx.scene.control.Label
 import java.util.function.Function
 
 
-class FluentLabel : Label, Foregroundable, Dictable, Themeable {
+open class FluentLabel : Label, Foregroundable, Dictable, Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
     constructor() {

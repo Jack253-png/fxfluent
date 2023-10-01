@@ -18,7 +18,7 @@ import javafx.scene.paint.Color
 import javafx.util.Duration
 import java.util.stream.Stream
 
-class FluentHyperlinkButtonSkin(private val button: FluentHyperlinkButton) : HyperlinkSkin(
+open class FluentHyperlinkButtonSkin(private val button: FluentHyperlinkButton) : HyperlinkSkin(
     button
 ) {
     private val state: ObjectProperty<StateType?> = SimpleObjectProperty(null)

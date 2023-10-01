@@ -1,10 +1,11 @@
-; dlltool --base-file C:\Users\ADMINI~1\AppData\Local\Temp\cca02408.base --output-exp UiShell.exp --dllname UiShell.dll --output-def libUiShell.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup --def C:\Users\ADMINI~1\AppData\Local\Temp\cca02408.def --output-lib libUiShell.a
+; dlltool --base-file C:\Users\ADMINI~1\AppData\Local\Temp\cca11348.base --output-exp UiShell.exp --dllname UiShell.dll --output-def libUiShell.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup --def C:\Users\ADMINI~1\AppData\Local\Temp\cca11348.def --output-lib libUiShell.a
 EXPORTS
-	implGetCompositionColor @ 1
-	implGetThemeIsDark @ 2
-	implGetTransparencyEnabled @ 3
-	implIsWindows11 @ 4
-	implNativeWarning @ 5
-	implSetWindowIsDark @ 6
-	implSetWindowRadius @ 7
-	implApplyBlur @ 8
+	implApplyBlur @ 1
+	implGetCompositionColor @ 2
+	implGetThemeIsDark @ 3
+	implGetTransparencyEnabled @ 4
+	implHideBar @ 5
+	implIsWindows11 @ 6
+	implNativeWarning @ 7
+	implSetWindowIsDark @ 8
+	implSetWindowRadius @ 9

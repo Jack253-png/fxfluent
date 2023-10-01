@@ -22,7 +22,7 @@ import javafx.util.Duration
 import java.util.stream.Stream
 
 
-class FluentButtonSkin(private val button: FluentButton) : ButtonSkin(button) {
+open class FluentButtonSkin(private val button: FluentButton) : ButtonSkin(button) {
     private val state: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val backgroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(83.0))

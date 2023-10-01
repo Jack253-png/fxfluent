@@ -20,6 +20,13 @@ import javafx.scene.text.Font
 import javafx.stage.StageStyle
 
 class FluentTitleBar(stage: FluentStage): AnchorPane() {
+    private val isRight = false // 是否处于右边界调整窗口状态
+
+    private val isBottomRight = false // 是否处于右下角调整窗口状态
+
+    private val isBottom = false // 是否处于下边界调整窗口状态
+
+    private val RESIZE_WIDTH = 5.00
     init {
         prefHeight = 50.0
         minHeight = 50.0

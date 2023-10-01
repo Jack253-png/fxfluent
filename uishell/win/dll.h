@@ -16,5 +16,6 @@ DLLIMPORT BOOL implApplyBlur(HWND, DWORD, BOOL);
 DLLIMPORT BOOL implSetWindowRadius(HWND, DWORD);
 DLLIMPORT BOOL implIsWindows11(void);
 DLLIMPORT void implSetWindowIsDark(HWND, BOOL);
+DLLIMPORT void implHideBar(HWND);
 
 #endif /* _DLL_H_ */

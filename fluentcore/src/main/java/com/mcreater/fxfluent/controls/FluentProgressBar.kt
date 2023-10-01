@@ -17,7 +17,7 @@ import javafx.scene.control.ProgressBar
 import javafx.scene.control.Skin
 
 
-class FluentProgressBar : ProgressBar, Backgroundable, Foregroundable, Dictable, Themeable {
+open class FluentProgressBar : ProgressBar, Backgroundable, Foregroundable, Dictable, Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
     enum class IndeterminateState {

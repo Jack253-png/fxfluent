@@ -17,4 +17,5 @@ interface Win32UiShellLib : Library {
     fun implIsWindows11(): BOOL
     fun implSetWindowIsDark(hwnd: HWND?, isDark: BOOL?)
     fun implSetWindowRadius(hwnd: HWND?, radius: DWORD?): BOOL
+    fun implHideBar(hwnd: HWND?)
 }

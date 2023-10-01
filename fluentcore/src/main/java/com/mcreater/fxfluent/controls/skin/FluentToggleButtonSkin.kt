@@ -22,7 +22,7 @@ import javafx.util.Duration
 import java.util.stream.Stream
 
 
-class FluentToggleButtonSkin(private val button: FluentToggleButton) : ToggleButtonSkin(
+open class FluentToggleButtonSkin(private val button: FluentToggleButton) : ToggleButtonSkin(
     button
 ) {
     private val state: ObjectProperty<StateType?> = SimpleObjectProperty(null)

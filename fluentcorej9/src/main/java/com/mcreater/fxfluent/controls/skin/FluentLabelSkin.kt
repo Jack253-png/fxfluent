@@ -12,7 +12,7 @@ import javafx.scene.paint.Color
 import javafx.util.Duration
 
 
-class FluentLabelSkin(private val label: FluentLabel) : LabelSkin(label) {
+open class FluentLabelSkin(private val label: FluentLabel) : LabelSkin(label) {
     private val foregroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(42.0))
 

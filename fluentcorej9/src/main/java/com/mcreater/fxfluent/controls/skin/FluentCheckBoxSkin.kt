@@ -23,7 +23,7 @@ import javafx.scene.paint.Paint
 import javafx.util.Duration
 import java.util.stream.Stream
 
-class FluentCheckBoxSkin(private val control: FluentCheckBox) : CheckBoxSkin(control) {
+open class FluentCheckBoxSkin(private val control: FluentCheckBox) : CheckBoxSkin(control) {
     private val state: ObjectProperty<StateType> = SimpleObjectProperty(null)
     private val backgroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(42.0))

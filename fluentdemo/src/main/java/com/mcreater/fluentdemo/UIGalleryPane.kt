@@ -30,10 +30,16 @@ class UIGalleryPane : FluentGridPane() {
         val button = FluentToggleButton("Test")
         val progressBar = FluentProgressBar()
         progressBar.prefWidth = 150.0
+        val slider = FluentSlider()
+        slider.isShowTickLabels = true
+        slider.isShowTickMarks = true
+
         add(bar, 0, 1)
         add(button, 0, 2)
         add(box2, 0, 3)
         add(hyperlink, 0, 4)
         add(progressBar, 0, 5)
+        add(slider, 0, 6)
+        prefWidth = 300.0
     }
 }
