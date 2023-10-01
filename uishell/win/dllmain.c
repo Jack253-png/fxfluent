@@ -13,8 +13,9 @@ DLLIMPORT void implNativeWarning() {
 
 DLLIMPORT void implHideBar(HWND hWnd) {
     LONG_PTR Style = GetWindowLongPtr(hWnd,GWL_STYLE);
-    // Style = Style &~WS_CAPTION &~WS_SYSMENU &~WS_THICKFRAME;
+    Style = Style | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU;
     SetWindowLongPtr(hWnd, GWL_STYLE, Style);
+    WindowExtendFrameIntoClientAreaFast(hWnd);
 }
 
 DLLIMPORT DWORD implGetCompositionColor() {

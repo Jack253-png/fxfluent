@@ -132,7 +132,9 @@ class FluentStage(style: StageStyle) : Stage(style) {
         placeHolder.prefHeight = (50 + 10).toDouble()
         sceneContent = Pane()
         sceneContent!!.children.clear()
-        sceneContent!!.children.addAll(VBox(placeHolder, content), titleBar)
+        if (style != StageStyle.DECORATED || style != StageStyle.UTILITY || style != StageStyle.UNIFIED) sceneContent!!.children.addAll(VBox(placeHolder, content), titleBar)
+        else sceneContent!!.children.addAll(content)
+
         sceneContent!!.background = Background(
             BackgroundFill(
                 getWindowBackground(),
@@ -209,7 +211,7 @@ class FluentStage(style: StageStyle) : Stage(style) {
                 val righted = isTopRight || isRight || isBottomRight
                 val bottomed = isBottomLeft || isBottom || isBottomRight
 
-                if (bottomed && event.sceneY >= minHeight) this.height = event.sceneY
+                if (bottomed && event.sceneY >= minHeight && event.sceneY >= 60) this.height = event.sceneY
                 if (righted && event.sceneX >= minWidth) this.width = event.sceneX
             }
         }
