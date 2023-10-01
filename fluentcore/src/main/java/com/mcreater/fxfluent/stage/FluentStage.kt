@@ -14,6 +14,7 @@ import com.mcreater.fxfluent.util.listeners.NewValueListener
 import com.mcreater.fxfluent.xaml.style.AppColorTheme
 import com.mcreater.fxfluent.xaml.style.SystemThemeLoop
 import javafx.beans.value.ObservableValue
+import javafx.event.ActionEvent
 import javafx.event.EventHandler
 import javafx.geometry.Insets
 import javafx.scene.Cursor
@@ -33,6 +34,7 @@ class FluentStage(style: StageStyle) : Stage(style) {
     private var isBottomRight = false
     private var isBottom = false
     private var isTopRight = false
+    var maximizedover = false
     init {
         init()
     }
@@ -47,6 +49,7 @@ class FluentStage(style: StageStyle) : Stage(style) {
     var backdropType: BackdropType? = null
     var disableBackdrop = false
     var disableBackground = false
+    private var fluentTitleBar: FluentTitleBar? = null
     var colorThemeOverride = AppColorTheme.SYSTEM
         /**
          * Set backdrop type of this stage (Windows only)<br></br>设置该窗口的背景类型 (仅 Windows)
@@ -124,6 +127,7 @@ class FluentStage(style: StageStyle) : Stage(style) {
             )
         }
         val titleBar = buildTitleBar()
+        fluentTitleBar = titleBar
         val placeHolder = Region()
         placeHolder.prefHeight = (50 + 10).toDouble()
         sceneContent = Pane()
@@ -201,12 +205,13 @@ class FluentStage(style: StageStyle) : Stage(style) {
         }
         sceneContent!!.setOnMouseDragged { event: MouseEvent ->
             event.consume()
+            if (!maximizedover) {
+                val righted = isTopRight || isRight || isBottomRight
+                val bottomed = isBottomLeft || isBottom || isBottomRight
 
-            val righted = isTopRight || isRight || isBottomRight
-            val bottomed = isBottomLeft || isBottom || isBottomRight
-
-            if (bottomed && event.sceneY >= minHeight) this.height = event.sceneY
-            if (righted && event.sceneX >= minWidth) this.width = event.sceneX
+                if (bottomed && event.sceneY >= minHeight) this.height = event.sceneY
+                if (righted && event.sceneX >= minWidth) this.width = event.sceneX
+            }
         }
 
         val scene = Scene(sceneContent)
@@ -220,15 +225,21 @@ class FluentStage(style: StageStyle) : Stage(style) {
         private var y1 = 0.0
         private var x_stage = 0.0
         private var y_stage = 0.0
-        fun <V : Region?, K : Stage?> windowMove(listenedObject: V, stage: K) {
+        fun <V : Region?, K : FluentStage?> windowMove(listenedObject: V, stage: K) {
             listenedObject!!.onMouseDragged = EventHandler { event: MouseEvent ->
-                if (stage!!.isMaximized) return@EventHandler
+                if (stage!!.maximizedover) {
+                    stage.fluentTitleBar?.buttonmax?.onAction?.handle(ActionEvent())
+                    return@EventHandler
+                }
                 stage.x = x_stage + event.screenX - x1
                 stage.y = y_stage + event.screenY - y1
             }
             listenedObject.onDragEntered = null
             listenedObject.onMousePressed = EventHandler { event: MouseEvent ->
-                if (stage!!.isMaximized) return@EventHandler
+                if (stage!!.maximizedover) {
+                    stage.fluentTitleBar?.buttonmax?.onAction?.handle(ActionEvent())
+                    return@EventHandler
+                }
                 x1 = event.screenX
                 y1 = event.screenY
                 x_stage = stage.x
