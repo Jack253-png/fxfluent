@@ -33,6 +33,7 @@ class UIGalleryPane : FluentGridPane() {
         val slider = FluentSlider()
         slider.isShowTickLabels = true
         slider.isShowTickMarks = true
+        slider.prefWidth = 250.0
 
         add(bar, 0, 1)
         add(button, 0, 2)

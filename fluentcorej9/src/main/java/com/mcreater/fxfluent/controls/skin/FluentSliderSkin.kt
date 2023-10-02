@@ -4,51 +4,107 @@ import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentSlider
 import com.mcreater.fxfluent.controls.state.StateType
+import com.mcreater.fxfluent.controls.state.StateUtil
 import com.mcreater.fxfluent.controls.value.AnimatedValue
 import com.mcreater.fxfluent.util.BrushUtil
 import com.mcreater.fxfluent.util.ControlUtil.Companion.findControlInSkin
+import com.mcreater.fxfluent.util.interpolatables.Interpolators
 import com.mcreater.fxfluent.util.listeners.NewValueListener
+import javafx.beans.property.ObjectProperty
+import javafx.beans.property.ReadOnlyBooleanProperty
+import javafx.beans.property.SimpleObjectProperty
+import javafx.beans.value.ObservableValue
 import javafx.geometry.Orientation
+import javafx.scene.control.Tooltip
 import javafx.scene.control.skin.SliderSkin
 import javafx.scene.layout.BorderWidths
 import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.StackPane
 import javafx.scene.paint.Color
+import javafx.scene.shape.Circle
 import javafx.util.Duration
+import java.util.stream.Stream
 import kotlin.math.max
 
 open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(control) {
+    private val stateThumb: ObjectProperty<StateType?> = SimpleObjectProperty(null)
+    private val stateTrack: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val backgroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(83.0))
     private val trackColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(83.0))
+    private val thumbInternalSize =
+        AnimatedValue(5.0, Duration.millis(83.0), Interpolators.sinusoidalEaseboth)
     private var trackTop: StackPane? = null
+    private var thumbInternal: Circle? = null
     private val track
         get() = findControlInSkin(this, "track")
-    private val thumb
-        get() = findControlInSkin(this, "thumb")
+    private val thumb: StackPane?
+        get() = findControlInSkin(this, "thumb") as StackPane?
     private val tickLine
         get() = findControlInSkin(this, "axis")
     init {
+        Stream.of(
+            thumb!!.hoverProperty(),
+            thumb!!.pressedProperty(),
+            thumb!!.focusedProperty(),
+            thumb!!.disabledProperty()
+        ).forEach { a: ReadOnlyBooleanProperty ->
+            a.addListener { _: ObservableValue<out Boolean?>?, _: Boolean?, _: Boolean? ->
+                updateState()
+            }
+        }
+        Stream.of(
+            control.hoverProperty(),
+            control.pressedProperty(),
+            control.focusedProperty(),
+            control.disabledProperty()
+        ).forEach { a: ReadOnlyBooleanProperty ->
+            a.addListener { _: ObservableValue<out Boolean?>?, _: Boolean?, _: Boolean? ->
+                updateState()
+            }
+        }
         trackTop = StackPane()
+        stateTrack.addListener(NewValueListener { updateComponentsTrack(it!!) })
+        stateThumb.addListener(NewValueListener { updateComponentsThumb(it!!) })
         backgroundColor.property.addListener(
             NewValueListener { it.accept(track, BrushUtil.backgroundFill(CornerRadii(8.0))) }
         )
         trackColor.property.addListener(
             NewValueListener { it.accept(trackTop, BrushUtil.backgroundFill(CornerRadii(8.0))) }
         )
-
+        thumbInternalSize.property.addListener(NewValueListener { thumbInternal!!.radius = it })
+        thumbInternal = Circle(0.0, 0.0, 5.0, Color.BLACK)
+        thumb!!.children.add(thumbInternal)
+        thumb!!.prefWidth = 20.0
+        thumb!!.prefHeight = 20.0
         children.add(2, trackTop)
-        updateComponents()
+        updateState()
+        updateComponents(stateTrack.get()!!, stateThumb.get()!!)
+        Tooltip.install(thumb, Tooltip("Test"))
     }
-    private fun updateComponents() {
-        backgroundColor.updateValue(control.backgroundRemap?.get(if (control.isDisable) StateType.DISABLE else StateType.NONE)?.apply(control.resourceDict)!!)
-        trackColor.updateValue(control.backgroundRemap?.get(StateType.FOCUS)?.apply(control.resourceDict)!!)
-        BrushUtil.backgroundFill(CornerRadii(16.0)).accept(thumb, control.backgroundRemap?.get(StateType.HOVER)?.apply(control.resourceDict)!!)
-        BrushUtil.borderFill(null, CornerRadii(16.0), BorderWidths(0.5)).accept(thumb, control.backgroundRemap?.get(StateType.PRESS)?.apply(control.resourceDict)!!)
+    private fun updateState() {
+        stateThumb.set(StateUtil.genState(thumb!!.isDisabled, thumb!!.isHover, thumb!!.isPressed, thumb!!.isFocused))
+        stateTrack.set(StateUtil.genState(control.isDisabled, control.isHover, control.isPressed, control.isFocused))
+    }
+    private fun updateComponentsTrack(stateTrack: StateType) {
+        BrushUtil.backgroundFill(CornerRadii(16.0)).accept(track, control.backgroundRemap?.get(stateTrack)?.apply(control.resourceDict)!!)
+        trackColor.updateValue(control.foregroundRemap?.get(stateTrack)?.apply(control.resourceDict)!!)
+    }
+    private fun updateComponentsThumb(stateThumb: StateType) {
+        thumbInternal?.fill = control.thumbRemap?.get(stateThumb)?.apply(control.resourceDict)!!.getPaint()
+        BrushUtil.borderFill(null, CornerRadii(16.0), BorderWidths(0.5)).accept(thumb, control.thumbBorder?.apply(control.resourceDict)!!)
+        BrushUtil.backgroundFill(CornerRadii(16.0)).accept(thumb, control.thumbOuter?.apply(control.resourceDict))
+        thumbInternalSize.updateValue(
+            if (stateThumb == StateType.HOVER) 7.0 else if (stateThumb == StateType.PRESS) 4.0 else 5.0
+        )
+    }
+    private fun updateComponents(stateTrack: StateType, stateThumb: StateType) {
+        updateComponentsTrack(stateTrack)
+        updateComponentsThumb(stateThumb)
     }
     fun implUpdate() {
-        updateComponents()
+        updateComponents(stateTrack.get()!!, stateThumb.get()!!)
     }
 
     override fun layoutChildren(x: Double, y: Double, w: Double, h: Double) {
@@ -56,8 +112,7 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
 
         val thumbWidth = snapSizeX(thumb!!.prefWidth(-1.0))
         val thumbHeight = snapSizeY(thumb!!.prefHeight(-1.0))
-        val trackRadius: Double =
-            (if (track!!.background == null) 0 else if (track!!.background.fills.size > 0) track!!.background.fills[0].radii.topLeftHorizontalRadius else 0).toDouble()
+        (if (track!!.background == null) 0 else if (track!!.background.fills.size > 0) track!!.background.fills[0].radii.topLeftHorizontalRadius else 0).toDouble()
 
         if (skinnable.orientation == Orientation.HORIZONTAL) {
             val tickLineHeight: Double = (if (control.isShowTickMarks) tickLine!!.prefHeight(-1.0) else 0).toDouble()
@@ -70,9 +125,15 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
             val trackStart = snapPositionX(x + thumbWidth / 2)
             val trackTop: Double = (startY + (trackAreaHeight - trackHeight) / 2).toInt().toDouble()
             this.trackTop?.resizeRelocate(
-                (trackStart - trackRadius).toInt().toDouble(),
+                (trackStart).toInt().toDouble(),
                 trackTop,
-                (trackLength + trackRadius + trackRadius).toInt().toDouble() * (control.value / control.max),
+                (trackLength).toInt().toDouble() * (control.value / control.max),
+                trackHeight
+            )
+            track!!.resizeRelocate(
+                (trackStart).toInt().toDouble(),
+                trackTop,
+                (trackLength).toInt().toDouble(),
                 trackHeight
             )
         }
@@ -89,9 +150,15 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
 
             this.trackTop?.resizeRelocate(
                 trackLeft,
-                (trackStart - trackRadius).toInt().toDouble(),
+                (trackStart).toInt().toDouble(),
                 trackWidth,
-                (trackLength + trackRadius + trackRadius).toInt().toDouble() * (control.value / control.max)
+                (trackLength).toInt().toDouble() * (control.value / control.max)
+            )
+            track!!.resizeRelocate(
+                trackLeft,
+                (trackStart).toInt().toDouble(),
+                trackWidth,
+                (trackLength).toInt().toDouble()
             )
         }
     }
