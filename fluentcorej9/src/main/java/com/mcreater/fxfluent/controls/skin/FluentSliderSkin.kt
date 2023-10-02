@@ -10,6 +10,7 @@ import com.mcreater.fxfluent.util.ControlUtil.Companion.findControlInSkin
 import com.mcreater.fxfluent.util.listeners.NewValueListener
 import javafx.geometry.Orientation
 import javafx.scene.control.skin.SliderSkin
+import javafx.scene.layout.BorderWidths
 import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.StackPane
 import javafx.scene.paint.Color
@@ -36,12 +37,15 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         trackColor.property.addListener(
             NewValueListener { it.accept(trackTop, BrushUtil.backgroundFill(CornerRadii(8.0))) }
         )
+
         children.add(2, trackTop)
         updateComponents()
     }
     private fun updateComponents() {
         backgroundColor.updateValue(control.backgroundRemap?.get(if (control.isDisable) StateType.DISABLE else StateType.NONE)?.apply(control.resourceDict)!!)
         trackColor.updateValue(control.backgroundRemap?.get(StateType.FOCUS)?.apply(control.resourceDict)!!)
+        BrushUtil.backgroundFill(CornerRadii(16.0)).accept(thumb, control.backgroundRemap?.get(StateType.HOVER)?.apply(control.resourceDict)!!)
+        BrushUtil.borderFill(null, CornerRadii(16.0), BorderWidths(0.5)).accept(thumb, control.backgroundRemap?.get(StateType.PRESS)?.apply(control.resourceDict)!!)
     }
     fun implUpdate() {
         updateComponents()

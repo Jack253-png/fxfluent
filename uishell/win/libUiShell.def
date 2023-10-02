@@ -1,4 +1,4 @@
-; dlltool --base-file C:\Users\ADMINI~1\AppData\Local\Temp\cca01960.base --output-exp UiShell.exp --dllname UiShell.dll --output-def libUiShell.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup --def C:\Users\ADMINI~1\AppData\Local\Temp\cca01960.def --output-lib libUiShell.a
+; dlltool --base-file C:\Users\ADMINI~1\AppData\Local\Temp\cca08960.base --output-exp UiShell.exp --dllname UiShell.dll --output-def libUiShell.def --no-export-all-symbols --add-stdcall-alias --exclude-symbol=DllMainCRTStartup --def C:\Users\ADMINI~1\AppData\Local\Temp\cca08960.def --output-lib libUiShell.a
 EXPORTS
 	implApplyBlur @ 1
 	implGetCompositionColor @ 2

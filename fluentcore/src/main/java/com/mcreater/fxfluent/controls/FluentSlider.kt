@@ -56,6 +56,20 @@ open class FluentSlider: Slider, Backgroundable, Themeable, Dictable {
                         d
                     )
                 }
+                put(StateType.HOVER
+                ) { d: ResourceDict? ->
+                    XamlManager.find(
+                        "SolidBackgroundFillColorQuarternaryBrush",
+                        d
+                    )
+                }
+                put(StateType.PRESS
+                ) { d: ResourceDict? ->
+                    XamlManager.find(
+                        "ControlStrokeColorSecondary",
+                        d
+                    )
+                }
             }
         }
     override fun onUpdateTheme(theme: AppColorTheme?) {

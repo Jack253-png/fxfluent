@@ -36,11 +36,18 @@ class BrushUtil {
                 if (region is Labeled) region.textFill = color?.getPaint()
             }
         }
-
         @JvmStatic
         fun borderFill(
             orientation: BorderOrientation?,
             cornerRadii: CornerRadii?
+        ): BiConsumer<Region?, AbstractColorBrush?> {
+            return borderFill(orientation, cornerRadii, BorderWidths(1.0))
+        }
+        @JvmStatic
+        fun borderFill(
+            orientation: BorderOrientation?,
+            cornerRadii: CornerRadii?,
+            wid: BorderWidths?
         ): BiConsumer<Region?, AbstractColorBrush?> {
             return BiConsumer { region: Region?, color: AbstractColorBrush? ->
                 val insets = Insets.EMPTY
@@ -56,7 +63,7 @@ class BrushUtil {
                             BorderStrokeStyle.SOLID,
                             BorderStrokeStyle.SOLID,
                             cornerRadii,
-                            BorderWidths(1.0),
+                            wid,
                             insets
                         )
                     )
@@ -76,7 +83,7 @@ class BrushUtil {
                                     BorderStrokeStyle.SOLID,
                                     BorderStrokeStyle.SOLID,
                                     cornerRadii,
-                                    BorderWidths(1.0),
+                                    wid,
                                     insets
                                 )
                             )
