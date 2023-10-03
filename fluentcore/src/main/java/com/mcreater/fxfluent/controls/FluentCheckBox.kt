@@ -56,7 +56,7 @@ open class FluentCheckBox : CheckBox, CornerRadiusable, Backgroundable, Foregrou
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentCheckBoxSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

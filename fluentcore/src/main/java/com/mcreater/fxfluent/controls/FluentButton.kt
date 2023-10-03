@@ -59,7 +59,7 @@ open class FluentButton : Button, CornerRadiusable, Backgroundable, Foregroundab
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentButtonSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

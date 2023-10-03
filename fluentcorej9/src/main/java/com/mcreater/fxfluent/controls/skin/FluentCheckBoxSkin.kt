@@ -3,6 +3,7 @@ package com.mcreater.fxfluent.controls.skin
 import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentCheckBox
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.internals.CheckBoxCheckMark
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil
@@ -23,7 +24,7 @@ import javafx.scene.paint.Paint
 import javafx.util.Duration
 import java.util.stream.Stream
 
-open class FluentCheckBoxSkin(private val control: FluentCheckBox) : CheckBoxSkin(control) {
+open class FluentCheckBoxSkin(private val control: FluentCheckBox) : CheckBoxSkin(control), SkinUpdatable {
     private val state: ObjectProperty<StateType> = SimpleObjectProperty(null)
     private val backgroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(42.0))
@@ -81,7 +82,7 @@ open class FluentCheckBoxSkin(private val control: FluentCheckBox) : CheckBoxSki
     val markColor: Paint
         get() = this.control.glyphRemap[state.get()]!!.apply(control.resourceDict)!!.getPaint()!!
 
-    fun implUpdate() {
+    override fun implUpdate() {
         updateComponents(state.get())
     }
 }

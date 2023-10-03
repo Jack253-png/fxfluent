@@ -2,6 +2,7 @@ package com.mcreater.fxfluent.controls.skin
 
 import com.mcreater.fxfluent.controls.FluentProgressBar
 import com.mcreater.fxfluent.controls.FluentProgressBar.IndeterminateState
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.util.BrushUtil.Companion.backgroundFill
 import com.mcreater.fxfluent.util.ControlUtil.Companion.findControlInSkin
@@ -22,7 +23,7 @@ import javafx.scene.paint.Color
 import javafx.util.Duration
 
 
-open class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSkin(bar) {
+open class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressBarSkin(bar), SkinUpdatable {
     private val internalBar = StackPane()
     private val internalBarClip = StackPane()
     private var normalIndeterminateAnimation: Timeline? = null
@@ -212,7 +213,7 @@ open class FluentProgressBarSkin(private val bar: FluentProgressBar) : ProgressB
         layoutInternalBar(x, y)
     }
 
-    fun implUpdate() {
+    override fun implUpdate() {
         updateComponents()
     }
 }

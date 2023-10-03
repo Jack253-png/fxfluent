@@ -54,7 +54,7 @@ open class FluentHyperlinkButton : Hyperlink, CornerRadiusable, Backgroundable, 
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentHyperlinkButtonSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

@@ -3,6 +3,7 @@ package com.mcreater.fxfluent.controls.skin
 import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentHyperlinkButton
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil.Companion.genState
 import com.mcreater.fxfluent.controls.value.AnimatedValue
@@ -22,7 +23,7 @@ import java.util.stream.Stream
 
 open class FluentHyperlinkButtonSkin(private val button: FluentHyperlinkButton) : HyperlinkSkin(
     button
-) {
+), SkinUpdatable {
     private val state: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val backgroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(83.0))
@@ -62,7 +63,7 @@ open class FluentHyperlinkButtonSkin(private val button: FluentHyperlinkButton) 
         foregroundColor.updateValue(button.foregroundRemap[type]!!.apply(button.resourceDict)!!)
     }
 
-    fun implUpdate() {
+    override fun implUpdate() {
         updateComponents(state.get()!!)
     }
 }

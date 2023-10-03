@@ -3,6 +3,7 @@ package com.mcreater.fxfluent.controls.skin
 import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentToggleButton
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil
 import com.mcreater.fxfluent.controls.value.AnimatedValue
@@ -23,7 +24,7 @@ import java.util.stream.Stream
 
 open class FluentToggleButtonSkin(private val button: FluentToggleButton) : ToggleButtonSkin(
     button
-) {
+), SkinUpdatable {
     private val state: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val backgroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(83.0))
@@ -96,7 +97,7 @@ open class FluentToggleButtonSkin(private val button: FluentToggleButton) : Togg
         downBorderColor.updateValue(button.borderRemap[type]!!.apply(button.resourceDict)!!)
     }
 
-    fun implUpdate() {
+    override fun implUpdate() {
         updateComponents(state.get()!!)
     }
 }

@@ -3,6 +3,7 @@ package com.mcreater.fxfluent.controls.skin
 import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentButton
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil.Companion.genState
 import com.mcreater.fxfluent.controls.value.AnimatedValue
@@ -22,7 +23,7 @@ import javafx.util.Duration
 import java.util.stream.Stream
 
 
-open class FluentButtonSkin(private val button: FluentButton) : ButtonSkin(button) {
+open class FluentButtonSkin(private val button: FluentButton) : ButtonSkin(button), SkinUpdatable {
     private val state: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val backgroundColor =
         AnimatedValue<AbstractColorBrush>(SolidColorBrush(Color.TRANSPARENT), Duration.millis(83.0))
@@ -95,7 +96,7 @@ open class FluentButtonSkin(private val button: FluentButton) : ButtonSkin(butto
         downBorderColor.updateValue(button.borderRemap[type]!!.apply(button.resourceDict)!!)
     }
 
-    fun implUpdate() {
+    override fun implUpdate() {
         updateComponents(state.get()!!)
     }
 }

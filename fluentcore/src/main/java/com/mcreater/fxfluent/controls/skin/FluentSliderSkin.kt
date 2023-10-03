@@ -3,6 +3,7 @@ package com.mcreater.fxfluent.controls.skin
 import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentSlider
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil
 import com.mcreater.fxfluent.controls.value.AnimatedValue
@@ -16,7 +17,6 @@ import javafx.beans.property.ReadOnlyBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.value.ObservableValue
 import javafx.geometry.Orientation
-import javafx.scene.control.Tooltip
 import javafx.scene.layout.BorderWidths
 import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.StackPane
@@ -26,7 +26,7 @@ import javafx.util.Duration
 import java.util.stream.Stream
 import kotlin.math.max
 
-open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(control) {
+open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(control), SkinUpdatable {
     private val stateThumb: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val stateTrack: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val backgroundColor =
@@ -81,7 +81,6 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         children.add(2, trackTop)
         updateState()
         updateComponents(stateTrack.get()!!, stateThumb.get()!!)
-        Tooltip.install(thumb, Tooltip("Test"))
     }
     private fun updateState() {
         stateThumb.set(StateUtil.genState(thumb!!.isDisabled, thumb!!.isHover, thumb!!.isPressed, thumb!!.isFocused))
@@ -103,7 +102,7 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         updateComponentsTrack(stateTrack)
         updateComponentsThumb(stateThumb)
     }
-    fun implUpdate() {
+    override fun implUpdate() {
         updateComponents(stateTrack.get()!!, stateThumb.get()!!)
     }
 

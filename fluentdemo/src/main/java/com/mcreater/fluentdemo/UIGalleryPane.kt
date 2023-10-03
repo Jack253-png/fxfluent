@@ -41,6 +41,15 @@ class UIGalleryPane : FluentGridPane() {
         add(hyperlink, 0, 4)
         add(progressBar, 0, 5)
         add(slider, 0, 6)
-        prefWidth = 300.0
+        /*val webv = WebView()
+        webv.engine.load("https://bilibili.com")
+        webv.prefWidth = -1.0
+        webv.prefHeight = -1.0
+        webv.prefWidthProperty().bind(prefWidthProperty())
+        webv.prefHeightProperty().bind(prefHeightProperty())
+        add(webv, 0, 0)*/
+
+        prefWidth = 800.0
+        prefHeight = 600.0
     }
 }

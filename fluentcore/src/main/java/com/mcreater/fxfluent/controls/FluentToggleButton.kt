@@ -59,7 +59,7 @@ open class FluentToggleButton : ToggleButton, CornerRadiusable, Backgroundable, 
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentToggleButtonSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

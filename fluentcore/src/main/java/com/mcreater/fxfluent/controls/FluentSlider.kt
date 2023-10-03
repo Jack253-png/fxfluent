@@ -55,6 +55,6 @@ open class FluentSlider: Slider, Backgroundable, Foregroundable, Thumbable, Them
         }
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentSliderSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }

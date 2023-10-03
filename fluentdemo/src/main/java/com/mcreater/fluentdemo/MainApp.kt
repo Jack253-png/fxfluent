@@ -15,7 +15,9 @@ class MainApp : Application() {
         stage.backdropType = BackdropType.ACRYLIC
         stage.icons.add(Image(MainApp::class.java.getClassLoader().getResourceAsStream("icons/TitlebarLogo.png")))
         stage.title = "FxFluent Gallery"
+        stage.width = 800.0
+        stage.height = 600.0
         stage.show()
-        stage.applyBackdropType()
+        stage.applyBackdropType() // -> call to win32 native (UiShell.dll)
     }
 }

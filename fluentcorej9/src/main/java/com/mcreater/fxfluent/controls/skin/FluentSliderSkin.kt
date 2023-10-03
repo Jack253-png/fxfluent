@@ -3,10 +3,13 @@ package com.mcreater.fxfluent.controls.skin
 import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentSlider
+import com.mcreater.fxfluent.controls.FluentTooltip
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil
 import com.mcreater.fxfluent.controls.value.AnimatedValue
 import com.mcreater.fxfluent.util.BrushUtil
+import com.mcreater.fxfluent.util.ControlUtil
 import com.mcreater.fxfluent.util.ControlUtil.Companion.findControlInSkin
 import com.mcreater.fxfluent.util.interpolatables.Interpolators
 import com.mcreater.fxfluent.util.listeners.NewValueListener
@@ -15,8 +18,8 @@ import javafx.beans.property.ReadOnlyBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.value.ObservableValue
 import javafx.geometry.Orientation
-import javafx.scene.control.Tooltip
 import javafx.scene.control.skin.SliderSkin
+import javafx.scene.input.MouseEvent
 import javafx.scene.layout.BorderWidths
 import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.StackPane
@@ -26,7 +29,7 @@ import javafx.util.Duration
 import java.util.stream.Stream
 import kotlin.math.max
 
-open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(control) {
+open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(control), SkinUpdatable {
     private val stateThumb: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val stateTrack: ObjectProperty<StateType?> = SimpleObjectProperty(null)
     private val backgroundColor =
@@ -37,6 +40,7 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         AnimatedValue(5.0, Duration.millis(83.0), Interpolators.sinusoidalEaseboth)
     private var trackTop: StackPane? = null
     private var thumbInternal: Circle? = null
+    private val tooltip: FluentTooltip = FluentTooltip("Test")
     private val track
         get() = findControlInSkin(this, "track")
     private val thumb: StackPane?
@@ -81,7 +85,19 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         children.add(2, trackTop)
         updateState()
         updateComponents(stateTrack.get()!!, stateThumb.get()!!)
-        Tooltip.install(thumb, Tooltip("Test"))
+
+        control.valueProperty().addListener(NewValueListener { tooltip.text = String.format("%.2f", it) })
+        thumb!!.addEventHandler(MouseEvent.ANY) {
+            val pos = ControlUtil.displayPos(thumb!!)
+            when (it.eventType) {
+                MouseEvent.MOUSE_DRAGGED, MouseEvent.MOUSE_PRESSED -> {
+                    tooltip.showCentered(thumb!!, pos.x, pos.y - 80)
+                }
+                MouseEvent.MOUSE_RELEASED -> {
+                    tooltip.hide()
+                }
+            }
+        }
     }
     private fun updateState() {
         stateThumb.set(StateUtil.genState(thumb!!.isDisabled, thumb!!.isHover, thumb!!.isPressed, thumb!!.isFocused))
@@ -103,7 +119,7 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         updateComponentsTrack(stateTrack)
         updateComponentsThumb(stateThumb)
     }
-    fun implUpdate() {
+    override fun implUpdate() {
         updateComponents(stateTrack.get()!!, stateThumb.get()!!)
     }
 

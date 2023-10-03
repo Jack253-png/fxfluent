@@ -135,6 +135,11 @@ class FluentStage(style: StageStyle) : Stage(style) {
         if (style != StageStyle.DECORATED || style != StageStyle.UTILITY || style != StageStyle.UNIFIED) sceneContent!!.children.addAll(VBox(placeHolder, content), titleBar)
         else sceneContent!!.children.addAll(content)
 
+        (content as Region).prefWidthProperty().bind(widthProperty())
+        (content as Region).prefHeightProperty().bind(heightProperty().add(
+            if (style != StageStyle.DECORATED || style != StageStyle.UTILITY || style != StageStyle.UNIFIED) -60 else 0
+        ))
+
         sceneContent!!.background = Background(
             BackgroundFill(
                 getWindowBackground(),
