@@ -14,6 +14,7 @@ import javafx.scene.effect.DropShadow
 import javafx.scene.layout.Background
 import javafx.scene.layout.Border
 import javafx.scene.paint.Color
+import javafx.stage.Window
 import javafx.util.Duration
 
 open class FluentTooltip(str: String?) : Tooltip(str), Themeable, Dictable {
@@ -28,6 +29,25 @@ open class FluentTooltip(str: String?) : Tooltip(str), Themeable, Dictable {
         (skin as SkinUpdatable?)?.implUpdate()
         show(n, x - (this.width / 2), y)
         animatedOpacity.updateValue(1.0)
+    }
+
+    override fun show(p0: Window?) {
+        super.show(p0)
+        animatedOpacity.updateValue(1.0)
+    }
+
+    override fun show(p0: Window?, p1: Double, p2: Double) {
+        super.show(p0, p1, p2)
+        animatedOpacity.updateValue(1.0)
+    }
+
+    override fun show(p0: Node?, p1: Double, p2: Double) {
+        super.show(p0, p1, p2)
+        animatedOpacity.updateValue(1.0)
+    }
+
+    override fun hide() {
+        closeCentered()
     }
     fun closeCentered() {
         animatedOpacity.updateValue(0.0)
