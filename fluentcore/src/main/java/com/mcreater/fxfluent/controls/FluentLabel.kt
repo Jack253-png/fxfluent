@@ -2,6 +2,7 @@ package com.mcreater.fxfluent.controls
 
 import com.mcreater.fxfluent.controls.abstractions.Dictable
 import com.mcreater.fxfluent.controls.abstractions.Foregroundable
+import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.abstractions.Themeable
 import com.mcreater.fxfluent.controls.skin.FluentLabelSkin
 import com.mcreater.fxfluent.controls.state.StateType
@@ -15,7 +16,7 @@ import javafx.scene.control.Label
 import java.util.function.Function
 
 
-class FluentLabel : Label, Foregroundable, Dictable, Themeable {
+open class FluentLabel : Label, Foregroundable, Dictable, Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
     constructor() {
@@ -57,7 +58,7 @@ class FluentLabel : Label, Foregroundable, Dictable, Themeable {
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentLabelSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

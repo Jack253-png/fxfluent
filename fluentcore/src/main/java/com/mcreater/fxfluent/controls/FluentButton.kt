@@ -18,7 +18,7 @@ import javafx.scene.control.Skin
 import javafx.scene.layout.CornerRadii
 
 
-class FluentButton : Button, CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable,
+open class FluentButton : Button, CornerRadiusable, Backgroundable, Foregroundable, Borderable, Dictable,
     Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
@@ -59,7 +59,7 @@ class FluentButton : Button, CornerRadiusable, Backgroundable, Foregroundable, B
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentButtonSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

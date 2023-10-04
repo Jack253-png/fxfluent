@@ -18,7 +18,7 @@ import javafx.scene.control.ToggleButton
 import javafx.scene.layout.CornerRadii
 
 
-class FluentToggleButton : ToggleButton, CornerRadiusable, Backgroundable, Foregroundable,
+open class FluentToggleButton : ToggleButton, CornerRadiusable, Backgroundable, Foregroundable,
     Borderable, Dictable, Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
@@ -59,7 +59,7 @@ class FluentToggleButton : ToggleButton, CornerRadiusable, Backgroundable, Foreg
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentToggleButtonSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

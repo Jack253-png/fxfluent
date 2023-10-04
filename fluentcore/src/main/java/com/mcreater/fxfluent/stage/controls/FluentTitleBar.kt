@@ -17,9 +17,15 @@ import javafx.scene.layout.BackgroundFill
 import javafx.scene.layout.CornerRadii
 import javafx.scene.paint.Color
 import javafx.scene.text.Font
+import javafx.stage.Screen
 import javafx.stage.StageStyle
 
 class FluentTitleBar(stage: FluentStage): AnchorPane() {
+    private var lastx = -1.0;
+    private var lasty = -1.0;
+    private var lastw = -1.0;
+    private var lasth = -1.0;
+    var buttonmax: FluentWindowButton? = null
     init {
         prefHeight = 50.0
         minHeight = 50.0
@@ -32,19 +38,40 @@ class FluentTitleBar(stage: FluentStage): AnchorPane() {
         setRightAnchor(closeButton, 0.0)
 
         val maximizeButton = FluentWindowButton()
-        maximizeButton.onAction = EventHandler {
-            stage.isMaximized = !stage.isMaximized
-        }
-        maximizeButton.alignment = Pos.CENTER
-        setRightAnchor(maximizeButton, closeButton.prefWidth)
+        buttonmax = maximizeButton
+        lastx = stage.x
+        lasty = stage.y
+        lastw = stage.width
+        lasth = stage.height
         val iconMax = arrayOf(FluentIcon('\uE922'))
         maximizeButton.graphic = iconMax[0]
         stage.maximizedProperty().addListener(NewValueListener { t1: Boolean ->
-            iconMax[0] = FluentIcon(if (t1) '\uE923' else '\uE922')
-            iconMax[0].textFill = if (getSystemIsDark()) Color.WHITE else Color.BLACK
-            maximizeButton.graphic = iconMax[0]
+
         })
         iconMax[0].textFill = if (getSystemIsDark()) Color.WHITE else Color.BLACK
+        maximizeButton.onAction = EventHandler {
+            stage.maximizedover = !stage.maximizedover
+            if (stage.maximizedover) {
+                lastx = stage.x
+                lasty = stage.y
+                lastw = stage.width
+                lasth = stage.height
+            }
+            val wid = Screen.getPrimary().visualBounds.width
+            val hei = Screen.getPrimary().visualBounds.height
+            stage.minWidth = if (stage.maximizedover) wid else lastw
+            stage.maxWidth = if (stage.maximizedover) wid else lastw
+            stage.minHeight = if (stage.maximizedover) hei else lasth
+            stage.maxHeight = if (stage.maximizedover) hei else lasth
+            stage.x = if (stage.maximizedover) 0.0 else lastx
+            stage.y = if (stage.maximizedover) 0.0 else lasty
+            // stage.isMaximized = !stage.isMaximized
+            iconMax[0] = FluentIcon(if (stage.maximizedover) '\uE923' else '\uE922')
+            iconMax[0].textFill = if (getSystemIsDark()) Color.WHITE else Color.BLACK
+            maximizeButton.graphic = iconMax[0]
+        }
+        maximizeButton.alignment = Pos.CENTER
+        setRightAnchor(maximizeButton, closeButton.prefWidth)
 
         val minimizeButton = FluentWindowButton()
         minimizeButton.onAction = EventHandler {
@@ -81,5 +108,8 @@ class FluentTitleBar(stage: FluentStage): AnchorPane() {
             minimizeButton
         )
         children.addAll(view, windowTitle)
+    }
+    fun onMaxi() {
+
     }
 }

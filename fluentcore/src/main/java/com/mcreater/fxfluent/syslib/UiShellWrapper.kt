@@ -48,6 +48,12 @@ class UiShellWrapper {
             return false
         }
         @JvmStatic
+        fun hideBar(windowHandle: Long) {
+            if (SystemUtil.isWindows()) {
+                Win32UiShellLib.INSTANCE.implHideBar(HWND(Pointer(windowHandle)))
+            }
+        }
+        @JvmStatic
         fun nativeWarn() {
             if (SystemUtil.isWindows()) Win32UiShellLib.INSTANCE.implNativeWarning()
         }

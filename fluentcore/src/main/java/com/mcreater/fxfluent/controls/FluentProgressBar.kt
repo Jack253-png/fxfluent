@@ -1,9 +1,6 @@
 package com.mcreater.fxfluent.controls
 
-import com.mcreater.fxfluent.controls.abstractions.Backgroundable
-import com.mcreater.fxfluent.controls.abstractions.Dictable
-import com.mcreater.fxfluent.controls.abstractions.Foregroundable
-import com.mcreater.fxfluent.controls.abstractions.Themeable
+import com.mcreater.fxfluent.controls.abstractions.*
 import com.mcreater.fxfluent.controls.skin.FluentProgressBarSkin
 import com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.Companion.BG_KEY_MAP
 import com.mcreater.fxfluent.controls.value.ControlMaps.ProgressBar.Companion.FG_KEY_MAP
@@ -17,7 +14,7 @@ import javafx.scene.control.ProgressBar
 import javafx.scene.control.Skin
 
 
-class FluentProgressBar : ProgressBar, Backgroundable, Foregroundable, Dictable, Themeable {
+open class FluentProgressBar : ProgressBar, Backgroundable, Foregroundable, Dictable, Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
     enum class IndeterminateState {
@@ -63,6 +60,6 @@ class FluentProgressBar : ProgressBar, Backgroundable, Foregroundable, Dictable,
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentProgressBarSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }

@@ -615,4 +615,128 @@ class ControlMaps {
             }
         }
     }
+    class Slider {
+        companion object {
+            val BG_KEY_MAP: StateMap = object : StateMap() {
+                init {
+                    put(
+                        StateType.NONE
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackFill",
+                            d
+                        )
+                    }
+                    put(StateType.DISABLE
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackFillDisabled",
+                            d
+                        )
+                    }
+                    put(StateType.FOCUS
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackFill",
+                            d
+                        )
+                    }
+                    put(StateType.HOVER
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackFillPointerOver",
+                            d
+                        )
+                    }
+                    put(StateType.PRESS
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackFillPressed",
+                            d
+                        )
+                    }
+                }
+            }
+            val FG_KEY_MAP: StateMap = object : StateMap() {
+                init {
+                    put(
+                        StateType.NONE
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackValueFill",
+                            d
+                        )
+                    }
+                    put(StateType.DISABLE
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackValueFillDisabled",
+                            d
+                        )
+                    }
+                    put(StateType.FOCUS
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackValueFill",
+                            d
+                        )
+                    }
+                    put(StateType.HOVER
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackValueFillPointerOver",
+                            d
+                        )
+                    }
+                    put(StateType.PRESS
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderTrackValueFillPressed",
+                            d
+                        )
+                    }
+                }
+            }
+            val THB_KEY_MAP: StateMap = object : StateMap() {
+                init {
+                    put(
+                        StateType.NONE
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderThumbBackground",
+                            d
+                        )
+                    }
+                    put(StateType.DISABLE
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderThumbBackgroundDisabled",
+                            d
+                        )
+                    }
+                    put(StateType.FOCUS
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderThumbBackground",
+                            d
+                        )
+                    }
+                    put(StateType.HOVER
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderThumbBackgroundPointerOver",
+                            d
+                        )
+                    }
+                    put(StateType.PRESS
+                    ) { d: ResourceDict? ->
+                        XamlManager.find(
+                            "SliderThumbBackgroundPressed",
+                            d
+                        )
+                    }
+                }
+            }
+        }
+    }
 }

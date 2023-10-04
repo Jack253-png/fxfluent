@@ -17,7 +17,7 @@ import javafx.scene.control.Skin
 import javafx.scene.layout.CornerRadii
 
 
-class FluentCheckBox : CheckBox, CornerRadiusable, Backgroundable, Foregroundable, Borderable,
+open class FluentCheckBox : CheckBox, CornerRadiusable, Backgroundable, Foregroundable, Borderable,
     Glyphable, Dictable, Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
@@ -56,7 +56,7 @@ class FluentCheckBox : CheckBox, CornerRadiusable, Backgroundable, Foregroundabl
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentCheckBoxSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

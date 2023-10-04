@@ -14,7 +14,7 @@ import javafx.scene.control.Skin
 import javafx.scene.layout.CornerRadii
 
 
-class FluentHyperlinkButton : Hyperlink, CornerRadiusable, Backgroundable, Foregroundable, Dictable,
+open class FluentHyperlinkButton : Hyperlink, CornerRadiusable, Backgroundable, Foregroundable, Dictable,
     Themeable {
     private var theme: AppColorTheme? = AppColorTheme.SYSTEM
 
@@ -54,7 +54,7 @@ class FluentHyperlinkButton : Hyperlink, CornerRadiusable, Backgroundable, Foreg
 
     override fun onUpdateTheme(theme: AppColorTheme?) {
         this.theme = theme
-        (skin as FluentHyperlinkButtonSkin).implUpdate()
+        (skin as SkinUpdatable).implUpdate()
     }
 }
 

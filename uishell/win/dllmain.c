@@ -11,6 +11,13 @@ DLLIMPORT void implNativeWarning() {
     MessageBox(0, "Backdrop set failed, please check your console for resolution. \n", "Backdrop setting failed", MB_ICONWARNING);
 }
 
+DLLIMPORT void implHideBar(HWND hWnd) {
+    LONG_PTR Style = GetWindowLongPtr(hWnd,GWL_STYLE);
+    Style = Style | WS_MINIMIZEBOX | WS_MAXIMIZEBOX | WS_SYSMENU;
+    SetWindowLongPtr(hWnd, GWL_STYLE, Style);
+    WindowExtendFrameIntoClientAreaFast(hWnd);
+}
+
 DLLIMPORT DWORD implGetCompositionColor() {
   DWORD color = 0;
   BOOL opaque = FALSE;

@@ -179,5 +179,9 @@ class XamlManager {
         fun find(k: String, dict: ResourceDict?): AbstractColorBrush {
             return dict!!.findColorBrush(k)
         }
+        @JvmStatic
+        fun find(k: String, t: AppColorTheme): AbstractColorBrush {
+            return getDict(t).findColorBrush(k)
+        }
     }
 }

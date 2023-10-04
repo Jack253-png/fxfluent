@@ -1,0 +1,41 @@
+.slider .thumb:hover,
+.slider .thumb:pressed {
+    -fx-color: transparent;
+}
+
+.slider:focused .thumb {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0.0;
+    -fx-background-radius: 16px;
+}
+
+.slider:disabled {
+    -fx-opacity: 1.0
+}
+
+.slider .thumb {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0, 0, 0;
+    -fx-background-radius: 16px;
+    -fx-padding: 9px;
+    /*-fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.1), 5, 0.0 , 0, 2);*/
+    -fx-effect: null;
+}
+.slider:focused .thumb {
+    -fx-background-radius: 16px;
+}
+.slider .track {
+    -fx-background-color: transparent;
+    -fx-background-insets: 0 0 -1 0, 0, 1;
+    -fx-background-radius: 0.25em, 0.25em, 0.166667em; /* 3 3 2 */
+    -fx-padding: 2px;
+}
+.slider:vertical .track {
+    -fx-background-color: transparent;
+}
+.slider .axis {
+    -fx-tick-label-fill: black;
+    -fx-tick-length: 5px;
+    -fx-minor-tick-length: 3px;
+    -fx-border-color: null;
+}
