@@ -3,6 +3,7 @@ package com.mcreater.fxfluent.controls.skin
 import com.mcreater.fxfluent.brush.AbstractColorBrush
 import com.mcreater.fxfluent.brush.SolidColorBrush
 import com.mcreater.fxfluent.controls.FluentSlider
+import com.mcreater.fxfluent.controls.FluentTooltip
 import com.mcreater.fxfluent.controls.abstractions.SkinUpdatable
 import com.mcreater.fxfluent.controls.state.StateType
 import com.mcreater.fxfluent.controls.state.StateUtil
@@ -17,6 +18,7 @@ import javafx.beans.property.ReadOnlyBooleanProperty
 import javafx.beans.property.SimpleObjectProperty
 import javafx.beans.value.ObservableValue
 import javafx.geometry.Orientation
+import javafx.scene.input.MouseEvent
 import javafx.scene.layout.BorderWidths
 import javafx.scene.layout.CornerRadii
 import javafx.scene.layout.StackPane
@@ -37,6 +39,7 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         AnimatedValue(5.0, Duration.millis(83.0), Interpolators.sinusoidalEaseboth)
     private var trackTop: StackPane? = null
     private var thumbInternal: Circle? = null
+    private val tooltip: FluentTooltip = FluentTooltip("Test")
     private val track
         get() = ControlUtil.findControlInSkin(this, "track")
     private val thumb: StackPane?
@@ -81,6 +84,20 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         children.add(2, trackTop)
         updateState()
         updateComponents(stateTrack.get()!!, stateThumb.get()!!)
+
+        tooltip.text = String.format("%.0f", control.value)
+        control.valueProperty().addListener(NewValueListener { tooltip.text = String.format("%.0f", it) })
+        thumb!!.addEventHandler(MouseEvent.ANY) {
+            val pos = ControlUtil.displayPos(thumb!!)
+            when (it.eventType) {
+                MouseEvent.MOUSE_DRAGGED, MouseEvent.MOUSE_PRESSED -> {
+                    tooltip.showCentered(thumb!!, pos.x + 20, pos.y - 55)
+                }
+                MouseEvent.MOUSE_RELEASED -> {
+                    tooltip.closeCentered()
+                }
+            }
+        }
     }
     private fun updateState() {
         stateThumb.set(StateUtil.genState(thumb!!.isDisabled, thumb!!.isHover, thumb!!.isPressed, thumb!!.isFocused))

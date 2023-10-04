@@ -48,7 +48,7 @@ open class FluentGridPane : GridPane, SystemThemeListenable {
     }
 
     override fun onChange(input: AppColorTheme) {
-        backgroundColor.updateValue(XamlManager.find("SolidBackgroundFillColorQuarternaryBrush", input))
+        backgroundColor.updateValue(XamlManager.find("SolidBackgroundFillColorBaseBrush", input))
     }
 }
 

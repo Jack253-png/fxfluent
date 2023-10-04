@@ -86,15 +86,16 @@ open class FluentSliderSkin(private val control: FluentSlider) : SliderSkin(cont
         updateState()
         updateComponents(stateTrack.get()!!, stateThumb.get()!!)
 
-        control.valueProperty().addListener(NewValueListener { tooltip.text = String.format("%.2f", it) })
+        tooltip.text = String.format("%.0f", control.value)
+        control.valueProperty().addListener(NewValueListener { tooltip.text = String.format("%.0f", it) })
         thumb!!.addEventHandler(MouseEvent.ANY) {
             val pos = ControlUtil.displayPos(thumb!!)
             when (it.eventType) {
                 MouseEvent.MOUSE_DRAGGED, MouseEvent.MOUSE_PRESSED -> {
-                    tooltip.showCentered(thumb!!, pos.x, pos.y - 80)
+                    tooltip.showCentered(thumb!!, pos.x + 20, pos.y - 55)
                 }
                 MouseEvent.MOUSE_RELEASED -> {
-                    tooltip.hide()
+                    tooltip.closeCentered()
                 }
             }
         }
